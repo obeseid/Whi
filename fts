@@ -1,0 +1,508 @@
+--[[
+╔══════════════════════════════════════════════════════════════╗
+║              TRADE TEST TOOL  –  LocalScript                 ║
+║  Drop into StarterPlayerScripts alongside MostKnownAvaGui.   ║
+║                                                              ║
+║  Expected GUI hierarchy (MostKnownAvaGui → MainFrame):       ║
+║    StartTrade          TextButton  → starts test trade       ║
+║    BlockPlayer         TextButton  → (reserved for future)   ║
+║    RefreshButton       TextButton  → force-refresh list      ║
+║    PlayerList          ScrollingFrame                        ║
+║      PlayerButtonTemplate  TextButton  (kept hidden, cloned) ║
+║      UIListLayout                                            ║
+║    Info                Frame                                 ║
+║      TextLabel         "Selected player:"                    ║
+║      SelectedPlayer    TextLabel   → shows chosen name       ║
+║                                                              ║
+║  PlayerList populates on load and updates automatically      ║
+║  whenever a player joins or leaves the server.               ║
+║  Clicking a player button selects them as the trade target.  ║
+║                                                              ║
+║  • Real Trade class + TradingHandler, untouched              ║
+║  • Real TradingMenu ScreenGui and all real UI                ║
+║  • Real inventory via Data.GetLocal                          ║
+║  • Zero server calls – FireServer("Trade",...) intercepted   ║
+║  • All stubs reverted cleanly when the trade ends            ║
+╚══════════════════════════════════════════════════════════════╝
+]]
+
+-- ── SERVICES / REFERENCES ────────────────────────────────────────────────────
+
+local Players     = game:GetService("Players")
+local LocalPlayer = Players.LocalPlayer
+
+local References  = require(game:GetService("ReplicatedStorage"):WaitForChild("References"))
+local Utilities   = References.Utilities
+local Constants   = References.Constants
+
+local function req(path)
+	local obj = References.PlayerScripts
+	for _, part in ipairs(path) do
+		obj = obj:WaitForChild(part)
+	end
+	return require(obj)
+end
+
+local Data               = req({"Priority",  "Data"})
+local AlertHandler       = req({"Secondary", "AlertHandler"})
+local GameManagerHandler = req({"Secondary", "GameManagerHandler"})
+local TradeHandler       = req({"Secondary", "TradingHandler"})
+
+-- ── GUI WIRING ───────────────────────────────────────────────────────────────
+
+local PlayerGui   = LocalPlayer:WaitForChild("PlayerGui")
+local launcherSG  = PlayerGui:WaitForChild("MostKnownAvaGui")
+local MainFrame   = launcherSG:WaitForChild("MainFrame")
+local btnStart    = MainFrame:WaitForChild("StartTrade")
+local btnRefresh  = MainFrame:WaitForChild("RefreshButton")
+local playerList  = MainFrame:WaitForChild("PlayerList")
+local template    = playerList:WaitForChild("PlayerButtonTemplate")
+local lblSelected = MainFrame:WaitForChild("Info"):WaitForChild("SelectedPlayer")
+
+-- Hide the template so it isn't visible in the list
+template.Visible = false
+
+-- ── PLAYER LIST ──────────────────────────────────────────────────────────────
+-- Clones PlayerButtonTemplate for every player on the server (except local).
+-- Clicking a button sets that player as the selected trade target.
+-- Rebuilds whenever someone joins or leaves.
+
+-- Track which player is currently selected
+local selectedDisplayName = nil
+
+local function setSelected(displayName)
+	selectedDisplayName = displayName
+	lblSelected.Text    = displayName or "(none)"
+end
+
+local function rebuildPlayerList()
+	-- Remove all existing cloned buttons (leave template and UIListLayout)
+	for _, child in ipairs(playerList:GetChildren()) do
+		if child:IsA("TextButton") and child.Name ~= "PlayerButtonTemplate" then
+			child:Destroy()
+		end
+	end
+
+	local order = 0
+	for _, player in ipairs(Players:GetPlayers()) do
+		if player ~= LocalPlayer then
+			local btn = template:Clone()
+			btn.Text        = player.DisplayName
+			btn.Name        = "PlayerBtn_" .. player.UserId
+			btn.LayoutOrder = order
+			btn.Visible     = true
+			btn.Parent      = playerList
+
+			btn.MouseButton1Click:Connect(function()
+				setSelected(player.DisplayName)
+				-- Highlight selected button, dim others
+				for _, sib in ipairs(playerList:GetChildren()) do
+					if sib:IsA("TextButton") and sib.Name ~= "PlayerButtonTemplate" then
+						sib.BackgroundTransparency = sib == btn and 0.3 or 0.71
+					end
+				end
+			end)
+
+			order += 1
+		end
+	end
+
+	-- Auto-canvas sizing: each button is 32px tall, no padding between them
+	playerList.CanvasSize = UDim2.new(0, 0, 0, order * 32)
+
+	-- If the selected player left, clear the selection
+	if selectedDisplayName then
+		local stillHere = false
+		for _, player in ipairs(Players:GetPlayers()) do
+			if player.DisplayName == selectedDisplayName then
+				stillHere = true
+				break
+			end
+		end
+		if not stillHere then
+			setSelected(nil)
+			AlertHandler.Add("Selected player left the server.", "Negative")
+		end
+	end
+end
+
+-- Initial population
+rebuildPlayerList()
+
+-- Keep the list live
+Players.PlayerAdded:Connect(rebuildPlayerList)
+Players.PlayerRemoving:Connect(rebuildPlayerList)
+
+-- RefreshButton forces an immediate rebuild
+btnRefresh.MouseButton1Click:Connect(rebuildPlayerList)
+
+-- ── FAKE PLAYER OBJECT ───────────────────────────────────────────────────────
+
+local fakePlayer = {
+	DisplayName  = "TestPlayer",
+	Name         = "TestPlayer",
+	UserId       = -1,
+	AccountAge   = 365,
+	_attrs       = { inTrade = false, inCobreed = false },
+
+	GetAttribute = function(self, key) return self._attrs[key] end,
+	SetAttribute = function(self, key, val) self._attrs[key] = val end,
+
+	ClassName = "Player",
+	IsA = function(self, class)
+		return class == "Player" or class == "Instance"
+	end,
+}
+
+-- ── NETWORK STUB ─────────────────────────────────────────────────────────────
+
+local _originalFireServer = Utilities.Network.FireServer
+local pendingActions      = {}
+
+local function stubFireServer(self, event, subEvent, ...)
+	if event ~= "Trade" then
+		return _originalFireServer(self, event, subEvent, ...)
+	end
+	table.insert(pendingActions, { action = subEvent, args = { ... } })
+end
+
+local function installNetworkStub()   Utilities.Network.FireServer = stubFireServer      end
+local function removeNetworkStub()    Utilities.Network.FireServer = _originalFireServer  end
+
+-- ── DATA STUB ────────────────────────────────────────────────────────────────
+-- Only overrides settings.Trading and tradeBanned.
+-- Real inventory flows through untouched.
+
+local _originalGetLocal = Data.GetLocal
+
+local function stubGetLocal(_, path)
+	local p = type(path) == "table" and path or { path }
+	if #p == 2 and p[1] == "settings" and p[2] == "Trading" then return true  end
+	if #p == 1 and p[1] == "tradeBanned"                     then return false end
+	return _originalGetLocal(Data, path)
+end
+
+local function installDataStub()
+	Data.GetLocal = function(path) return stubGetLocal(Data, path) end
+end
+local function removeDataStub()
+	Data.GetLocal = _originalGetLocal
+end
+
+-- ── UTILITIES STUBS ──────────────────────────────────────────────────────────
+
+local _originalCanTradeItem    = Utilities.CanTradeItem
+local _originalGetItemValue    = Utilities.GetItemValue
+local _originalIsItemStackable = Utilities.IsItemStackable
+
+local function installUtilitiesStubs()
+	Utilities.CanTradeItem = function(itemData)
+		if not itemData then return false, "Item not found" end
+		if itemData.untradeable then return false, "This item cannot be traded" end
+		return true
+	end
+	if not _originalGetItemValue then
+		Utilities.GetItemValue = function(itemData, amt)
+			return (itemData and itemData.value or 0) * (amt or 1)
+		end
+	end
+	if not _originalIsItemStackable then
+		Utilities.IsItemStackable = function(itemId)
+			local inv = _originalGetLocal(Data, {"inventory", itemId})
+			return inv and (inv.amt or 1) > 1
+		end
+	end
+end
+
+local function removeUtilitiesStubs()
+	Utilities.CanTradeItem    = _originalCanTradeItem
+	Utilities.GetItemValue    = _originalGetItemValue
+	Utilities.IsItemStackable = _originalIsItemStackable
+end
+
+-- ── FLAGS / ISLAND PATCHES ───────────────────────────────────────────────────
+
+local function patchFlags()
+	if References.Flags and References.Flags.flags then
+		References.Flags.flags.tradingDisabled  = false
+		References.Flags.flags.showValueInTrade = true
+	end
+end
+
+local function patchIsland()
+	local islandName = LocalPlayer:GetAttribute("island")
+	if islandName and References.Islands and References.Islands[islandName] then
+		References.Islands[islandName].tradingDisabled = false
+	end
+end
+
+-- ── SIMULATION STATE ─────────────────────────────────────────────────────────
+
+local SimState = {
+	active          = false,
+	otherAccepted   = false,
+	otherAddedSlots = {},
+}
+
+local endTrade  -- forward declaration
+
+local function handleTradeAction(action, args)
+	if not SimState.active then return end
+
+	if action == "Add" then
+		local slotId, qty = args[1], args[2]
+		local itemData = _originalGetLocal(Data, {"inventory", slotId})
+		if itemData then
+			TradeHandler.Server.ItemAdded(
+				{ id = itemData.id or slotId, name = itemData.name, amt = qty or itemData.amt, value = itemData.value },
+				slotId,
+				LocalPlayer
+			)
+		end
+
+	elseif action == "Remove" then
+		TradeHandler.Server.ItemRemoved(args[1], LocalPlayer)
+
+	elseif action == "Accept" then
+		TradeHandler.Server.Accepted(
+			LocalPlayer,
+			true,
+			SimState.otherAccepted and (os.time() + Constants.TRADE_FINAL_EXECUTION_DELAY) or nil
+		)
+		if SimState.otherAccepted then
+			task.delay(Constants.TRADE_FINAL_EXECUTION_DELAY, function()
+				if SimState.active then
+					endTrade(false, "✅ Trade executed successfully! (simulated)")
+				end
+			end)
+		end
+
+	elseif action == "Cancel" then
+		endTrade(false, "🚫 You declined / cancelled the trade.")
+
+	elseif action == "Report" then
+		AlertHandler.Add("📋 Report sent (simulated – no real report fired).", "Positive")
+	end
+end
+
+-- ── SIM PANEL GUI ────────────────────────────────────────────────────────────
+
+local simGui = Instance.new("ScreenGui")
+simGui.Name           = "TradeTestSimPanel"
+simGui.ResetOnSpawn   = false
+simGui.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
+simGui.DisplayOrder   = 998
+simGui.Enabled        = false
+simGui.Parent         = PlayerGui
+
+local simPanel = Instance.new("Frame")
+simPanel.Name             = "Panel"
+simPanel.Size             = UDim2.new(0, 160, 0, 210)
+simPanel.Position         = UDim2.new(1, -172, 0.5, -105)
+simPanel.BackgroundColor3 = Color3.fromRGB(18, 18, 26)
+simPanel.BorderSizePixel  = 0
+simPanel.Parent           = simGui
+Instance.new("UICorner", simPanel).CornerRadius = UDim.new(0, 8)
+local simStroke = Instance.new("UIStroke", simPanel)
+simStroke.Color = Color3.fromRGB(80, 80, 120); simStroke.Thickness = 0.5
+
+do
+	local l = Instance.new("UIListLayout", simPanel)
+	l.FillDirection = Enum.FillDirection.Vertical
+	l.HorizontalAlignment = Enum.HorizontalAlignment.Center
+	l.SortOrder = Enum.SortOrder.LayoutOrder
+	l.Padding = UDim.new(0, 5)
+	local p = Instance.new("UIPadding", simPanel)
+	p.PaddingTop = UDim.new(0,8); p.PaddingBottom = UDim.new(0,8)
+	p.PaddingLeft = UDim.new(0,8); p.PaddingRight = UDim.new(0,8)
+end
+
+local simTitle = Instance.new("TextLabel", simPanel)
+simTitle.Size = UDim2.new(1,0,0,18); simTitle.BackgroundTransparency = 1
+simTitle.Text = "[SIM] Other Player"; simTitle.Font = Enum.Font.GothamBold
+simTitle.TextSize = 11; simTitle.TextColor3 = Color3.fromRGB(160,160,200)
+simTitle.TextXAlignment = Enum.TextXAlignment.Center; simTitle.LayoutOrder = 0
+
+local function makeSimBtn(text, order, bg)
+	local b = Instance.new("TextButton", simPanel)
+	b.Size = UDim2.new(1,0,0,30); b.BackgroundColor3 = bg or Color3.fromRGB(38,38,55)
+	b.BorderSizePixel = 0; b.Text = text; b.Font = Enum.Font.Gotham
+	b.TextSize = 11; b.TextColor3 = Color3.fromRGB(220,220,240)
+	b.AutoButtonColor = true; b.LayoutOrder = order
+	Instance.new("UICorner", b).CornerRadius = UDim.new(0, 5)
+	return b
+end
+
+local simBtnAdd     = makeSimBtn("＋ Add Item",   1)
+local simBtnRemove  = makeSimBtn("− Remove Last", 2)
+local simBtnAccept  = makeSimBtn("✓ Accept",      3, Color3.fromRGB(25,70,35))
+local simBtnDecline = makeSimBtn("✗ Decline",     4, Color3.fromRGB(70,20,20))
+
+-- ── TRADE LIFECYCLE ──────────────────────────────────────────────────────────
+
+local function cleanupStubs()
+	removeNetworkStub()
+	removeDataStub()
+	removeUtilitiesStubs()
+end
+
+endTrade = function(_, alertMsg)
+	if not SimState.active then return end
+	SimState.active          = false
+	SimState.otherAccepted   = false
+	SimState.otherAddedSlots = {}
+	cleanupStubs()
+	simGui.Enabled     = false
+	launcherSG.Enabled = true
+	LocalPlayer:SetAttribute("inTrade", false)
+	fakePlayer._attrs.inTrade = false
+	TradeHandler.Server.End(alertMsg)
+end
+
+local function startTrade()
+	if SimState.active then
+		AlertHandler.Add("A test trade is already running!", "Negative")
+		return
+	end
+
+	if not selectedDisplayName then
+		AlertHandler.Add("Select a player from the list first.", "Negative")
+		return
+	end
+
+	fakePlayer.DisplayName      = selectedDisplayName
+	fakePlayer.Name             = selectedDisplayName
+	fakePlayer._attrs.inTrade   = false
+	fakePlayer._attrs.inCobreed = false
+
+	patchFlags()
+	patchIsland()
+
+	local ok, reason = TradeHandler.CanTrade(fakePlayer)
+	if not ok then
+		AlertHandler.Add(reason or "Cannot trade right now.", "Negative")
+		return
+	end
+
+	installNetworkStub()
+	installDataStub()
+	installUtilitiesStubs()
+
+	SimState.active          = true
+	SimState.otherAccepted   = false
+	SimState.otherAddedSlots = {}
+	pendingActions           = {}
+
+	LocalPlayer:SetAttribute("inTrade", true)
+	fakePlayer:SetAttribute("inTrade", true)
+	launcherSG.Enabled = false
+
+	-- Wrap Server.End so cleanup always fires regardless of how the trade closes
+	local _origEnd = TradeHandler.Server.End
+	local function wrappedEnd(reason)
+		LocalPlayer:SetAttribute("inTrade", false)
+		fakePlayer._attrs.inTrade = false
+		SimState.active    = false
+		simGui.Enabled     = false
+		launcherSG.Enabled = true
+		cleanupStubs()
+		TradeHandler.Server.End = _origEnd
+		_origEnd(reason)
+	end
+	TradeHandler.Server.End = wrappedEnd
+
+	TradeHandler.Server.Begin(fakePlayer)
+	simGui.Enabled = true
+end
+
+-- ── PENDING ACTION LOOP ──────────────────────────────────────────────────────
+
+task.spawn(function()
+	while true do
+		task.wait()
+		while #pendingActions > 0 do
+			local entry = table.remove(pendingActions, 1)
+			local ok, err = pcall(handleTradeAction, entry.action, entry.args)
+			if not ok then
+				warn("[TradeTestTool] handleTradeAction error:", err)
+			end
+		end
+	end
+end)
+
+-- ── SIM PANEL LOGIC ──────────────────────────────────────────────────────────
+
+local function getNextOtherSlot()
+	local inv = _originalGetLocal(Data, {"inventory"}) or {}
+	local keys = {}
+	for k in pairs(inv) do
+		if not SimState.otherAddedSlots[k] then
+			table.insert(keys, k)
+		end
+	end
+	table.sort(keys)
+	return keys[1]
+end
+
+simBtnAdd.MouseButton1Click:Connect(function()
+	if not SimState.active then return end
+	local count = 0
+	for _ in pairs(SimState.otherAddedSlots) do count += 1 end
+	if count >= Constants.MAX_ITEMS_PER_TRADE then
+		AlertHandler.Add("[SIM] Other player is at the item cap.", "Negative"); return
+	end
+	local slotKey = getNextOtherSlot()
+	if not slotKey then
+		AlertHandler.Add("[SIM] No inventory slots available to simulate.", "Negative"); return
+	end
+	local itemData = _originalGetLocal(Data, {"inventory", slotKey})
+	if not itemData then return end
+	SimState.otherAddedSlots[slotKey] = true
+	TradeHandler.Server.ItemAdded(
+		{ id = itemData.id or slotKey, name = itemData.name, amt = itemData.amt, value = itemData.value },
+		slotKey,
+		fakePlayer
+	)
+end)
+
+simBtnRemove.MouseButton1Click:Connect(function()
+	if not SimState.active then return end
+	local lastKey = nil
+	for k in pairs(SimState.otherAddedSlots) do lastKey = k end
+	if not lastKey then
+		AlertHandler.Add("[SIM] Other side has no items to remove.", "Negative"); return
+	end
+	SimState.otherAddedSlots[lastKey] = nil
+	TradeHandler.Server.ItemRemoved(lastKey, fakePlayer)
+end)
+
+simBtnAccept.MouseButton1Click:Connect(function()
+	if not SimState.active then return end
+	SimState.otherAccepted = not SimState.otherAccepted
+	simBtnAccept.Text = SimState.otherAccepted and "↩ Unaccept (other)" or "✓ Accept (other)"
+	simBtnAccept.BackgroundColor3 = SimState.otherAccepted
+		and Color3.fromRGB(60,20,20) or Color3.fromRGB(25,70,35)
+
+	local executeAt = nil
+	if SimState.otherAccepted then
+		local tradeObj = TradeHandler.currentObject
+		if tradeObj and tradeObj.accepted and tradeObj.accepted[LocalPlayer] then
+			executeAt = os.time() + Constants.TRADE_FINAL_EXECUTION_DELAY
+			task.delay(Constants.TRADE_FINAL_EXECUTION_DELAY, function()
+				if SimState.active then
+					endTrade(false, "✅ Trade executed successfully! (simulated)")
+				end
+			end)
+		end
+	end
+	TradeHandler.Server.Accepted(fakePlayer, SimState.otherAccepted, executeAt)
+end)
+
+simBtnDecline.MouseButton1Click:Connect(function()
+	if not SimState.active then return end
+	endTrade(true, fakePlayer.DisplayName .. " declined the trade.")
+end)
+
+-- ── LAUNCHER BUTTON WIRING ───────────────────────────────────────────────────
+
+btnStart.MouseButton1Click:Connect(startTrade)
