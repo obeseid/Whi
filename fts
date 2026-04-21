@@ -1,12 +1,11 @@
 --[[
 ╔══════════════════════════════════════════════════════════════╗
-║       fag    TRADE TEST TOOL  –  LocalScript                 ║
+║              TRADE TEST TOOL  –  LocalScript                 ║
 ║  Drop into StarterPlayerScripts alongside MostKnownAvaGui.   ║
 ║                                                              ║
 ║  Expected GUI hierarchy (MostKnownAvaGui → MainFrame):       ║
 ║    StartTrade          TextButton  → starts test trade       ║
-║    BlockPlayer         TextButton  → (reserved for future)   ║
-║    RefreshButton       TextButton  → force-refresh list      ║
+║    BlockPlayer         TextButton  → blocks selected player  ║
 ║    PlayerList          ScrollingFrame                        ║
 ║      PlayerButtonTemplate  TextButton  (kept hidden, cloned) ║
 ║      UIListLayout                                            ║
@@ -17,6 +16,7 @@
 ║  PlayerList populates on load and updates automatically      ║
 ║  whenever a player joins or leaves the server.               ║
 ║  Clicking a player button selects them as the trade target.  ║
+║  Selection persists even if the player leaves.               ║
 ║                                                              ║
 ║  • Real Trade class + TradingHandler, untouched              ║
 ║  • Real TradingMenu ScreenGui and all real UI                ║
@@ -29,6 +29,7 @@
 -- ── SERVICES / REFERENCES ────────────────────────────────────────────────────
 
 local Players     = game:GetService("Players")
+local StarterGui  = game:GetService("StarterGui")
 local LocalPlayer = Players.LocalPlayer
 
 local References  = require(game:GetService("ReplicatedStorage"):WaitForChild("References"))
@@ -44,8 +45,6 @@ local function req(path)
 end
 
 local Data               = req({"Priority",  "Data"})
-local AlertHandler       = req({"Secondary", "AlertHandler"})
-local GameManagerHandler = req({"Secondary", "GameManagerHandler"})
 local TradeHandler       = req({"Secondary", "TradingHandler"})
 
 -- ── GUI WIRING ───────────────────────────────────────────────────────────────
@@ -54,6 +53,7 @@ local PlayerGui   = LocalPlayer:WaitForChild("PlayerGui")
 local launcherSG  = PlayerGui:WaitForChild("MostKnownAvaGui")
 local MainFrame   = launcherSG:WaitForChild("MainFrame")
 local btnStart    = MainFrame:WaitForChild("StartTrade")
+local btnBlock    = MainFrame:WaitForChild("BlockPlayer")
 local playerList  = MainFrame:WaitForChild("PlayerList")
 local template    = playerList:WaitForChild("PlayerButtonTemplate")
 local lblSelected = MainFrame:WaitForChild("Info"):WaitForChild("SelectedPlayer")
@@ -63,11 +63,11 @@ template.Visible = false
 
 -- ── PLAYER LIST ──────────────────────────────────────────────────────────────
 -- Clones PlayerButtonTemplate for every player on the server (except local).
--- Clicking a button sets that player as the selected trade target.
+-- Clicking a button selects that player as the trade target.
 -- Rebuilds whenever someone joins or leaves.
+-- Selection persists even if the selected player leaves.
 
--- Track which player is currently selected
-local selectedDisplayName = nil
+local selectedDisplayName = nil  -- persists across list rebuilds
 
 local function setSelected(displayName)
 	selectedDisplayName = displayName
@@ -75,7 +75,7 @@ local function setSelected(displayName)
 end
 
 local function rebuildPlayerList()
-	-- Remove all existing cloned buttons (leave template and UIListLayout)
+	-- Remove all existing cloned buttons (leave template and UIListLayout intact)
 	for _, child in ipairs(playerList:GetChildren()) do
 		if child:IsA("TextButton") and child.Name ~= "PlayerButtonTemplate" then
 			child:Destroy()
@@ -90,11 +90,13 @@ local function rebuildPlayerList()
 			btn.Name        = "PlayerBtn_" .. player.UserId
 			btn.LayoutOrder = order
 			btn.Visible     = true
+			-- Re-highlight if this player was already selected
+			btn.BackgroundTransparency = (player.DisplayName == selectedDisplayName) and 0.3 or 0.71
 			btn.Parent      = playerList
 
 			btn.MouseButton1Click:Connect(function()
 				setSelected(player.DisplayName)
-				-- Highlight selected button, dim others
+				-- Highlight selected button, dim all others
 				for _, sib in ipairs(playerList:GetChildren()) do
 					if sib:IsA("TextButton") and sib.Name ~= "PlayerButtonTemplate" then
 						sib.BackgroundTransparency = sib == btn and 0.3 or 0.71
@@ -106,32 +108,37 @@ local function rebuildPlayerList()
 		end
 	end
 
-	-- Auto-canvas sizing: each button is 32px tall, no padding between them
+	-- Auto-canvas sizing: each button is 32px tall
 	playerList.CanvasSize = UDim2.new(0, 0, 0, order * 32)
-
-	-- If the selected player left, clear the selection
-	if selectedDisplayName then
-		local stillHere = false
-		for _, player in ipairs(Players:GetPlayers()) do
-			if player.DisplayName == selectedDisplayName then
-				stillHere = true
-				break
-			end
-		end
-		if not stillHere then
-			setSelected(nil)
-			AlertHandler.Add("Selected player left the server.", "Negative")
-		end
-	end
+	-- Note: selection is intentionally NOT cleared when the selected player leaves
 end
 
 -- Initial population
 rebuildPlayerList()
 
--- Keep the list live
+-- Keep the list live on join/leave — no manual refresh needed
 Players.PlayerAdded:Connect(rebuildPlayerList)
 Players.PlayerRemoving:Connect(rebuildPlayerList)
 
+-- ── BLOCK PLAYER ─────────────────────────────────────────────────────────────
+-- Looks up the selected player by DisplayName and opens the Roblox block prompt.
+
+btnBlock.MouseButton1Click:Connect(function()
+	if not selectedDisplayName then return end
+
+	local target = nil
+	for _, player in ipairs(Players:GetPlayers()) do
+		if player.DisplayName == selectedDisplayName then
+			target = player
+			break
+		end
+	end
+
+	if target then
+		StarterGui:SetCore("PromptBlockPlayer", target)
+	end
+	-- If they've already left, silently do nothing
+end)
 
 -- ── FAKE PLAYER OBJECT ───────────────────────────────────────────────────────
 
@@ -278,7 +285,7 @@ local function handleTradeAction(action, args)
 		endTrade(false, "🚫 You declined / cancelled the trade.")
 
 	elseif action == "Report" then
-		AlertHandler.Add("📋 Report sent (simulated – no real report fired).", "Positive")
+		-- silently no-op in test mode
 	end
 end
 
@@ -295,7 +302,7 @@ simGui.Parent         = PlayerGui
 local simPanel = Instance.new("Frame")
 simPanel.Name             = "Panel"
 simPanel.Size             = UDim2.new(0, 160, 0, 210)
-simPanel.Position         = UDim2.new(1, -172, 0.5, -105)
+simPanel.Position         = UDim2.new(0, 12, 0.5, -105)
 simPanel.BackgroundColor3 = Color3.fromRGB(18, 18, 26)
 simPanel.BorderSizePixel  = 0
 simPanel.Parent           = simGui
@@ -358,12 +365,10 @@ end
 
 local function startTrade()
 	if SimState.active then
-		AlertHandler.Add("A test trade is already running!", "Negative")
 		return
 	end
 
 	if not selectedDisplayName then
-		AlertHandler.Add("Select a player from the list first.", "Negative")
 		return
 	end
 
@@ -377,7 +382,6 @@ local function startTrade()
 
 	local ok, reason = TradeHandler.CanTrade(fakePlayer)
 	if not ok then
-		AlertHandler.Add(reason or "Cannot trade right now.", "Negative")
 		return
 	end
 
@@ -446,11 +450,11 @@ simBtnAdd.MouseButton1Click:Connect(function()
 	local count = 0
 	for _ in pairs(SimState.otherAddedSlots) do count += 1 end
 	if count >= Constants.MAX_ITEMS_PER_TRADE then
-		AlertHandler.Add("[SIM] Other player is at the item cap.", "Negative"); return
+		return
 	end
 	local slotKey = getNextOtherSlot()
 	if not slotKey then
-		AlertHandler.Add("[SIM] No inventory slots available to simulate.", "Negative"); return
+		return
 	end
 	local itemData = _originalGetLocal(Data, {"inventory", slotKey})
 	if not itemData then return end
@@ -467,7 +471,7 @@ simBtnRemove.MouseButton1Click:Connect(function()
 	local lastKey = nil
 	for k in pairs(SimState.otherAddedSlots) do lastKey = k end
 	if not lastKey then
-		AlertHandler.Add("[SIM] Other side has no items to remove.", "Negative"); return
+		return
 	end
 	SimState.otherAddedSlots[lastKey] = nil
 	TradeHandler.Server.ItemRemoved(lastKey, fakePlayer)
