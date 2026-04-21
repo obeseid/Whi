@@ -1,0 +1,251 @@
+-- MostKnownAvaGui - Pure Luau Recreation
+-- Original GUI by Most known Ava
+
+local PlayerGui = game:GetService("Players").LocalPlayer:WaitForChild("PlayerGui")
+
+-- ScreenGui
+local ScreenGui = Instance.new("ScreenGui")
+ScreenGui.Name = "MostKnownAvaGui"
+ScreenGui.ClipToDeviceSafeArea = true
+ScreenGui.DisplayOrder = 0
+ScreenGui.SafeAreaCompatibility = Enum.SafeAreaCompatibility.FullscreenExtension
+ScreenGui.ScreenInsets = Enum.ScreenInsets.DeviceSafeInsets
+ScreenGui.Enabled = true
+ScreenGui.ResetOnSpawn = true
+ScreenGui.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
+ScreenGui.Parent = PlayerGui
+
+-- MainFrame
+local MainFrame = Instance.new("Frame")
+MainFrame.Name = "MainFrame"
+MainFrame.AnchorPoint = Vector2.new(0, 0)
+MainFrame.BackgroundColor3 = Color3.fromRGB(42, 42, 42) -- 0.1647 * 255 ≈ 42
+MainFrame.BackgroundTransparency = 0.200000003
+MainFrame.BorderSizePixel = 0
+MainFrame.Position = UDim2.new(0.00637876801, 0, 0.305170238, 0)
+MainFrame.Size = UDim2.new(0, 170, 0, 318)
+MainFrame.Visible = true
+MainFrame.ZIndex = 1
+MainFrame.Parent = ScreenGui
+
+local MainFrameCorner = Instance.new("UICorner")
+MainFrameCorner.Name = "UICorner"
+MainFrameCorner.CornerRadius = UDim.new(0, 10)
+MainFrameCorner.Parent = MainFrame
+
+-- Credits label ("Made by Most known Ava")
+local Credits = Instance.new("TextLabel")
+Credits.Name = "Credits"
+Credits.AnchorPoint = Vector2.new(0, 0)
+Credits.BackgroundTransparency = 1
+Credits.BorderSizePixel = 0
+Credits.Position = UDim2.new(0.0294117648, 0, 0, 0)
+Credits.Size = UDim2.new(0, 160, 0, 26)
+Credits.ZIndex = 1
+Credits.Font = Enum.Font.FredokaOne
+Credits.Text = "Made by Most known Ava"
+Credits.TextColor3 = Color3.fromRGB(255, 255, 255)
+Credits.TextScaled = true
+Credits.TextSize = 14
+Credits.TextStrokeTransparency = 1
+Credits.TextTransparency = 0
+Credits.TextWrapped = true
+Credits.TextXAlignment = Enum.TextXAlignment.Center
+Credits.TextYAlignment = Enum.TextYAlignment.Top
+Credits.Parent = MainFrame
+
+-- START TRADE button
+local StartTrade = Instance.new("TextButton")
+StartTrade.Name = "StartTrade"
+StartTrade.AnchorPoint = Vector2.new(0, 0)
+StartTrade.BackgroundColor3 = Color3.fromRGB(113, 191, 105) -- 0.4431, 0.7490, 0.4118
+StartTrade.BackgroundTransparency = 0
+StartTrade.BorderSizePixel = 0
+StartTrade.Position = UDim2.new(0.0588235296, 0, 0.0815793127, 0)
+StartTrade.Size = UDim2.new(0, 150, 0, 41)
+StartTrade.ZIndex = 1
+StartTrade.Font = Enum.Font.FredokaOne
+StartTrade.Text = "START TRADE"
+StartTrade.TextColor3 = Color3.fromRGB(255, 255, 255)
+StartTrade.TextScaled = true
+StartTrade.TextSize = 14
+StartTrade.TextStrokeTransparency = 1
+StartTrade.TextTransparency = 0
+StartTrade.TextWrapped = true
+StartTrade.TextXAlignment = Enum.TextXAlignment.Center
+StartTrade.TextYAlignment = Enum.TextYAlignment.Top
+StartTrade.AutoButtonColor = true
+StartTrade.Parent = MainFrame
+
+local StartTradeCorner = Instance.new("UICorner")
+StartTradeCorner.Name = "UICorner"
+StartTradeCorner.CornerRadius = UDim.new(0, 5)
+StartTradeCorner.Parent = StartTrade
+
+-- BLOCK PLAYER button
+local BlockPlayer = Instance.new("TextButton")
+BlockPlayer.Name = "BlockPlayer"
+BlockPlayer.AnchorPoint = Vector2.new(0, 0)
+BlockPlayer.BackgroundColor3 = Color3.fromRGB(191, 28, 28) -- 0.7490, 0.1098, 0.1098
+BlockPlayer.BackgroundTransparency = 0
+BlockPlayer.BorderSizePixel = 0
+BlockPlayer.Position = UDim2.new(0.0588235296, 0, 0.2386287, 0)
+BlockPlayer.Size = UDim2.new(0, 150, 0, 41)
+BlockPlayer.ZIndex = 1
+BlockPlayer.Font = Enum.Font.FredokaOne
+BlockPlayer.Text = "BLOCK PLAYER"
+BlockPlayer.TextColor3 = Color3.fromRGB(255, 255, 255)
+BlockPlayer.TextScaled = true
+BlockPlayer.TextSize = 21
+BlockPlayer.TextStrokeTransparency = 1
+BlockPlayer.TextTransparency = 0
+BlockPlayer.TextWrapped = true
+BlockPlayer.TextXAlignment = Enum.TextXAlignment.Center
+BlockPlayer.TextYAlignment = Enum.TextYAlignment.Top
+BlockPlayer.AutoButtonColor = true
+BlockPlayer.Parent = MainFrame
+
+local BlockPlayerCorner = Instance.new("UICorner")
+BlockPlayerCorner.Name = "UICorner"
+BlockPlayerCorner.CornerRadius = UDim.new(0, 5)
+BlockPlayerCorner.Parent = BlockPlayer
+
+-- Divider line
+local Divider = Instance.new("Frame")
+Divider.Name = "Divider"
+Divider.AnchorPoint = Vector2.new(0, 0)
+Divider.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+Divider.BackgroundTransparency = 0.699999988
+Divider.BorderSizePixel = 0
+Divider.Position = UDim2.new(0.0588235296, 0, 0.395091444, 0)
+Divider.Size = UDim2.new(0, 150, 0, 2)
+Divider.ZIndex = 1
+Divider.Parent = MainFrame
+
+local DividerCorner = Instance.new("UICorner")
+DividerCorner.Name = "UICorner"
+DividerCorner.CornerRadius = UDim.new(1, 20)
+DividerCorner.Parent = Divider
+
+-- PlayerList (ScrollingFrame)
+local PlayerList = Instance.new("ScrollingFrame")
+PlayerList.Name = "PlayerList"
+PlayerList.AnchorPoint = Vector2.new(0, 0)
+PlayerList.BackgroundTransparency = 1
+PlayerList.BorderSizePixel = 0
+PlayerList.Position = UDim2.new(0.0588235296, 0, 0.433656961, 0)
+PlayerList.Size = UDim2.new(0, 150, 0, 123)
+PlayerList.ZIndex = 1
+PlayerList.CanvasSize = UDim2.new(2, 0, 0, 0)
+PlayerList.ScrollBarImageColor3 = Color3.fromRGB(0, 0, 0)
+PlayerList.ScrollBarImageTransparency = 0
+PlayerList.ScrollBarThickness = 12
+PlayerList.ScrollingDirection = Enum.ScrollingDirection.Y
+PlayerList.ScrollingEnabled = true
+PlayerList.ClipsDescendants = true
+PlayerList.Parent = MainFrame
+
+local PlayerListCorner = Instance.new("UICorner")
+PlayerListCorner.Name = "UICorner"
+PlayerListCorner.CornerRadius = UDim.new(0, 8)
+PlayerListCorner.Parent = PlayerList
+
+local PlayerListStroke = Instance.new("UIStroke")
+PlayerListStroke.Name = "UIStroke"
+PlayerListStroke.ApplyStrokeMode = Enum.ApplyStrokeMode.Border
+PlayerListStroke.Color = Color3.fromRGB(255, 255, 255)
+PlayerListStroke.Enabled = true
+PlayerListStroke.Thickness = 2
+PlayerListStroke.Transparency = 0.699999988
+PlayerListStroke.Parent = PlayerList
+
+local PlayerListLayout = Instance.new("UIListLayout")
+PlayerListLayout.Name = "UIListLayout"
+PlayerListLayout.FillDirection = Enum.FillDirection.Vertical
+PlayerListLayout.HorizontalAlignment = Enum.HorizontalAlignment.Center
+PlayerListLayout.SortOrder = Enum.SortOrder.Name
+PlayerListLayout.VerticalAlignment = Enum.VerticalAlignment.Top
+PlayerListLayout.Padding = UDim.new(0, 0)
+PlayerListLayout.Parent = PlayerList
+
+-- PlayerButtonTemplate (inside PlayerList)
+local PlayerButtonTemplate = Instance.new("TextButton")
+PlayerButtonTemplate.Name = "PlayerButtonTemplate"
+PlayerButtonTemplate.AnchorPoint = Vector2.new(0, 0)
+PlayerButtonTemplate.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+PlayerButtonTemplate.BackgroundTransparency = 0.709999979
+PlayerButtonTemplate.BorderSizePixel = 0
+PlayerButtonTemplate.Position = UDim2.new(0, 0, 0, 0)
+PlayerButtonTemplate.Size = UDim2.new(0, 136, 0, 32)
+PlayerButtonTemplate.ZIndex = 1
+PlayerButtonTemplate.Font = Enum.Font.FredokaOne
+PlayerButtonTemplate.Text = "PlayerName"
+PlayerButtonTemplate.TextColor3 = Color3.fromRGB(255, 255, 255)
+PlayerButtonTemplate.TextScaled = true
+PlayerButtonTemplate.TextSize = 14
+PlayerButtonTemplate.TextStrokeTransparency = 1
+PlayerButtonTemplate.TextTransparency = 0
+PlayerButtonTemplate.TextWrapped = true
+PlayerButtonTemplate.TextXAlignment = Enum.TextXAlignment.Center
+PlayerButtonTemplate.TextYAlignment = Enum.TextYAlignment.Top
+PlayerButtonTemplate.AutoButtonColor = true
+PlayerButtonTemplate.Visible = true
+PlayerButtonTemplate.Parent = PlayerList
+
+local PlayerButtonTemplateCorner = Instance.new("UICorner")
+PlayerButtonTemplateCorner.Name = "UICorner"
+PlayerButtonTemplateCorner.CornerRadius = UDim.new(0, 8)
+PlayerButtonTemplateCorner.Parent = PlayerButtonTemplate
+
+-- Info Frame (bottom section)
+local Info = Instance.new("Frame")
+Info.Name = "Info"
+Info.AnchorPoint = Vector2.new(0, 0)
+Info.BackgroundTransparency = 1
+Info.BorderSizePixel = 0
+Info.Position = UDim2.new(0, 0, 0.864077687, 0)
+Info.Size = UDim2.new(0, 170, 0, 42)
+Info.ZIndex = 1
+Info.Parent = MainFrame
+
+-- "Selected player:" label
+local SelectedPlayerLabel = Instance.new("TextLabel")
+SelectedPlayerLabel.Name = "TextLabel"
+SelectedPlayerLabel.AnchorPoint = Vector2.new(0, 0)
+SelectedPlayerLabel.BackgroundTransparency = 1
+SelectedPlayerLabel.BorderSizePixel = 0
+SelectedPlayerLabel.Position = UDim2.new(0, 0, -0.095238097, 0)
+SelectedPlayerLabel.Size = UDim2.new(0, 170, 0, 21)
+SelectedPlayerLabel.ZIndex = 1
+SelectedPlayerLabel.Font = Enum.Font.FredokaOne
+SelectedPlayerLabel.Text = "Selected player:"
+SelectedPlayerLabel.TextColor3 = Color3.fromRGB(255, 255, 255)
+SelectedPlayerLabel.TextScaled = true
+SelectedPlayerLabel.TextSize = 14
+SelectedPlayerLabel.TextStrokeTransparency = 1
+SelectedPlayerLabel.TextTransparency = 0
+SelectedPlayerLabel.TextWrapped = true
+SelectedPlayerLabel.TextXAlignment = Enum.TextXAlignment.Center
+SelectedPlayerLabel.TextYAlignment = Enum.TextYAlignment.Top
+SelectedPlayerLabel.Parent = Info
+
+-- SelectedPlayer name display
+local SelectedPlayer = Instance.new("TextLabel")
+SelectedPlayer.Name = "SelectedPlayer"
+SelectedPlayer.AnchorPoint = Vector2.new(0, 0)
+SelectedPlayer.BackgroundTransparency = 1
+SelectedPlayer.BorderSizePixel = 0
+SelectedPlayer.Position = UDim2.new(0, 0, 0.40476191, 0)
+SelectedPlayer.Size = UDim2.new(0, 170, 0, 25)
+SelectedPlayer.ZIndex = 1
+SelectedPlayer.Font = Enum.Font.FredokaOne
+SelectedPlayer.Text = "PlayerName"
+SelectedPlayer.TextColor3 = Color3.fromRGB(255, 255, 255)
+SelectedPlayer.TextScaled = true
+SelectedPlayer.TextSize = 14
+SelectedPlayer.TextStrokeTransparency = 1
+SelectedPlayer.TextTransparency = 0
+SelectedPlayer.TextWrapped = true
+SelectedPlayer.TextXAlignment = Enum.TextXAlignment.Center
+SelectedPlayer.TextYAlignment = Enum.TextYAlignment.Top
+SelectedPlayer.Parent = Info
