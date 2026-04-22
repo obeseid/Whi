@@ -1,6 +1,6 @@
 --[[
 ╔══════════════════════════════════════════════════════════════╗
-║    888       TRADE TEST TOOL  –  LocalScript                 ║
+║              TRADE TEST TOOL  –  LocalScript                 ║
 ║  Drop into StarterPlayerScripts alongside MostKnownAvaGui.   ║
 ║                                                              ║
 ║  Expected GUI hierarchy (MostKnownAvaGui → MainFrame):       ║
@@ -25,6 +25,107 @@
 ║  • All stubs reverted cleanly when the trade ends            ║
 ╚══════════════════════════════════════════════════════════════╝
 ]]
+
+-- ── MOCK INVENTORY ───────────────────────────────────────────────────────────
+-- These items are injected into your inventory during a test trade,
+-- supplementing your real items. They show up in the inventory picker
+-- and can be added to the trade just like real items.
+--
+-- Each entry:
+--   amount  = how many copies of this item to inject (each gets its own slot)
+--   item    = the item data table (same shape as a real inventory item)
+--
+-- Fields reference (horse example):
+--   id          numeric breed/item type ID
+--   name        custom horse name (string, or nil for none)
+--   pId         personality ID (number)
+--   gId         gender ID (1 = male, 2 = female typically)
+--   height      float 0-1
+--   food        favourite food string
+--   strength/agility/speed/stamina/jump         base stats (0-1 floats)
+--   strengthMod/agilityMod/speedMod/staminaMod/jumpMod  stat modifiers (0-1)
+--   madeAt      creation timestamp (os.time() for "just made")
+--   lineage     dictionary of { [breedId] = count } — can leave as {}
+--   variants    coat/mane/tail colour and style strings
+
+local MOCK_INVENTORY = {
+	{
+		amount = 1,
+		item = {
+			id          = 370,
+			name        = "Mock Horse 1",
+			pId         = 1,
+			gId         = 2,
+			height      = 0.5,
+			food        = "Golden Carrot",
+			strength    = 0.5, agility  = 0.5, speed    = 0.5,
+			stamina     = 0.5, jump     = 0.5,
+			strengthMod = 1.0, agilityMod = 1.0, speedMod = 1.0,
+			staminaMod  = 1.0, jumpMod  = 1.0,
+			madeAt      = os.time(),
+			lineage     = {},
+			variants    = {
+				colour     = "brownQH2",
+				maneColour = "white",
+				tailColour = "white",
+				maneStyle  = "longQH2",
+				tailStyle  = "mediumQH2",
+			},
+		},
+	},
+	{
+		amount = 1,
+		item = {
+			id          = 370,
+			name        = "Mock Horse 2",
+			pId         = 2,
+			gId         = 1,
+			height      = 0.6,
+			food        = "Apple",
+			strength    = 0.7, agility  = 0.6, speed    = 0.8,
+			stamina     = 0.65, jump    = 0.55,
+			strengthMod = 0.95, agilityMod = 0.98, speedMod = 0.97,
+			staminaMod  = 0.92, jumpMod = 0.99,
+			madeAt      = os.time(),
+			lineage     = {},
+			variants    = {
+				colour     = "blackQH2",
+				maneColour = "black",
+				tailColour = "black",
+				maneStyle  = "shortQH2",
+				tailStyle  = "longQH2",
+			},
+		},
+	},
+}
+
+-- Builds a flat slot map from MOCK_INVENTORY, generating a unique fake UUID
+-- for each copy so they appear as separate slots in the inventory.
+local function buildMockSlots()
+	local slots = {}
+	local counter = 0
+	for _, entry in ipairs(MOCK_INVENTORY) do
+		local copies = entry.amount or 1
+		for _ = 1, copies do
+			counter += 1
+			-- Fake UUID that won't collide with real slot keys
+			local fakeSlotId = ("mock-%04d-0000-0000-000000000000"):format(counter)
+			-- Deep-copy the item so each slot is independent
+			local itemCopy = {}
+			for k, v in pairs(entry.item) do
+				if type(v) == "table" then
+					local t = {}
+					for k2, v2 in pairs(v) do t[k2] = v2 end
+					itemCopy[k] = t
+				else
+					itemCopy[k] = v
+				end
+			end
+			slots[fakeSlotId] = itemCopy
+		end
+	end
+	return slots
+end
 
 -- ── SERVICES / REFERENCES ────────────────────────────────────────────────────
 
@@ -174,24 +275,48 @@ local function installNetworkStub()   Utilities.Network.FireServer = stubFireSer
 local function removeNetworkStub()    Utilities.Network.FireServer = _originalFireServer  end
 
 -- ── DATA STUB ────────────────────────────────────────────────────────────────
--- Only overrides settings.Trading and tradeBanned.
--- Real inventory flows through untouched.
+-- Overrides settings.Trading, tradeBanned, and inventory reads to
+-- seamlessly inject mock items alongside the real inventory.
 -- IMPORTANT: Data.GetLocal is function(path), NOT function(self, path).
--- Calling _originalGetLocal(path) directly is correct.
 
 local _originalGetLocal = Data.GetLocal
 
+-- Built once when a trade starts, cleared when it ends
+local activeMockSlots = {}
+
 local function stubGetLocal(path)
 	local p = type(path) == "table" and path or { path }
+
 	if #p == 2 and p[1] == "settings" and p[2] == "Trading" then return true  end
 	if #p == 1 and p[1] == "tradeBanned"                     then return false end
+
+	-- Full inventory read: merge real + mock
+	if #p == 1 and p[1] == "inventory" then
+		local real = _originalGetLocal({"inventory"}) or {}
+		local merged = {}
+		for k, v in pairs(real)            do merged[k] = v end
+		for k, v in pairs(activeMockSlots) do merged[k] = v end
+		return merged
+	end
+
+	-- Single slot read: check mock slots first, fall through to real
+	if #p == 2 and p[1] == "inventory" then
+		local slotId = p[2]
+		if activeMockSlots[slotId] then
+			return activeMockSlots[slotId]
+		end
+		return _originalGetLocal({"inventory", slotId})
+	end
+
 	return _originalGetLocal(path)
 end
 
 local function installDataStub()
+	activeMockSlots = buildMockSlots()
 	Data.GetLocal = stubGetLocal
 end
 local function removeDataStub()
+	activeMockSlots = {}
 	Data.GetLocal = _originalGetLocal
 end
 
@@ -343,6 +468,13 @@ local simBtnDecline = makeSimBtn("✗ Decline",     4, Color3.fromRGB(70,20,20))
 
 local function cleanupStubs()
 	removeNetworkStub()
+	-- Remove mock items from InventoryMenu before clearing the stub
+	local ok, InventoryMenu = pcall(req, {"Secondary", "InventoryMenu"})
+	if ok and InventoryMenu then
+		for slotId in pairs(activeMockSlots) do
+			pcall(InventoryMenu.RemoveItem, InventoryMenu, slotId)
+		end
+	end
 	removeDataStub()
 	removeUtilitiesStubs()
 end
@@ -411,6 +543,15 @@ local function startTrade()
 
 	TradeHandler.Server.Begin(fakePlayer)
 	simGui.Enabled = true
+
+	-- Inject mock items into InventoryMenu so they appear in the picker.
+	-- We require lazily here to avoid a circular dependency at load time.
+	local ok, InventoryMenu = pcall(req, {"Secondary", "InventoryMenu"})
+	if ok and InventoryMenu then
+		for slotId, itemData in pairs(activeMockSlots) do
+			pcall(InventoryMenu.AddOrUpdateItem, InventoryMenu, slotId, itemData, nil, false)
+		end
+	end
 end
 
 -- ── PENDING ACTION LOOP ──────────────────────────────────────────────────────
