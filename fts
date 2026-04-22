@@ -176,35 +176,33 @@ local function removeNetworkStub()    Utilities.Network.FireServer = _originalFi
 -- ── DATA STUB ────────────────────────────────────────────────────────────────
 -- Only overrides settings.Trading and tradeBanned.
 -- Real inventory flows through untouched.
+-- IMPORTANT: Data.GetLocal is function(path), NOT function(self, path).
+-- Calling _originalGetLocal(path) directly is correct.
 
 local _originalGetLocal = Data.GetLocal
 
-local function stubGetLocal(_, path)
+local function stubGetLocal(path)
 	local p = type(path) == "table" and path or { path }
 	if #p == 2 and p[1] == "settings" and p[2] == "Trading" then return true  end
 	if #p == 1 and p[1] == "tradeBanned"                     then return false end
-	return _originalGetLocal(Data, path)
+	return _originalGetLocal(path)
 end
 
 local function installDataStub()
-	Data.GetLocal = function(path) return stubGetLocal(Data, path) end
+	Data.GetLocal = stubGetLocal
 end
 local function removeDataStub()
 	Data.GetLocal = _originalGetLocal
 end
 
 -- ── UTILITIES STUBS ──────────────────────────────────────────────────────────
+-- Only install stubs for utilities that don't exist in the real Utilities.
+-- CanTradeItem is left as-is so the real checks (untradeable, locked, etc.) run.
 
-local _originalCanTradeItem    = Utilities.CanTradeItem
 local _originalGetItemValue    = Utilities.GetItemValue
 local _originalIsItemStackable = Utilities.IsItemStackable
 
 local function installUtilitiesStubs()
-	Utilities.CanTradeItem = function(itemData)
-		if not itemData then return false, "Item not found" end
-		if itemData.untradeable then return false, "This item cannot be traded" end
-		return true
-	end
 	if not _originalGetItemValue then
 		Utilities.GetItemValue = function(itemData, amt)
 			return (itemData and itemData.value or 0) * (amt or 1)
@@ -212,14 +210,13 @@ local function installUtilitiesStubs()
 	end
 	if not _originalIsItemStackable then
 		Utilities.IsItemStackable = function(itemId)
-			local inv = _originalGetLocal(Data, {"inventory", itemId})
+			local inv = _originalGetLocal({"inventory", itemId})
 			return inv and (inv.amt or 1) > 1
 		end
 	end
 end
 
 local function removeUtilitiesStubs()
-	Utilities.CanTradeItem    = _originalCanTradeItem
 	Utilities.GetItemValue    = _originalGetItemValue
 	Utilities.IsItemStackable = _originalIsItemStackable
 end
@@ -255,7 +252,7 @@ local function handleTradeAction(action, args)
 
 	if action == "Add" then
 		local slotId, qty = args[1], args[2]
-		local itemData = _originalGetLocal(Data, {"inventory", slotId})
+		local itemData = _originalGetLocal({"inventory", slotId})
 		if itemData then
 			TradeHandler.Server.ItemAdded(
 				{ id = itemData.id or slotId, name = itemData.name, amt = qty or itemData.amt, value = itemData.value },
@@ -434,7 +431,7 @@ end)
 -- ── SIM PANEL LOGIC ──────────────────────────────────────────────────────────
 
 local function getNextOtherSlot()
-	local inv = _originalGetLocal(Data, {"inventory"}) or {}
+	local inv = _originalGetLocal({"inventory"}) or {}
 	local keys = {}
 	for k in pairs(inv) do
 		if not SimState.otherAddedSlots[k] then
@@ -456,7 +453,7 @@ simBtnAdd.MouseButton1Click:Connect(function()
 	if not slotKey then
 		return
 	end
-	local itemData = _originalGetLocal(Data, {"inventory", slotKey})
+	local itemData = _originalGetLocal({"inventory", slotKey})
 	if not itemData then return end
 	SimState.otherAddedSlots[slotKey] = true
 	TradeHandler.Server.ItemAdded(
