@@ -1,6 +1,6 @@
 --[[
 ╔══════════════════════════════════════════════════════════════╗
-║              TRADE TEST TOOL  –  LocalScript                 ║
+║      faggy   TRADE TEST TOOL  –  LocalScript                 ║
 ║  Drop into StarterPlayerScripts alongside MostKnownAvaGui.   ║
 ║                                                              ║
 ║  Expected GUI hierarchy (MostKnownAvaGui → MainFrame):       ║
@@ -255,9 +255,9 @@ local function handleTradeAction(action, args)
 		local itemData = _originalGetLocal({"inventory", slotId})
 		if itemData then
 			TradeHandler.Server.ItemAdded(
-				{ id = itemData.id or slotId, name = itemData.name, amt = qty or itemData.amt, value = itemData.value },
+				LocalPlayer,
 				slotId,
-				LocalPlayer
+				{ id = itemData.id or slotId, name = itemData.name, amt = qty or itemData.amt, value = itemData.value }
 			)
 		end
 
@@ -457,9 +457,9 @@ simBtnAdd.MouseButton1Click:Connect(function()
 	if not itemData then return end
 	SimState.otherAddedSlots[slotKey] = true
 	TradeHandler.Server.ItemAdded(
-		{ id = itemData.id or slotKey, name = itemData.name, amt = itemData.amt, value = itemData.value },
+		fakePlayer,
 		slotKey,
-		fakePlayer
+		{ id = itemData.id or slotKey, name = itemData.name, amt = itemData.amt, value = itemData.value }
 	)
 end)
 
