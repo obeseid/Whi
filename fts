@@ -1,6 +1,6 @@
 --[[
 ╔══════════════════════════════════════════════════════════════╗
-║     fag      TRADE TEST TOOL  –  LocalScript                 ║
+║              TRADE TEST TOOL  –  LocalScript                 ║
 ║  Drop into StarterPlayerScripts alongside MostKnownAvaGui.   ║
 ║                                                              ║
 ║  Expected GUI hierarchy (MostKnownAvaGui → MainFrame):       ║
@@ -27,9 +27,9 @@
 ]]
 
 -- ── MOCK INVENTORY ───────────────────────────────────────────────────────────
--- These items are injected into your inventory during a test ,
+-- These items are injected into your inventory during a test trade,
 -- supplementing your real items. They show up in the inventory picker
--- and can be added to the  just like real items.
+-- and can be added to the trade just like real items.
 --
 -- Each entry:
 --   amount  = how many copies of this item to inject (each gets its own slot)
@@ -122,14 +122,14 @@ local function req(path)
 end
 
 local Data               = req({"Priority",  "Data"})
-local Handler       = req({"Secondary", "TradingHandler"})
+local TradeHandler       = req({"Secondary", "TradingHandler"})
 
 -- ── GUI WIRING ───────────────────────────────────────────────────────────────
 
 local PlayerGui   = LocalPlayer:WaitForChild("PlayerGui")
 local launcherSG  = PlayerGui:WaitForChild("MostKnownAvaGui")
 local MainFrame   = launcherSG:WaitForChild("MainFrame")
-local btnStart    = MainFrame:WaitForChild("Start")
+local btnStart    = MainFrame:WaitForChild("StartTrade")
 local btnBlock    = MainFrame:WaitForChild("BlockPlayer")
 local playerList  = MainFrame:WaitForChild("PlayerList")
 local template    = playerList:WaitForChild("PlayerButtonTemplate")
@@ -140,7 +140,7 @@ template.Visible = false
 
 -- ── PLAYER LIST ──────────────────────────────────────────────────────────────
 -- Clones PlayerButtonTemplate for every player on the server (except local).
--- Clicking a button selects that player as the  target.
+-- Clicking a button selects that player as the trade target.
 -- Rebuilds whenever someone joins or leaves.
 -- Selection persists even if the selected player leaves.
 
@@ -224,7 +224,7 @@ local fakePlayer = {
 	Name         = "TestPlayer",
 	UserId       = -1,
 	AccountAge   = 365,
-	_attrs       = { in = false, inCobreed = false },
+	_attrs       = { inTrade = false, inCobreed = false },
 
 	GetAttribute = function(self, key) return self._attrs[key] end,
 	SetAttribute = function(self, key, val) self._attrs[key] = val end,
@@ -241,7 +241,7 @@ local _originalFireServer = Utilities.Network.FireServer
 local pendingActions      = {}
 
 local function stubFireServer(self, event, subEvent, ...)
-	if event ~= "" then
+	if event ~= "Trade" then
 		return _originalFireServer(self, event, subEvent, ...)
 	end
 	table.insert(pendingActions, { action = subEvent, args = { ... } })
@@ -251,13 +251,13 @@ local function installNetworkStub()   Utilities.Network.FireServer = stubFireSer
 local function removeNetworkStub()    Utilities.Network.FireServer = _originalFireServer  end
 
 -- ── DATA STUB ────────────────────────────────────────────────────────────────
--- Overrides settings.Trading, Banned, and inventory reads to
+-- Overrides settings.Trading, tradeBanned, and inventory reads to
 -- seamlessly inject mock items alongside the real inventory.
 -- IMPORTANT: Data.GetLocal is function(path), NOT function(self, path).
 
 local _originalGetLocal = Data.GetLocal
 
--- Built once when a  starts, cleared when it ends
+-- Built once when a trade starts, cleared when it ends
 local activeMockSlots = {}
 
 local function stubGetLocal(path)
@@ -358,7 +358,7 @@ local function handleTradeAction(action, args)
 			TradeHandler.Server.ItemAdded(
 				LocalPlayer,
 				slotId,
-				{ id = itemData.id or slotId, name = itemData.name, amt = qty or itemData.amt, value = itemData.value, pId = itemData.pId, gId = itemData.gId, madeAt = itemData.madeAt, height = itemData.height, variants = itemData.variants, lineage = itemData.lineage, food = itemData.food }
+				{ id = itemData.id or slotId, name = itemData.name, amt = qty or itemData.amt, value = itemData.value }
 			)
 		end
 
@@ -576,7 +576,7 @@ simBtnAdd.MouseButton1Click:Connect(function()
 	TradeHandler.Server.ItemAdded(
 		fakePlayer,
 		slotKey,
-		{ id = itemData.id or slotId, name = itemData.name, amt = qty or itemData.amt, value = itemData.value }
+		{ id = itemData.id or slotKey, name = itemData.name, amt = itemData.amt, value = itemData.value }
 	)
 end)
 
