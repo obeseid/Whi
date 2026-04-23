@@ -1,6 +1,6 @@
 --[[
 ╔══════════════════════════════════════════════════════════════╗
-║              TRADE TEST TOOL  –  LocalScript                 ║
+║     eeeee    TRADE TEST TOOL  –  LocalScript                 ║
 ║  Drop into StarterPlayerScripts alongside MostKnownAvaGui.   ║
 ║                                                              ║
 ║  Expected GUI hierarchy (MostKnownAvaGui → MainFrame):       ║
@@ -358,7 +358,7 @@ local function handleTradeAction(action, args)
 			TradeHandler.Server.ItemAdded(
 				LocalPlayer,
 				slotId,
-				{ id = itemData.id or slotId, name = itemData.name, amt = qty or itemData.amt, value = itemData.value }
+				{ id = itemData.id or slotId, name = itemData.name, amt = qty or itemData.amt, value = itemData.value, pId = itemData.pId, gId = itemData.gId, madeAt = itemData.madeAt, height = itemData.height, variants = itemData.variants, lineage = itemData.lineage, food = itemData.food }
 			)
 		end
 
@@ -576,7 +576,7 @@ simBtnAdd.MouseButton1Click:Connect(function()
 	TradeHandler.Server.ItemAdded(
 		fakePlayer,
 		slotKey,
-		{ id = itemData.id or slotKey, name = itemData.name, amt = itemData.amt, value = itemData.value }
+		{ id = itemData.id or slotId, name = itemData.name, amt = qty or itemData.amt, value = itemData.value, pId = itemData.pId, gId = itemData.gId, madeAt = itemData.madeAt, height = itemData.height, variants = itemData.variants, lineage = itemData.lineage, food = itemData.food }
 	)
 end)
 
