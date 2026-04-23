@@ -181,22 +181,33 @@ end
 local spawnedSlots = {}  -- array of slotId strings injected by this script
 
 local function SpawnHorse(overrides)
-	local itemData = Merge(DefaultItemData(), overrides or {})
-	itemData.madeAt = os.time()
+    local itemData = Merge(DefaultItemData(), overrides or {})
+    itemData.madeAt = os.time()
 
-	local slotId = HttpService:GenerateGUID(false)
-	table.insert(spawnedSlots, slotId)
+    local slotId = HttpService:GenerateGUID(false)
+    table.insert(spawnedSlots, slotId)
 
-	-- isInitialLoad = false so the "item added" alert fires, matching live behaviour
-	InventoryMenu.AddOrUpdateItem(slotId, itemData, nil, false)
-	return slotId
+    -- Write into Data cache so trade validation can find it
+    local Data = require(Players.LocalPlayer.PlayerScripts.Priority.Data)
+    local cache = Data.Get(Players.LocalPlayer)  -- gets the full data table (by ref)
+    if cache and cache.inventory then
+        cache.inventory[slotId] = itemData
+    end
+
+    InventoryMenu.AddOrUpdateItem(slotId, itemData, nil, false)
+    return slotId
 end
 
 local function ClearAllMock()
-	for _, slotId in ipairs(spawnedSlots) do
-		InventoryMenu.RemoveItem(slotId)
-	end
-	spawnedSlots = {}
+    local Data = require(Players.LocalPlayer.PlayerScripts.Priority.Data)
+    local cache = Data.Get(Players.LocalPlayer)
+    for _, slotId in ipairs(spawnedSlots) do
+        if cache and cache.inventory then
+            cache.inventory[slotId] = nil
+        end
+        InventoryMenu.RemoveItem(slotId)
+    end
+    spawnedSlots = {}
 end
 
 -- ── GUI ───────────────────────────────────────────────────────────────────────
