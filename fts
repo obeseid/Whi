@@ -1,6 +1,6 @@
 --[[
 ╔══════════════════════════════════════════════════════════════╗
-║     nga      TRADE TEST TOOL  –  LocalScript                 ║
+║     fag      TRADE TEST TOOL  –  LocalScript                 ║
 ║  Drop into StarterPlayerScripts alongside MostKnownAvaGui.   ║
 ║                                                              ║
 ║  Expected GUI hierarchy (MostKnownAvaGui → MainFrame):       ║
@@ -576,7 +576,7 @@ simBtnAdd.MouseButton1Click:Connect(function()
 	TradeHandler.Server.ItemAdded(
 		fakePlayer,
 		slotKey,
-		{ id = itemData.id or slotId, name = itemData.name, amt = qty or itemData.amt, value = itemData.value, pId = itemData.pId, gId = itemData.gId, madeAt = itemData.madeAt, height = itemData.height, variants = itemData.variants, lineage = itemData.lineage, food = itemData.food }
+		{ id = itemData.id or slotId, name = itemData.name, amt = qty or itemData.amt, value = itemData.value }
 	)
 end)
 
