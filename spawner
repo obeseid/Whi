@@ -1,4 +1,4 @@
--- MockInventoryTester (eeefa)
+-- MockInventoryTester (ddddd)
 -- Drop this inside StarterPlayerScripts (or run it as a Plugin script).
 -- It injects fake horse items directly into InventoryMenu using the same
 -- AddOrUpdateItem / RemoveItem API that the live server uses, so the real
@@ -32,10 +32,10 @@ local InventoryMenu = require(
 
 local PRESETS = {
 	{
-		label = "Average QH",
+		label = "Mummy QH",
 		data = {
 			id      = 370,
-			name    = "Test Quarter Horse",
+			name    = "Quarter Horse",
 			pId     = 1,   -- Bold
 			gId     = 2,   -- Stallion
 			height  = 0.5,
@@ -53,10 +53,10 @@ local PRESETS = {
 		},
 	},
 	{
-		label = "Elite Sprinter",
+		label = "Motherchip dh",
 		data = {
-			id      = 370,
-			name    = "Blaze",
+			id      = 399,
+			name    = "DELDO HORSE",
 			pId     = 3,   -- Energetic
 			gId     = 2,   -- Stallion
 			height  = 0.82,
@@ -65,11 +65,11 @@ local PRESETS = {
 			invLock = false,
 			stats   = { speed = 0.97, agility = 0.88, strength = 0.60, stamina = 0.75, jump = 0.55 },
 			variants = {
-				colour     = "chestnut",
-				maneColour = "flaxen",
-				tailColour = "flaxen",
-				maneStyle  = "longQH2",
-				tailStyle  = "mediumQH2",
+				colour     = "midnightSnowstorm",
+				maneColour = "iceyBlue",
+				tailColour = "iceyPink",
+				maneStyle  = "longPercheron",
+				tailStyle  = "longPercheron",
 			},
 		},
 	},
