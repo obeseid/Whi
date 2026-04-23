@@ -1,4 +1,4 @@
--- MockInventoryTester (few)
+-- MockInventoryTester (soos)
 -- Drop this inside StarterPlayerScripts (or run it as a Plugin script).
 -- It injects fake horse items directly into InventoryMenu using the same
 -- AddOrUpdateItem / RemoveItem API that the live server uses, so the real
@@ -86,7 +86,7 @@ local PRESETS = {
 			invLock = true,
 			stats   = { speed = 0.45, agility = 0.50, strength = 0.40, stamina = 0.65, jump = 0.35 },
 			variants = {
-				colour     = "iceCreamDrizzle",
+				colour     = "iceCreamDrizzleQH2",
 				maneColour = "iceyPink",
 				tailColour = "iceyGreen",
 				maneStyle  = "longQH2",
