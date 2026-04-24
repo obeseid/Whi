@@ -287,7 +287,7 @@ local function handleTradeAction(action, args)
 		end
 
 	elseif action == "Remove" then
-		TradeHandler.Server.ItemRemoved(args[1], LocalPlayer)
+		TradeHandler.Server.ItemRemoved(LocalPlayer, args[1])
 
 	elseif action == "Accept" then
 		TradeHandler.Server.Accepted(
@@ -498,7 +498,7 @@ simBtnRemove.MouseButton1Click:Connect(function()
 		return
 	end
 	SimState.otherAddedSlots[lastKey] = nil
-	TradeHandler.Server.ItemRemoved(lastKey, fakePlayer)
+	TradeHandler.Server.ItemRemoved(fakePlayer, lastKey)
 end)
 
 simBtnAccept.MouseButton1Click:Connect(function()
