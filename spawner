@@ -1201,11 +1201,10 @@ statGrid.LayoutOrder       = 1
 statGrid.Parent            = statRow
 
 local statGridLayout = Instance.new("UIGridLayout")
-statGridLayout.CellSize        = UDim2.new(0.5, -3, 0, 26)
-statGridLayout.CellPaddingX    = UDim2.new(0, 6, 0, 0)
-statGridLayout.CellPaddingY    = UDim2.new(0, 4, 0, 0)
-statGridLayout.SortOrder       = Enum.SortOrder.LayoutOrder
-statGridLayout.Parent          = statGrid
+statGridLayout.CellSize    = UDim2.new(0.5, -3, 0, 26)
+statGridLayout.CellPadding = UDim2.new(0, 6, 0, 4)   -- ✅ X=6px, Y=4px
+statGridLayout.SortOrder   = Enum.SortOrder.LayoutOrder
+statGridLayout.Parent      = statGrid
 
 for i, statName in ipairs(STAT_NAMES) do
 	local box = Instance.new("TextBox")
