@@ -129,45 +129,718 @@ local PRESETS = {
 
 local MASS_SPAWN_PRESETS = {
 	{
-		id      = 370,
-		name    = "Mass Horse 1",
-		pId     = 1,
-		gId     = 2,
-		height  = 0.6,
-		purity  = 0.7,
-		stats   = { speed = 0.8, agility = 0.7, strength = 0.6, stamina = 0.75, jump = 0.5 },
-		variants = { colour = "bay", maneColour = "black", tailColour = "black", maneStyle = "longQH2", tailStyle = "mediumQH2" },
-	},
-	{
-		id      = 370,
-		name    = "Mass Horse 2",
-		pId     = 3,
-		gId     = 1,
-		height  = 0.72,
-		purity  = 0.85,
-		stats   = { speed = 0.9, agility = 0.6, strength = 0.8, stamina = 0.65, jump = 0.7 },
-		variants = { colour = "chestnut", maneColour = "flaxen", tailColour = "flaxen", maneStyle = "longQH2", tailStyle = "mediumQH2" },
-	},
-	{
-		id      = 370,
-		name    = "Mass Horse 3",
-		pId     = 2,
-		gId     = 1,
-		height  = 0.45,
-		purity  = 0.3,
-		baby    = true,
-		timeUntilGrown = 3600,
-		stats   = { speed = 0.3, agility = 0.4, strength = 0.3, stamina = 0.35, jump = 0.25 },
-		variants = { colour = "grey", maneColour = "white", tailColour = "white", maneStyle = "longQH2", tailStyle = "mediumQH2" },
-	},
+	id = 392, name = "", pId = 1, gId = 2, height = 0.6, purity = 0.7,
+	stats = { speed = 0.8, agility = 0.7, strength = 0.6, stamina = 0.75, jump = 0.5 },
+	variants = { colour = "strawberryShortcake", maneColour = "blessed", tailColour = "blessed", maneStyle = "longBubbleBraidsStrawberriesQH2", tailStyle = "longBubbleBraidsStrawberriesQH2" },
+},
+{
+	id = 392, name = "", pId = 1, gId = 2, height = 0.6, purity = 0.7,
+	stats = { speed = 0.8, agility = 0.7, strength = 0.6, stamina = 0.75, jump = 0.5 },
+	variants = { colour = "strawberryShortcake", maneColour = "iceyBlue", tailColour = "iceyBlue", maneStyle = "longBubbleBraidsStrawberriesQH2", tailStyle = "longBubbleBraidsStrawberriesQH2" },
+},
+{
+	id = 392, name = "", pId = 1, gId = 2, height = 0.6, purity = 0.7,
+	stats = { speed = 0.8, agility = 0.7, strength = 0.6, stamina = 0.75, jump = 0.5 },
+	variants = { colour = "strawberryShortcake", maneColour = "iceyWhite", tailColour = "iceyWhite", maneStyle = "longBubbleBraidsStrawberriesQH2", tailStyle = "longBubbleBraidsStrawberriesQH2" },
+},
+{
+	id = 392, name = "", pId = 1, gId = 2, height = 0.6, purity = 0.7,
+	stats = { speed = 0.8, agility = 0.7, strength = 0.6, stamina = 0.75, jump = 0.5 },
+	variants = { colour = "strawberryShortcake", maneColour = "iceyPink", tailColour = "iceyPink", maneStyle = "longBubbleBraidsStrawberriesQH2", tailStyle = "longBubbleBraidsStrawberriesQH2" },
+},
+{
+	id = 392, name = "", pId = 1, gId = 2, height = 0.6, purity = 0.7,
+	stats = { speed = 0.8, agility = 0.7, strength = 0.6, stamina = 0.75, jump = 0.5 },
+	variants = { colour = "strawberryShortcake", maneColour = "iceyBlack", tailColour = "iceyBlack", maneStyle = "longBubbleBraidsStrawberriesQH2", tailStyle = "longBubbleBraidsStrawberriesQH2" },
+},
+{
+	id = 392, name = "", pId = 1, gId = 2, height = 0.6, purity = 0.7,
+	stats = { speed = 0.8, agility = 0.7, strength = 0.6, stamina = 0.75, jump = 0.5 },
+	variants = { colour = "strawberryShortcake", maneColour = "winterStreaks", tailColour = "winterStreaks", maneStyle = "longBubbleBraidsStrawberriesQH2", tailStyle = "longBubbleBraidsStrawberriesQH2" },
+},
+{
+	id = 392, name = "", pId = 1, gId = 2, height = 0.6, purity = 0.7,
+	stats = { speed = 0.8, agility = 0.7, strength = 0.6, stamina = 0.75, jump = 0.5 },
+	variants = { colour = "strawberryShortcake", maneColour = "flowery", tailColour = "flowery", maneStyle = "longBubbleBraidsStrawberriesQH2", tailStyle = "longBubbleBraidsStrawberriesQH2" },
+},
+{
+	id = 392, name = "", pId = 1, gId = 2, height = 0.6, purity = 0.7,
+	stats = { speed = 0.8, agility = 0.7, strength = 0.6, stamina = 0.75, jump = 0.5 },
+	variants = { colour = "strawberryShortcake", maneColour = "pearlyGreen", tailColour = "pearlyGreen", maneStyle = "longBubbleBraidsStrawberriesQH2", tailStyle = "longBubbleBraidsStrawberriesQH2" },
+},
+{
+	id = 392, name = "", pId = 1, gId = 2, height = 0.6, purity = 0.7,
+	stats = { speed = 0.8, agility = 0.7, strength = 0.6, stamina = 0.75, jump = 0.5 },
+	variants = { colour = "strawberryShortcake", maneColour = "leafy", tailColour = "leafy", maneStyle = "longBubbleBraidsStrawberriesQH2", tailStyle = "longBubbleBraidsStrawberriesQH2" },
+},
+{
+	id = 392, name = "", pId = 1, gId = 2, height = 0.6, purity = 0.7,
+	stats = { speed = 0.8, agility = 0.7, strength = 0.6, stamina = 0.75, jump = 0.5 },
+	variants = { colour = "strawberryShortcake", maneColour = "pearly", tailColour = "pearly", maneStyle = "longBubbleBraidsStrawberriesQH2", tailStyle = "longBubbleBraidsStrawberriesQH2" },
+},
+{
+	id = 392, name = "", pId = 1, gId = 2, height = 0.6, purity = 0.7,
+	stats = { speed = 0.8, agility = 0.7, strength = 0.6, stamina = 0.75, jump = 0.5 },
+	variants = { colour = "strawberryShortcake", maneColour = "pastelStreaks", tailColour = "pastelStreaks", maneStyle = "longBubbleBraidsStrawberriesQH2", tailStyle = "longBubbleBraidsStrawberriesQH2" },
+},
+{
+	id = 392, name = "", pId = 1, gId = 2, height = 0.6, purity = 0.7,
+	stats = { speed = 0.8, agility = 0.7, strength = 0.6, stamina = 0.75, jump = 0.5 },
+	variants = { colour = "strawberryShortcake", maneColour = "leathery", tailColour = "leathery", maneStyle = "longBubbleBraidsStrawberriesQH2", tailStyle = "longBubbleBraidsStrawberriesQH2" },
+},
+{
+	id = 392, name = "", pId = 1, gId = 2, height = 0.6, purity = 0.7,
+	stats = { speed = 0.8, agility = 0.7, strength = 0.6, stamina = 0.75, jump = 0.5 },
+	variants = { colour = "strawberryShortcake", maneColour = "royalStreaks", tailColour = "royalStreaks", maneStyle = "longBubbleBraidsStrawberriesQH2", tailStyle = "longBubbleBraidsStrawberriesQH2" },
+},
+{
+	id = 392, name = "", pId = 1, gId = 2, height = 0.6, purity = 0.7,
+	stats = { speed = 0.8, agility = 0.7, strength = 0.6, stamina = 0.75, jump = 0.5 },
+	variants = { colour = "strawberryShortcake", maneColour = "cowPrint", tailColour = "cowPrint", maneStyle = "longBubbleBraidsStrawberriesQH2", tailStyle = "longBubbleBraidsStrawberriesQH2" },
+},
+{
+	id = 392, name = "", pId = 1, gId = 2, height = 0.6, purity = 0.7,
+	stats = { speed = 0.8, agility = 0.7, strength = 0.6, stamina = 0.75, jump = 0.5 },
+	variants = { colour = "strawberryShortcake", maneColour = "pearlyPink", tailColour = "pearlyPink", maneStyle = "longBubbleBraidsStrawberriesQH2", tailStyle = "longBubbleBraidsStrawberriesQH2" },
+},
+{
+	id = 392, name = "", pId = 1, gId = 2, height = 0.6, purity = 0.7,
+	stats = { speed = 0.8, agility = 0.7, strength = 0.6, stamina = 0.75, jump = 0.5 },
+	variants = { colour = "strawberryShortcake", maneColour = "clearQuartz", tailColour = "clearQuartz", maneStyle = "longBubbleBraidsStrawberriesQH2", tailStyle = "longBubbleBraidsStrawberriesQH2" },
+},
+{
+	id = 392, name = "", pId = 1, gId = 2, height = 0.6, purity = 0.7,
+	stats = { speed = 0.8, agility = 0.7, strength = 0.6, stamina = 0.75, jump = 0.5 },
+	variants = { colour = "strawberryShortcake", maneColour = "zebraStripes", tailColour = "zebraStripes", maneStyle = "longBubbleBraidsStrawberriesQH2", tailStyle = "longBubbleBraidsStrawberriesQH2" },
+},
+{
+	id = 392, name = "", pId = 1, gId = 2, height = 0.6, purity = 0.7,
+	stats = { speed = 0.8, agility = 0.7, strength = 0.6, stamina = 0.75, jump = 0.5 },
+	variants = { colour = "strawberryShortcake", maneColour = "dustyFade", tailColour = "dustyFade", maneStyle = "longBubbleBraidsStrawberriesQH2", tailStyle = "longBubbleBraidsStrawberriesQH2" },
+},
+{
+	id = 392, name = "", pId = 1, gId = 2, height = 0.6, purity = 0.7,
+	stats = { speed = 0.8, agility = 0.7, strength = 0.6, stamina = 0.75, jump = 0.5 },
+	variants = { colour = "strawberryShortcake", maneColour = "limestone", tailColour = "limestone", maneStyle = "longBubbleBraidsStrawberriesQH2", tailStyle = "longBubbleBraidsStrawberriesQH2" },
+},
+{
+	id = 392, name = "", pId = 1, gId = 2, height = 0.6, purity = 0.7,
+	stats = { speed = 0.8, agility = 0.7, strength = 0.6, stamina = 0.75, jump = 0.5 },
+	variants = { colour = "strawberryShortcake", maneColour = "sandstone", tailColour = "sandstone", maneStyle = "longBubbleBraidsStrawberriesQH2", tailStyle = "longBubbleBraidsStrawberriesQH2" },
+},
+{
+	id = 392, name = "", pId = 1, gId = 2, height = 0.6, purity = 0.7,
+	stats = { speed = 0.8, agility = 0.7, strength = 0.6, stamina = 0.75, jump = 0.5 },
+	variants = { colour = "strawberryShortcake", maneColour = "ruby", tailColour = "ruby", maneStyle = "longBubbleBraidsStrawberriesQH2", tailStyle = "longBubbleBraidsStrawberriesQH2" },
+},
+{
+	id = 392, name = "", pId = 1, gId = 2, height = 0.6, purity = 0.7,
+	stats = { speed = 0.8, agility = 0.7, strength = 0.6, stamina = 0.75, jump = 0.5 },
+	variants = { colour = "strawberryShortcake", maneColour = "pearlyRed", tailColour = "pearlyRed", maneStyle = "longBubbleBraidsStrawberriesQH2", tailStyle = "longBubbleBraidsStrawberriesQH2" },
+},
+{
+	id = 392, name = "", pId = 1, gId = 2, height = 0.6, purity = 0.7,
+	stats = { speed = 0.8, agility = 0.7, strength = 0.6, stamina = 0.75, jump = 0.5 },
+	variants = { colour = "strawberryShortcake", maneColour = "iceyGreen", tailColour = "iceyGreen", maneStyle = "longBubbleBraidsStrawberriesQH2", tailStyle = "longBubbleBraidsStrawberriesQH2" },
+},
+{
+	id = 392, name = "", pId = 1, gId = 2, height = 0.6, purity = 0.7,
+	stats = { speed = 0.8, agility = 0.7, strength = 0.6, stamina = 0.75, jump = 0.5 },
+	variants = { colour = "strawberryShortcake", maneColour = "glacierGreen", tailColour = "glacierGreen", maneStyle = "longBubbleBraidsStrawberriesQH2", tailStyle = "longBubbleBraidsStrawberriesQH2" },
+},
+{
+	id = 392, name = "", pId = 1, gId = 2, height = 0.6, purity = 0.7,
+	stats = { speed = 0.8, agility = 0.7, strength = 0.6, stamina = 0.75, jump = 0.5 },
+	variants = { colour = "strawberryShortcake", maneColour = "glacierPink", tailColour = "glacierPink", maneStyle = "longBubbleBraidsStrawberriesQH2", tailStyle = "longBubbleBraidsStrawberriesQH2" },
+},
+{
+	id = 392, name = "", pId = 1, gId = 2, height = 0.6, purity = 0.7,
+	stats = { speed = 0.8, agility = 0.7, strength = 0.6, stamina = 0.75, jump = 0.5 },
+	variants = { colour = "strawberryShortcake", maneColour = "glacierBlue", tailColour = "glacierBlue", maneStyle = "longBubbleBraidsStrawberriesQH2", tailStyle = "longBubbleBraidsStrawberriesQH2" },
+},
+{
+	id = 392, name = "", pId = 1, gId = 2, height = 0.6, purity = 0.7,
+	stats = { speed = 0.8, agility = 0.7, strength = 0.6, stamina = 0.75, jump = 0.5 },
+	variants = { colour = "strawberryShortcake", maneColour = "snowyGlacierFade", tailColour = "snowyGlacierFade", maneStyle = "longBubbleBraidsStrawberriesQH2", tailStyle = "longBubbleBraidsStrawberriesQH2" },
+},
+{
+	id = 392, name = "", pId = 1, gId = 2, height = 0.6, purity = 0.7,
+	stats = { speed = 0.8, agility = 0.7, strength = 0.6, stamina = 0.75, jump = 0.5 },
+	variants = { colour = "strawberryShortcake", maneColour = "pinkCowPrint", tailColour = "pinkCowPrint", maneStyle = "longBubbleBraidsStrawberriesQH2", tailStyle = "longBubbleBraidsStrawberriesQH2" },
+},
+{
+	id = 392, name = "", pId = 1, gId = 2, height = 0.6, purity = 0.7,
+	stats = { speed = 0.8, agility = 0.7, strength = 0.6, stamina = 0.75, jump = 0.5 },
+	variants = { colour = "strawberryShortcake", maneColour = "diamond", tailColour = "diamond", maneStyle = "longBubbleBraidsStrawberriesQH2", tailStyle = "longBubbleBraidsStrawberriesQH2" },
+},
+{
+	id = 392, name = "", pId = 1, gId = 2, height = 0.6, purity = 0.7,
+	stats = { speed = 0.8, agility = 0.7, strength = 0.6, stamina = 0.75, jump = 0.5 },
+	variants = { colour = "strawberryShortcake", maneColour = "sapphire", tailColour = "sapphire", maneStyle = "longBubbleBraidsStrawberriesQH2", tailStyle = "longBubbleBraidsStrawberriesQH2" },
+},
+{
+	id = 392, name = "", pId = 1, gId = 2, height = 0.6, purity = 0.7,
+	stats = { speed = 0.8, agility = 0.7, strength = 0.6, stamina = 0.75, jump = 0.5 },
+	variants = { colour = "strawberryShortcake", maneColour = "pearlyOrange", tailColour = "pearlyOrange", maneStyle = "longBubbleBraidsStrawberriesQH2", tailStyle = "longBubbleBraidsStrawberriesQH2" },
+},
+{
+	id = 392, name = "", pId = 1, gId = 2, height = 0.6, purity = 0.7,
+	stats = { speed = 0.8, agility = 0.7, strength = 0.6, stamina = 0.75, jump = 0.5 },
+	variants = { colour = "strawberryShortcake", maneColour = "sunriseStreaks", tailColour = "sunriseStreaks", maneStyle = "longBubbleBraidsStrawberriesQH2", tailStyle = "longBubbleBraidsStrawberriesQH2" },
+},
+{
+	id = 392, name = "", pId = 1, gId = 2, height = 0.6, purity = 0.7,
+	stats = { speed = 0.8, agility = 0.7, strength = 0.6, stamina = 0.75, jump = 0.5 },
+	variants = { colour = "strawberryShortcake", maneColour = "amethyst", tailColour = "amethyst", maneStyle = "longBubbleBraidsStrawberriesQH2", tailStyle = "longBubbleBraidsStrawberriesQH2" },
+},
+{
+	id = 392, name = "", pId = 1, gId = 2, height = 0.6, purity = 0.7,
+	stats = { speed = 0.8, agility = 0.7, strength = 0.6, stamina = 0.75, jump = 0.5 },
+	variants = { colour = "strawberryShortcake", maneColour = "topaz", tailColour = "topaz", maneStyle = "longBubbleBraidsStrawberriesQH2", tailStyle = "longBubbleBraidsStrawberriesQH2" },
+},
+{
+	id = 392, name = "", pId = 1, gId = 2, height = 0.6, purity = 0.7,
+	stats = { speed = 0.8, agility = 0.7, strength = 0.6, stamina = 0.75, jump = 0.5 },
+	variants = { colour = "strawberryShortcake", maneColour = "jaguarSpots", tailColour = "jaguarSpots", maneStyle = "longBubbleBraidsStrawberriesQH2", tailStyle = "longBubbleBraidsStrawberriesQH2" },
+},
+{
+	id = 392, name = "", pId = 1, gId = 2, height = 0.6, purity = 0.7,
+	stats = { speed = 0.8, agility = 0.7, strength = 0.6, stamina = 0.75, jump = 0.5 },
+	variants = { colour = "strawberryShortcake", maneColour = "mossy", tailColour = "mossy", maneStyle = "longBubbleBraidsStrawberriesQH2", tailStyle = "longBubbleBraidsStrawberriesQH2" },
+},
+{
+	id = 392, name = "", pId = 1, gId = 2, height = 0.6, purity = 0.7,
+	stats = { speed = 0.8, agility = 0.7, strength = 0.6, stamina = 0.75, jump = 0.5 },
+	variants = { colour = "strawberryShortcake", maneColour = "tigerStripes", tailColour = "tigerStripes", maneStyle = "longBubbleBraidsStrawberriesQH2", tailStyle = "longBubbleBraidsStrawberriesQH2" },
+},
+{
+	id = 392, name = "", pId = 1, gId = 2, height = 0.6, purity = 0.7,
+	stats = { speed = 0.8, agility = 0.7, strength = 0.6, stamina = 0.75, jump = 0.5 },
+	variants = { colour = "strawberryShortcake", maneColour = "emerald", tailColour = "emerald", maneStyle = "longBubbleBraidsStrawberriesQH2", tailStyle = "longBubbleBraidsStrawberriesQH2" },
+},
+{
+	id = 392, name = "", pId = 1, gId = 2, height = 0.6, purity = 0.7,
+	stats = { speed = 0.8, agility = 0.7, strength = 0.6, stamina = 0.75, jump = 0.5 },
+	variants = { colour = "strawberryShortcake", maneColour = "deepSpace", tailColour = "deepSpace", maneStyle = "longBubbleBraidsStrawberriesQH2", tailStyle = "longBubbleBraidsStrawberriesQH2" },
+},
+{
+	id = 392, name = "", pId = 1, gId = 2, height = 0.6, purity = 0.7,
+	stats = { speed = 0.8, agility = 0.7, strength = 0.6, stamina = 0.75, jump = 0.5 },
+	variants = { colour = "strawberryShortcake", maneColour = "neonBlue", tailColour = "neonBlue", maneStyle = "longBubbleBraidsStrawberriesQH2", tailStyle = "longBubbleBraidsStrawberriesQH2" },
+},
+{
+	id = 392, name = "", pId = 1, gId = 2, height = 0.6, purity = 0.7,
+	stats = { speed = 0.8, agility = 0.7, strength = 0.6, stamina = 0.75, jump = 0.5 },
+	variants = { colour = "strawberryShortcake", maneColour = "neonPurple", tailColour = "neonPurple", maneStyle = "longBubbleBraidsStrawberriesQH2", tailStyle = "longBubbleBraidsStrawberriesQH2" },
+},
+{
+	id = 392, name = "", pId = 1, gId = 2, height = 0.6, purity = 0.7,
+	stats = { speed = 0.8, agility = 0.7, strength = 0.6, stamina = 0.75, jump = 0.5 },
+	variants = { colour = "strawberryShortcake", maneColour = "moonstone", tailColour = "moonstone", maneStyle = "longBubbleBraidsStrawberriesQH2", tailStyle = "longBubbleBraidsStrawberriesQH2" },
+},
+{
+	id = 392, name = "", pId = 1, gId = 2, height = 0.6, purity = 0.7,
+	stats = { speed = 0.8, agility = 0.7, strength = 0.6, stamina = 0.75, jump = 0.5 },
+	variants = { colour = "strawberryShortcake", maneColour = "pearlyBlue", tailColour = "pearlyBlue", maneStyle = "longBubbleBraidsStrawberriesQH2", tailStyle = "longBubbleBraidsStrawberriesQH2" },
+},
+{
+	id = 392, name = "", pId = 1, gId = 2, height = 0.6, purity = 0.7,
+	stats = { speed = 0.8, agility = 0.7, strength = 0.6, stamina = 0.75, jump = 0.5 },
+	variants = { colour = "strawberryShortcake", maneColour = "volcanicOrange", tailColour = "volcanicOrange", maneStyle = "longBubbleBraidsStrawberriesQH2", tailStyle = "longBubbleBraidsStrawberriesQH2" },
+},
+{
+	id = 392, name = "", pId = 1, gId = 2, height = 0.6, purity = 0.7,
+	stats = { speed = 0.8, agility = 0.7, strength = 0.6, stamina = 0.75, jump = 0.5 },
+	variants = { colour = "strawberryShortcake", maneColour = "pearlyBlack", tailColour = "pearlyBlack", maneStyle = "longBubbleBraidsStrawberriesQH2", tailStyle = "longBubbleBraidsStrawberriesQH2" },
+},
+{
+	id = 392, name = "", pId = 1, gId = 2, height = 0.6, purity = 0.7,
+	stats = { speed = 0.8, agility = 0.7, strength = 0.6, stamina = 0.75, jump = 0.5 },
+	variants = { colour = "strawberryShortcake", maneColour = "crackedLavaFade", tailColour = "crackedLavaFade", maneStyle = "longBubbleBraidsStrawberriesQH2", tailStyle = "longBubbleBraidsStrawberriesQH2" },
+},
+{
+	id = 392, name = "", pId = 1, gId = 2, height = 0.6, purity = 0.7,
+	stats = { speed = 0.8, agility = 0.7, strength = 0.6, stamina = 0.75, jump = 0.5 },
+	variants = { colour = "strawberryShortcake", maneColour = "volcanicBlack", tailColour = "volcanicBlack", maneStyle = "longBubbleBraidsStrawberriesQH2", tailStyle = "longBubbleBraidsStrawberriesQH2" },
+},
+{
+	id = 370, name = "", pId = 2, gId = 2, height = 0.6, purity = 0.7,
+	stats = { speed = 0.8, agility = 0.7, strength = 0.6, stamina = 0.75, jump = 0.5 },
+	variants = { colour = "mummy", maneColour = "blessed", tailColour = "blessed", maneStyle = "longQH2", tailStyle = "longQH2" },
+},
+{
+	id = 370, name = "", pId = 2, gId = 2, height = 0.6, purity = 0.7,
+	stats = { speed = 0.8, agility = 0.7, strength = 0.6, stamina = 0.75, jump = 0.5 },
+	variants = { colour = "mummy", maneColour = "iceyBlue", tailColour = "iceyBlue", maneStyle = "longQH2", tailStyle = "longQH2" },
+},
+{
+	id = 370, name = "", pId = 2, gId = 2, height = 0.6, purity = 0.7,
+	stats = { speed = 0.8, agility = 0.7, strength = 0.6, stamina = 0.75, jump = 0.5 },
+	variants = { colour = "mummy", maneColour = "iceyWhite", tailColour = "iceyWhite", maneStyle = "longQH2", tailStyle = "longQH2" },
+},
+{
+	id = 370, name = "", pId = 2, gId = 2, height = 0.6, purity = 0.7,
+	stats = { speed = 0.8, agility = 0.7, strength = 0.6, stamina = 0.75, jump = 0.5 },
+	variants = { colour = "mummy", maneColour = "iceyPink", tailColour = "iceyPink", maneStyle = "longQH2", tailStyle = "longQH2" },
+},
+{
+	id = 370, name = "", pId = 2, gId = 2, height = 0.6, purity = 0.7,
+	stats = { speed = 0.8, agility = 0.7, strength = 0.6, stamina = 0.75, jump = 0.5 },
+	variants = { colour = "mummy", maneColour = "iceyBlack", tailColour = "iceyBlack", maneStyle = "longQH2", tailStyle = "longQH2" },
+},
+{
+	id = 370, name = "", pId = 2, gId = 2, height = 0.6, purity = 0.7,
+	stats = { speed = 0.8, agility = 0.7, strength = 0.6, stamina = 0.75, jump = 0.5 },
+	variants = { colour = "mummy", maneColour = "winterStreaks", tailColour = "winterStreaks", maneStyle = "longQH2", tailStyle = "longQH2" },
+},
+{
+	id = 370, name = "", pId = 2, gId = 2, height = 0.6, purity = 0.7,
+	stats = { speed = 0.8, agility = 0.7, strength = 0.6, stamina = 0.75, jump = 0.5 },
+	variants = { colour = "mummy", maneColour = "flowery", tailColour = "flowery", maneStyle = "longQH2", tailStyle = "longQH2" },
+},
+{
+	id = 370, name = "", pId = 2, gId = 2, height = 0.6, purity = 0.7,
+	stats = { speed = 0.8, agility = 0.7, strength = 0.6, stamina = 0.75, jump = 0.5 },
+	variants = { colour = "mummy", maneColour = "pearlyGreen", tailColour = "pearlyGreen", maneStyle = "longQH2", tailStyle = "longQH2" },
+},
+{
+	id = 370, name = "", pId = 2, gId = 2, height = 0.6, purity = 0.7,
+	stats = { speed = 0.8, agility = 0.7, strength = 0.6, stamina = 0.75, jump = 0.5 },
+	variants = { colour = "mummy", maneColour = "leafy", tailColour = "leafy", maneStyle = "longQH2", tailStyle = "longQH2" },
+},
+{
+	id = 370, name = "", pId = 2, gId = 2, height = 0.6, purity = 0.7,
+	stats = { speed = 0.8, agility = 0.7, strength = 0.6, stamina = 0.75, jump = 0.5 },
+	variants = { colour = "mummy", maneColour = "pearly", tailColour = "pearly", maneStyle = "longQH2", tailStyle = "longQH2" },
+},
+{
+	id = 370, name = "", pId = 2, gId = 2, height = 0.6, purity = 0.7,
+	stats = { speed = 0.8, agility = 0.7, strength = 0.6, stamina = 0.75, jump = 0.5 },
+	variants = { colour = "mummy", maneColour = "pastelStreaks", tailColour = "pastelStreaks", maneStyle = "longQH2", tailStyle = "longQH2" },
+},
+{
+	id = 370, name = "", pId = 2, gId = 2, height = 0.6, purity = 0.7,
+	stats = { speed = 0.8, agility = 0.7, strength = 0.6, stamina = 0.75, jump = 0.5 },
+	variants = { colour = "mummy", maneColour = "leathery", tailColour = "leathery", maneStyle = "longQH2", tailStyle = "longQH2" },
+},
+{
+	id = 370, name = "", pId = 2, gId = 2, height = 0.6, purity = 0.7,
+	stats = { speed = 0.8, agility = 0.7, strength = 0.6, stamina = 0.75, jump = 0.5 },
+	variants = { colour = "mummy", maneColour = "royalStreaks", tailColour = "royalStreaks", maneStyle = "longQH2", tailStyle = "longQH2" },
+},
+{
+	id = 370, name = "", pId = 2, gId = 2, height = 0.6, purity = 0.7,
+	stats = { speed = 0.8, agility = 0.7, strength = 0.6, stamina = 0.75, jump = 0.5 },
+	variants = { colour = "mummy", maneColour = "cowPrint", tailColour = "cowPrint", maneStyle = "longQH2", tailStyle = "longQH2" },
+},
+{
+	id = 370, name = "", pId = 2, gId = 2, height = 0.6, purity = 0.7,
+	stats = { speed = 0.8, agility = 0.7, strength = 0.6, stamina = 0.75, jump = 0.5 },
+	variants = { colour = "mummy", maneColour = "pearlyPink", tailColour = "pearlyPink", maneStyle = "longQH2", tailStyle = "longQH2" },
+},
+{
+	id = 370, name = "", pId = 2, gId = 2, height = 0.6, purity = 0.7,
+	stats = { speed = 0.8, agility = 0.7, strength = 0.6, stamina = 0.75, jump = 0.5 },
+	variants = { colour = "mummy", maneColour = "clearQuartz", tailColour = "clearQuartz", maneStyle = "longQH2", tailStyle = "longQH2" },
+},
+{
+	id = 370, name = "", pId = 2, gId = 2, height = 0.6, purity = 0.7,
+	stats = { speed = 0.8, agility = 0.7, strength = 0.6, stamina = 0.75, jump = 0.5 },
+	variants = { colour = "mummy", maneColour = "zebraStripes", tailColour = "zebraStripes", maneStyle = "longQH2", tailStyle = "longQH2" },
+},
+{
+	id = 370, name = "", pId = 2, gId = 2, height = 0.6, purity = 0.7,
+	stats = { speed = 0.8, agility = 0.7, strength = 0.6, stamina = 0.75, jump = 0.5 },
+	variants = { colour = "mummy", maneColour = "dustyFade", tailColour = "dustyFade", maneStyle = "longQH2", tailStyle = "longQH2" },
+},
+{
+	id = 370, name = "", pId = 2, gId = 2, height = 0.6, purity = 0.7,
+	stats = { speed = 0.8, agility = 0.7, strength = 0.6, stamina = 0.75, jump = 0.5 },
+	variants = { colour = "mummy", maneColour = "limestone", tailColour = "limestone", maneStyle = "longQH2", tailStyle = "longQH2" },
+},
+{
+	id = 370, name = "", pId = 2, gId = 2, height = 0.6, purity = 0.7,
+	stats = { speed = 0.8, agility = 0.7, strength = 0.6, stamina = 0.75, jump = 0.5 },
+	variants = { colour = "mummy", maneColour = "sandstone", tailColour = "sandstone", maneStyle = "longQH2", tailStyle = "longQH2" },
+},
+{
+	id = 370, name = "", pId = 2, gId = 2, height = 0.6, purity = 0.7,
+	stats = { speed = 0.8, agility = 0.7, strength = 0.6, stamina = 0.75, jump = 0.5 },
+	variants = { colour = "mummy", maneColour = "ruby", tailColour = "ruby", maneStyle = "longQH2", tailStyle = "longQH2" },
+},
+{
+	id = 370, name = "", pId = 2, gId = 2, height = 0.6, purity = 0.7,
+	stats = { speed = 0.8, agility = 0.7, strength = 0.6, stamina = 0.75, jump = 0.5 },
+	variants = { colour = "mummy", maneColour = "pearlyRed", tailColour = "pearlyRed", maneStyle = "longQH2", tailStyle = "longQH2" },
+},
+{
+	id = 370, name = "", pId = 2, gId = 2, height = 0.6, purity = 0.7,
+	stats = { speed = 0.8, agility = 0.7, strength = 0.6, stamina = 0.75, jump = 0.5 },
+	variants = { colour = "mummy", maneColour = "iceyGreen", tailColour = "iceyGreen", maneStyle = "longQH2", tailStyle = "longQH2" },
+},
+{
+	id = 370, name = "", pId = 2, gId = 2, height = 0.6, purity = 0.7,
+	stats = { speed = 0.8, agility = 0.7, strength = 0.6, stamina = 0.75, jump = 0.5 },
+	variants = { colour = "mummy", maneColour = "glacierGreen", tailColour = "glacierGreen", maneStyle = "longQH2", tailStyle = "longQH2" },
+},
+{
+	id = 370, name = "", pId = 2, gId = 2, height = 0.6, purity = 0.7,
+	stats = { speed = 0.8, agility = 0.7, strength = 0.6, stamina = 0.75, jump = 0.5 },
+	variants = { colour = "mummy", maneColour = "glacierPink", tailColour = "glacierPink", maneStyle = "longQH2", tailStyle = "longQH2" },
+},
+{
+	id = 370, name = "", pId = 2, gId = 2, height = 0.6, purity = 0.7,
+	stats = { speed = 0.8, agility = 0.7, strength = 0.6, stamina = 0.75, jump = 0.5 },
+	variants = { colour = "mummy", maneColour = "glacierBlue", tailColour = "glacierBlue", maneStyle = "longQH2", tailStyle = "longQH2" },
+},
+{
+	id = 370, name = "", pId = 2, gId = 2, height = 0.6, purity = 0.7,
+	stats = { speed = 0.8, agility = 0.7, strength = 0.6, stamina = 0.75, jump = 0.5 },
+	variants = { colour = "mummy", maneColour = "snowyGlacierFade", tailColour = "snowyGlacierFade", maneStyle = "longQH2", tailStyle = "longQH2" },
+},
+{
+	id = 370, name = "", pId = 2, gId = 2, height = 0.6, purity = 0.7,
+	stats = { speed = 0.8, agility = 0.7, strength = 0.6, stamina = 0.75, jump = 0.5 },
+	variants = { colour = "mummy", maneColour = "pinkCowPrint", tailColour = "pinkCowPrint", maneStyle = "longQH2", tailStyle = "longQH2" },
+},
+{
+	id = 370, name = "", pId = 2, gId = 2, height = 0.6, purity = 0.7,
+	stats = { speed = 0.8, agility = 0.7, strength = 0.6, stamina = 0.75, jump = 0.5 },
+	variants = { colour = "mummy", maneColour = "diamond", tailColour = "diamond", maneStyle = "longQH2", tailStyle = "longQH2" },
+},
+{
+	id = 370, name = "", pId = 2, gId = 2, height = 0.6, purity = 0.7,
+	stats = { speed = 0.8, agility = 0.7, strength = 0.6, stamina = 0.75, jump = 0.5 },
+	variants = { colour = "mummy", maneColour = "sapphire", tailColour = "sapphire", maneStyle = "longQH2", tailStyle = "longQH2" },
+},
+{
+	id = 370, name = "", pId = 2, gId = 2, height = 0.6, purity = 0.7,
+	stats = { speed = 0.8, agility = 0.7, strength = 0.6, stamina = 0.75, jump = 0.5 },
+	variants = { colour = "mummy", maneColour = "pearlyOrange", tailColour = "pearlyOrange", maneStyle = "longQH2", tailStyle = "longQH2" },
+},
+{
+	id = 370, name = "", pId = 2, gId = 2, height = 0.6, purity = 0.7,
+	stats = { speed = 0.8, agility = 0.7, strength = 0.6, stamina = 0.75, jump = 0.5 },
+	variants = { colour = "mummy", maneColour = "sunriseStreaks", tailColour = "sunriseStreaks", maneStyle = "longQH2", tailStyle = "longQH2" },
+},
+{
+	id = 370, name = "", pId = 2, gId = 2, height = 0.6, purity = 0.7,
+	stats = { speed = 0.8, agility = 0.7, strength = 0.6, stamina = 0.75, jump = 0.5 },
+	variants = { colour = "mummy", maneColour = "amethyst", tailColour = "amethyst", maneStyle = "longQH2", tailStyle = "longQH2" },
+},
+{
+	id = 370, name = "", pId = 2, gId = 2, height = 0.6, purity = 0.7,
+	stats = { speed = 0.8, agility = 0.7, strength = 0.6, stamina = 0.75, jump = 0.5 },
+	variants = { colour = "mummy", maneColour = "topaz", tailColour = "topaz", maneStyle = "longQH2", tailStyle = "longQH2" },
+},
+{
+	id = 370, name = "", pId = 2, gId = 2, height = 0.6, purity = 0.7,
+	stats = { speed = 0.8, agility = 0.7, strength = 0.6, stamina = 0.75, jump = 0.5 },
+	variants = { colour = "mummy", maneColour = "jaguarSpots", tailColour = "jaguarSpots", maneStyle = "longQH2", tailStyle = "longQH2" },
+},
+{
+	id = 370, name = "", pId = 2, gId = 2, height = 0.6, purity = 0.7,
+	stats = { speed = 0.8, agility = 0.7, strength = 0.6, stamina = 0.75, jump = 0.5 },
+	variants = { colour = "mummy", maneColour = "mossy", tailColour = "mossy", maneStyle = "longQH2", tailStyle = "longQH2" },
+},
+{
+	id = 370, name = "", pId = 2, gId = 2, height = 0.6, purity = 0.7,
+	stats = { speed = 0.8, agility = 0.7, strength = 0.6, stamina = 0.75, jump = 0.5 },
+	variants = { colour = "mummy", maneColour = "tigerStripes", tailColour = "tigerStripes", maneStyle = "longQH2", tailStyle = "longQH2" },
+},
+{
+	id = 370, name = "", pId = 2, gId = 2, height = 0.6, purity = 0.7,
+	stats = { speed = 0.8, agility = 0.7, strength = 0.6, stamina = 0.75, jump = 0.5 },
+	variants = { colour = "mummy", maneColour = "emerald", tailColour = "emerald", maneStyle = "longQH2", tailStyle = "longQH2" },
+},
+{
+	id = 370, name = "", pId = 2, gId = 2, height = 0.6, purity = 0.7,
+	stats = { speed = 0.8, agility = 0.7, strength = 0.6, stamina = 0.75, jump = 0.5 },
+	variants = { colour = "mummy", maneColour = "deepSpace", tailColour = "deepSpace", maneStyle = "longQH2", tailStyle = "longQH2" },
+},
+{
+	id = 370, name = "", pId = 2, gId = 2, height = 0.6, purity = 0.7,
+	stats = { speed = 0.8, agility = 0.7, strength = 0.6, stamina = 0.75, jump = 0.5 },
+	variants = { colour = "mummy", maneColour = "neonBlue", tailColour = "neonBlue", maneStyle = "longQH2", tailStyle = "longQH2" },
+},
+{
+	id = 370, name = "", pId = 2, gId = 2, height = 0.6, purity = 0.7,
+	stats = { speed = 0.8, agility = 0.7, strength = 0.6, stamina = 0.75, jump = 0.5 },
+	variants = { colour = "mummy", maneColour = "neonPurple", tailColour = "neonPurple", maneStyle = "longQH2", tailStyle = "longQH2" },
+},
+{
+	id = 370, name = "", pId = 2, gId = 2, height = 0.6, purity = 0.7,
+	stats = { speed = 0.8, agility = 0.7, strength = 0.6, stamina = 0.75, jump = 0.5 },
+	variants = { colour = "mummy", maneColour = "moonstone", tailColour = "moonstone", maneStyle = "longQH2", tailStyle = "longQH2" },
+},
+{
+	id = 370, name = "", pId = 2, gId = 2, height = 0.6, purity = 0.7,
+	stats = { speed = 0.8, agility = 0.7, strength = 0.6, stamina = 0.75, jump = 0.5 },
+	variants = { colour = "mummy", maneColour = "pearlyBlue", tailColour = "pearlyBlue", maneStyle = "longQH2", tailStyle = "longQH2" },
+},
+{
+	id = 370, name = "", pId = 2, gId = 2, height = 0.6, purity = 0.7,
+	stats = { speed = 0.8, agility = 0.7, strength = 0.6, stamina = 0.75, jump = 0.5 },
+	variants = { colour = "mummy", maneColour = "volcanicOrange", tailColour = "volcanicOrange", maneStyle = "longQH2", tailStyle = "longQH2" },
+},
+{
+	id = 370, name = "", pId = 2, gId = 2, height = 0.6, purity = 0.7,
+	stats = { speed = 0.8, agility = 0.7, strength = 0.6, stamina = 0.75, jump = 0.5 },
+	variants = { colour = "mummy", maneColour = "pearlyBlack", tailColour = "pearlyBlack", maneStyle = "longQH2", tailStyle = "longQH2" },
+},
+{
+	id = 370, name = "", pId = 2, gId = 2, height = 0.6, purity = 0.7,
+	stats = { speed = 0.8, agility = 0.7, strength = 0.6, stamina = 0.75, jump = 0.5 },
+	variants = { colour = "mummy", maneColour = "crackedLavaFade", tailColour = "crackedLavaFade", maneStyle = "longQH2", tailStyle = "longQH2" },
+},
+{
+	id = 370, name = "", pId = 2, gId = 2, height = 0.6, purity = 0.7,
+	stats = { speed = 0.8, agility = 0.7, strength = 0.6, stamina = 0.75, jump = 0.5 },
+	variants = { colour = "mummy", maneColour = "volcanicBlack", tailColour = "volcanicBlack", maneStyle = "longQH2", tailStyle = "longQH2" },
+}, {
+	id = 233, name = "", pId = 3, gId = 2, height = 0.6, purity = 0.7,
+	stats = { speed = 0.8, agility = 0.7, strength = 0.6, stamina = 0.75, jump = 0.5 },
+	variants = { colour = "winterConstellation", maneColour = "blessed", tailColour = "blessed", maneStyle = "starryCrystalFjord", tailStyle = "starryCrystalFjord" },
+},
+{
+	id = 233, name = "", pId = 3, gId = 2, height = 0.6, purity = 0.7,
+	stats = { speed = 0.8, agility = 0.7, strength = 0.6, stamina = 0.75, jump = 0.5 },
+	variants = { colour = "winterConstellation", maneColour = "iceyBlue", tailColour = "iceyBlue", maneStyle = "starryCrystalFjord", tailStyle = "starryCrystalFjord" },
+},
+{
+	id = 233, name = "", pId = 3, gId = 2, height = 0.6, purity = 0.7,
+	stats = { speed = 0.8, agility = 0.7, strength = 0.6, stamina = 0.75, jump = 0.5 },
+	variants = { colour = "winterConstellation", maneColour = "iceyWhite", tailColour = "iceyWhite", maneStyle = "starryCrystalFjord", tailStyle = "starryCrystalFjord" },
+},
+{
+	id = 233, name = "", pId = 3, gId = 2, height = 0.6, purity = 0.7,
+	stats = { speed = 0.8, agility = 0.7, strength = 0.6, stamina = 0.75, jump = 0.5 },
+	variants = { colour = "winterConstellation", maneColour = "iceyPink", tailColour = "iceyPink", maneStyle = "starryCrystalFjord", tailStyle = "starryCrystalFjord" },
+},
+{
+	id = 233, name = "", pId = 3, gId = 2, height = 0.6, purity = 0.7,
+	stats = { speed = 0.8, agility = 0.7, strength = 0.6, stamina = 0.75, jump = 0.5 },
+	variants = { colour = "winterConstellation", maneColour = "iceyBlack", tailColour = "iceyBlack", maneStyle = "starryCrystalFjord", tailStyle = "starryCrystalFjord" },
+},
+{
+	id = 233, name = "", pId = 3, gId = 2, height = 0.6, purity = 0.7,
+	stats = { speed = 0.8, agility = 0.7, strength = 0.6, stamina = 0.75, jump = 0.5 },
+	variants = { colour = "winterConstellation", maneColour = "winterStreaks", tailColour = "winterStreaks", maneStyle = "starryCrystalFjord", tailStyle = "starryCrystalFjord" },
+},
+{
+	id = 233, name = "", pId = 3, gId = 2, height = 0.6, purity = 0.7,
+	stats = { speed = 0.8, agility = 0.7, strength = 0.6, stamina = 0.75, jump = 0.5 },
+	variants = { colour = "winterConstellation", maneColour = "flowery", tailColour = "flowery", maneStyle = "starryCrystalFjord", tailStyle = "starryCrystalFjord" },
+},
+{
+	id = 233, name = "", pId = 3, gId = 2, height = 0.6, purity = 0.7,
+	stats = { speed = 0.8, agility = 0.7, strength = 0.6, stamina = 0.75, jump = 0.5 },
+	variants = { colour = "winterConstellation", maneColour = "pearlyGreen", tailColour = "pearlyGreen", maneStyle = "starryCrystalFjord", tailStyle = "starryCrystalFjord" },
+},
+{
+	id = 233, name = "", pId = 3, gId = 2, height = 0.6, purity = 0.7,
+	stats = { speed = 0.8, agility = 0.7, strength = 0.6, stamina = 0.75, jump = 0.5 },
+	variants = { colour = "winterConstellation", maneColour = "leafy", tailColour = "leafy", maneStyle = "starryCrystalFjord", tailStyle = "starryCrystalFjord" },
+},
+{
+	id = 233, name = "", pId = 3, gId = 2, height = 0.6, purity = 0.7,
+	stats = { speed = 0.8, agility = 0.7, strength = 0.6, stamina = 0.75, jump = 0.5 },
+	variants = { colour = "winterConstellation", maneColour = "pearly", tailColour = "pearly", maneStyle = "starryCrystalFjord", tailStyle = "starryCrystalFjord" },
+},
+{
+	id = 233, name = "", pId = 3, gId = 2, height = 0.6, purity = 0.7,
+	stats = { speed = 0.8, agility = 0.7, strength = 0.6, stamina = 0.75, jump = 0.5 },
+	variants = { colour = "winterConstellation", maneColour = "pastelStreaks", tailColour = "pastelStreaks", maneStyle = "starryCrystalFjord", tailStyle = "starryCrystalFjord" },
+},
+{
+	id = 233, name = "", pId = 3, gId = 2, height = 0.6, purity = 0.7,
+	stats = { speed = 0.8, agility = 0.7, strength = 0.6, stamina = 0.75, jump = 0.5 },
+	variants = { colour = "winterConstellation", maneColour = "leathery", tailColour = "leathery", maneStyle = "starryCrystalFjord", tailStyle = "starryCrystalFjord" },
+},
+{
+	id = 233, name = "", pId = 3, gId = 2, height = 0.6, purity = 0.7,
+	stats = { speed = 0.8, agility = 0.7, strength = 0.6, stamina = 0.75, jump = 0.5 },
+	variants = { colour = "winterConstellation", maneColour = "royalStreaks", tailColour = "royalStreaks", maneStyle = "starryCrystalFjord", tailStyle = "starryCrystalFjord" },
+},
+{
+	id = 233, name = "", pId = 3, gId = 2, height = 0.6, purity = 0.7,
+	stats = { speed = 0.8, agility = 0.7, strength = 0.6, stamina = 0.75, jump = 0.5 },
+	variants = { colour = "winterConstellation", maneColour = "cowPrint", tailColour = "cowPrint", maneStyle = "starryCrystalFjord", tailStyle = "starryCrystalFjord" },
+},
+{
+	id = 233, name = "", pId = 3, gId = 2, height = 0.6, purity = 0.7,
+	stats = { speed = 0.8, agility = 0.7, strength = 0.6, stamina = 0.75, jump = 0.5 },
+	variants = { colour = "winterConstellation", maneColour = "pearlyPink", tailColour = "pearlyPink", maneStyle = "starryCrystalFjord", tailStyle = "starryCrystalFjord" },
+},
+{
+	id = 233, name = "", pId = 3, gId = 2, height = 0.6, purity = 0.7,
+	stats = { speed = 0.8, agility = 0.7, strength = 0.6, stamina = 0.75, jump = 0.5 },
+	variants = { colour = "winterConstellation", maneColour = "clearQuartz", tailColour = "clearQuartz", maneStyle = "starryCrystalFjord", tailStyle = "starryCrystalFjord" },
+},
+{
+	id = 233, name = "", pId = 3, gId = 2, height = 0.6, purity = 0.7,
+	stats = { speed = 0.8, agility = 0.7, strength = 0.6, stamina = 0.75, jump = 0.5 },
+	variants = { colour = "winterConstellation", maneColour = "zebraStripes", tailColour = "zebraStripes", maneStyle = "starryCrystalFjord", tailStyle = "starryCrystalFjord" },
+},
+{
+	id = 233, name = "", pId = 3, gId = 2, height = 0.6, purity = 0.7,
+	stats = { speed = 0.8, agility = 0.7, strength = 0.6, stamina = 0.75, jump = 0.5 },
+	variants = { colour = "winterConstellation", maneColour = "dustyFade", tailColour = "dustyFade", maneStyle = "starryCrystalFjord", tailStyle = "starryCrystalFjord" },
+},
+{
+	id = 233, name = "", pId = 3, gId = 2, height = 0.6, purity = 0.7,
+	stats = { speed = 0.8, agility = 0.7, strength = 0.6, stamina = 0.75, jump = 0.5 },
+	variants = { colour = "winterConstellation", maneColour = "limestone", tailColour = "limestone", maneStyle = "starryCrystalFjord", tailStyle = "starryCrystalFjord" },
+},
+{
+	id = 233, name = "", pId = 3, gId = 2, height = 0.6, purity = 0.7,
+	stats = { speed = 0.8, agility = 0.7, strength = 0.6, stamina = 0.75, jump = 0.5 },
+	variants = { colour = "winterConstellation", maneColour = "sandstone", tailColour = "sandstone", maneStyle = "starryCrystalFjord", tailStyle = "starryCrystalFjord" },
+},
+{
+	id = 233, name = "", pId = 3, gId = 2, height = 0.6, purity = 0.7,
+	stats = { speed = 0.8, agility = 0.7, strength = 0.6, stamina = 0.75, jump = 0.5 },
+	variants = { colour = "winterConstellation", maneColour = "ruby", tailColour = "ruby", maneStyle = "starryCrystalFjord", tailStyle = "starryCrystalFjord" },
+},
+{
+	id = 233, name = "", pId = 3, gId = 2, height = 0.6, purity = 0.7,
+	stats = { speed = 0.8, agility = 0.7, strength = 0.6, stamina = 0.75, jump = 0.5 },
+	variants = { colour = "winterConstellation", maneColour = "pearlyRed", tailColour = "pearlyRed", maneStyle = "starryCrystalFjord", tailStyle = "starryCrystalFjord" },
+},
+{
+	id = 233, name = "", pId = 3, gId = 2, height = 0.6, purity = 0.7,
+	stats = { speed = 0.8, agility = 0.7, strength = 0.6, stamina = 0.75, jump = 0.5 },
+	variants = { colour = "winterConstellation", maneColour = "iceyGreen", tailColour = "iceyGreen", maneStyle = "starryCrystalFjord", tailStyle = "starryCrystalFjord" },
+},
+{
+	id = 233, name = "", pId = 3, gId = 2, height = 0.6, purity = 0.7,
+	stats = { speed = 0.8, agility = 0.7, strength = 0.6, stamina = 0.75, jump = 0.5 },
+	variants = { colour = "winterConstellation", maneColour = "glacierGreen", tailColour = "glacierGreen", maneStyle = "starryCrystalFjord", tailStyle = "starryCrystalFjord" },
+},
+{
+	id = 233, name = "", pId = 3, gId = 2, height = 0.6, purity = 0.7,
+	stats = { speed = 0.8, agility = 0.7, strength = 0.6, stamina = 0.75, jump = 0.5 },
+	variants = { colour = "winterConstellation", maneColour = "glacierPink", tailColour = "glacierPink", maneStyle = "starryCrystalFjord", tailStyle = "starryCrystalFjord" },
+},
+{
+	id = 233, name = "", pId = 3, gId = 2, height = 0.6, purity = 0.7,
+	stats = { speed = 0.8, agility = 0.7, strength = 0.6, stamina = 0.75, jump = 0.5 },
+	variants = { colour = "winterConstellation", maneColour = "glacierBlue", tailColour = "glacierBlue", maneStyle = "starryCrystalFjord", tailStyle = "starryCrystalFjord" },
+},
+{
+	id = 233, name = "", pId = 3, gId = 2, height = 0.6, purity = 0.7,
+	stats = { speed = 0.8, agility = 0.7, strength = 0.6, stamina = 0.75, jump = 0.5 },
+	variants = { colour = "winterConstellation", maneColour = "snowyGlacierFade", tailColour = "snowyGlacierFade", maneStyle = "starryCrystalFjord", tailStyle = "starryCrystalFjord" },
+},
+{
+	id = 233, name = "", pId = 3, gId = 2, height = 0.6, purity = 0.7,
+	stats = { speed = 0.8, agility = 0.7, strength = 0.6, stamina = 0.75, jump = 0.5 },
+	variants = { colour = "winterConstellation", maneColour = "pinkCowPrint", tailColour = "pinkCowPrint", maneStyle = "starryCrystalFjord", tailStyle = "starryCrystalFjord" },
+},
+{
+	id = 233, name = "", pId = 3, gId = 2, height = 0.6, purity = 0.7,
+	stats = { speed = 0.8, agility = 0.7, strength = 0.6, stamina = 0.75, jump = 0.5 },
+	variants = { colour = "winterConstellation", maneColour = "diamond", tailColour = "diamond", maneStyle = "starryCrystalFjord", tailStyle = "starryCrystalFjord" },
+},
+{
+	id = 233, name = "", pId = 3, gId = 2, height = 0.6, purity = 0.7,
+	stats = { speed = 0.8, agility = 0.7, strength = 0.6, stamina = 0.75, jump = 0.5 },
+	variants = { colour = "winterConstellation", maneColour = "sapphire", tailColour = "sapphire", maneStyle = "starryCrystalFjord", tailStyle = "starryCrystalFjord" },
+},
+{
+	id = 233, name = "", pId = 3, gId = 2, height = 0.6, purity = 0.7,
+	stats = { speed = 0.8, agility = 0.7, strength = 0.6, stamina = 0.75, jump = 0.5 },
+	variants = { colour = "winterConstellation", maneColour = "pearlyOrange", tailColour = "pearlyOrange", maneStyle = "starryCrystalFjord", tailStyle = "starryCrystalFjord" },
+},
+{
+	id = 233, name = "", pId = 3, gId = 2, height = 0.6, purity = 0.7,
+	stats = { speed = 0.8, agility = 0.7, strength = 0.6, stamina = 0.75, jump = 0.5 },
+	variants = { colour = "winterConstellation", maneColour = "sunriseStreaks", tailColour = "sunriseStreaks", maneStyle = "starryCrystalFjord", tailStyle = "starryCrystalFjord" },
+},
+{
+	id = 233, name = "", pId = 3, gId = 2, height = 0.6, purity = 0.7,
+	stats = { speed = 0.8, agility = 0.7, strength = 0.6, stamina = 0.75, jump = 0.5 },
+	variants = { colour = "winterConstellation", maneColour = "amethyst", tailColour = "amethyst", maneStyle = "starryCrystalFjord", tailStyle = "starryCrystalFjord" },
+},
+{
+	id = 233, name = "", pId = 3, gId = 2, height = 0.6, purity = 0.7,
+	stats = { speed = 0.8, agility = 0.7, strength = 0.6, stamina = 0.75, jump = 0.5 },
+	variants = { colour = "winterConstellation", maneColour = "topaz", tailColour = "topaz", maneStyle = "starryCrystalFjord", tailStyle = "starryCrystalFjord" },
+},
+{
+	id = 233, name = "", pId = 3, gId = 2, height = 0.6, purity = 0.7,
+	stats = { speed = 0.8, agility = 0.7, strength = 0.6, stamina = 0.75, jump = 0.5 },
+	variants = { colour = "winterConstellation", maneColour = "jaguarSpots", tailColour = "jaguarSpots", maneStyle = "starryCrystalFjord", tailStyle = "starryCrystalFjord" },
+},
+{
+	id = 233, name = "", pId = 3, gId = 2, height = 0.6, purity = 0.7,
+	stats = { speed = 0.8, agility = 0.7, strength = 0.6, stamina = 0.75, jump = 0.5 },
+	variants = { colour = "winterConstellation", maneColour = "mossy", tailColour = "mossy", maneStyle = "starryCrystalFjord", tailStyle = "starryCrystalFjord" },
+},
+{
+	id = 233, name = "", pId = 3, gId = 2, height = 0.6, purity = 0.7,
+	stats = { speed = 0.8, agility = 0.7, strength = 0.6, stamina = 0.75, jump = 0.5 },
+	variants = { colour = "winterConstellation", maneColour = "tigerStripes", tailColour = "tigerStripes", maneStyle = "starryCrystalFjord", tailStyle = "starryCrystalFjord" },
+},
+{
+	id = 233, name = "", pId = 3, gId = 2, height = 0.6, purity = 0.7,
+	stats = { speed = 0.8, agility = 0.7, strength = 0.6, stamina = 0.75, jump = 0.5 },
+	variants = { colour = "winterConstellation", maneColour = "emerald", tailColour = "emerald", maneStyle = "starryCrystalFjord", tailStyle = "starryCrystalFjord" },
+},
+{
+	id = 233, name = "", pId = 3, gId = 2, height = 0.6, purity = 0.7,
+	stats = { speed = 0.8, agility = 0.7, strength = 0.6, stamina = 0.75, jump = 0.5 },
+	variants = { colour = "winterConstellation", maneColour = "deepSpace", tailColour = "deepSpace", maneStyle = "starryCrystalFjord", tailStyle = "starryCrystalFjord" },
+},
+{
+	id = 233, name = "", pId = 3, gId = 2, height = 0.6, purity = 0.7,
+	stats = { speed = 0.8, agility = 0.7, strength = 0.6, stamina = 0.75, jump = 0.5 },
+	variants = { colour = "winterConstellation", maneColour = "neonBlue", tailColour = "neonBlue", maneStyle = "starryCrystalFjord", tailStyle = "starryCrystalFjord" },
+},
+{
+	id = 233, name = "", pId = 3, gId = 2, height = 0.6, purity = 0.7,
+	stats = { speed = 0.8, agility = 0.7, strength = 0.6, stamina = 0.75, jump = 0.5 },
+	variants = { colour = "winterConstellation", maneColour = "neonPurple", tailColour = "neonPurple", maneStyle = "starryCrystalFjord", tailStyle = "starryCrystalFjord" },
+},
+{
+	id = 233, name = "", pId = 3, gId = 2, height = 0.6, purity = 0.7,
+	stats = { speed = 0.8, agility = 0.7, strength = 0.6, stamina = 0.75, jump = 0.5 },
+	variants = { colour = "winterConstellation", maneColour = "moonstone", tailColour = "moonstone", maneStyle = "starryCrystalFjord", tailStyle = "starryCrystalFjord" },
+},
+{
+	id = 233, name = "", pId = 3, gId = 2, height = 0.6, purity = 0.7,
+	stats = { speed = 0.8, agility = 0.7, strength = 0.6, stamina = 0.75, jump = 0.5 },
+	variants = { colour = "winterConstellation", maneColour = "pearlyBlue", tailColour = "pearlyBlue", maneStyle = "starryCrystalFjord", tailStyle = "starryCrystalFjord" },
+},
+{
+	id = 233, name = "", pId = 3, gId = 2, height = 0.6, purity = 0.7,
+	stats = { speed = 0.8, agility = 0.7, strength = 0.6, stamina = 0.75, jump = 0.5 },
+	variants = { colour = "winterConstellation", maneColour = "volcanicOrange", tailColour = "volcanicOrange", maneStyle = "starryCrystalFjord", tailStyle = "starryCrystalFjord" },
+},
+{
+	id = 233, name = "", pId = 3, gId = 2, height = 0.6, purity = 0.7,
+	stats = { speed = 0.8, agility = 0.7, strength = 0.6, stamina = 0.75, jump = 0.5 },
+	variants = { colour = "winterConstellation", maneColour = "pearlyBlack", tailColour = "pearlyBlack", maneStyle = "starryCrystalFjord", tailStyle = "starryCrystalFjord" },
+},
+{
+	id = 233, name = "", pId = 3, gId = 2, height = 0.6, purity = 0.7,
+	stats = { speed = 0.8, agility = 0.7, strength = 0.6, stamina = 0.75, jump = 0.5 },
+	variants = { colour = "winterConstellation", maneColour = "crackedLavaFade", tailColour = "crackedLavaFade", maneStyle = "starryCrystalFjord", tailStyle = "starryCrystalFjord" },
+},
+{
+	id = 233, name = "", pId = 3, gId = 2, height = 0.6, purity = 0.7,
+	stats = { speed = 0.8, agility = 0.7, strength = 0.6, stamina = 0.75, jump = 0.5 },
+	variants = { colour = "winterConstellation", maneColour = "volcanicBlack", tailColour = "volcanicBlack", maneStyle = "starryCrystalFjord", tailStyle = "starryCrystalFjord" },
+},
 }
+
 
 -- ── Defaults used for any field not supplied by a preset ─────────────────────
 
 local function DefaultItemData()
 	return {
 		id             = 370,
-		name           = nil,
+		name           = "NO DATA SELECTED",
 		pId            = 1,
 		gId            = 1,
 		height         = 0.5,
@@ -178,7 +851,7 @@ local function DefaultItemData()
 		invLock        = false,
 		untradeable    = false,
 		equipped       = false,
-		food           = "Golden Carrot",
+		food           = "Apple",
 		lineage        = {},
 		strengthMod    = 1.0,
 		agilityMod     = 1.0,
@@ -193,9 +866,9 @@ local function DefaultItemData()
 			jump     = 0.5,
 		},
 		variants = {
-			colour     = "mummy",
-			maneColour = "neonPurple",
-			tailColour = "neonPurple",
+			colour     = "bay",
+			maneColour = "darkGrey",
+			tailColour = "darkGrey",
 			maneStyle  = "longQH2",
 			tailStyle  = "mediumQH2",
 		},
