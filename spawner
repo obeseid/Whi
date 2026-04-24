@@ -1,4 +1,4 @@
--- MockInventoryTester (soos)
+-- MockInventoryTester (LocalScript)
 -- Drop this inside StarterPlayerScripts (or run it as a Plugin script).
 -- It injects fake horse items directly into InventoryMenu using the same
 -- AddOrUpdateItem / RemoveItem API that the live server uses, so the real
@@ -32,10 +32,10 @@ local InventoryMenu = require(
 
 local PRESETS = {
 	{
-		label = "Mummy QH",
+		label = "Average QH",
 		data = {
 			id      = 370,
-			name    = "Quarter Horse",
+			name    = "Test Quarter Horse",
 			pId     = 1,   -- Bold
 			gId     = 2,   -- Stallion
 			height  = 0.5,
@@ -53,10 +53,10 @@ local PRESETS = {
 		},
 	},
 	{
-		label = "Motherchip dh",
+		label = "Elite Sprinter",
 		data = {
-			id      = 399,
-			name    = "DELDO HORSE",
+			id      = 370,
+			name    = "Blaze",
 			pId     = 3,   -- Energetic
 			gId     = 2,   -- Stallion
 			height  = 0.82,
@@ -65,19 +65,19 @@ local PRESETS = {
 			invLock = false,
 			stats   = { speed = 0.97, agility = 0.88, strength = 0.60, stamina = 0.75, jump = 0.55 },
 			variants = {
-				colour     = "midnightSnowstorm",
-				maneColour = "iceyBlue",
-				tailColour = "iceyPink",
-				maneStyle  = "longPercheron",
-				tailStyle  = "longPercheron",
+				colour     = "chestnut",
+				maneColour = "flaxen",
+				tailColour = "flaxen",
+				maneStyle  = "longQH2",
+				tailStyle  = "mediumQH2",
 			},
 		},
 	},
 	{
-		label = "ice cream qh",
+		label = "Locked Mare",
 		data = {
 			id      = 370,
-			name    = "Quarter Horse",
+			name    = "Rosie",
 			pId     = 4,   -- Calm
 			gId     = 1,   -- Mare
 			height  = 0.55,
@@ -86,9 +86,9 @@ local PRESETS = {
 			invLock = true,
 			stats   = { speed = 0.45, agility = 0.50, strength = 0.40, stamina = 0.65, jump = 0.35 },
 			variants = {
-				colour     = "iceCreamDrizzleQH2",
-				maneColour = "iceyPink",
-				tailColour = "iceyGreen",
+				colour     = "bay",
+				maneColour = "black",
+				tailColour = "black",
 				maneStyle  = "longQH2",
 				tailStyle  = "mediumQH2",
 			},
@@ -119,6 +119,46 @@ local PRESETS = {
 	{
 		label = "Custom",  -- selecting this lets all fields be typed manually
 		data  = {},
+	},
+}
+
+-- ── Mass spawn preset table ───────────────────────────────────────────────────
+-- Add as many horses as you like here. All fields are optional and fall back
+-- to DefaultItemData() just like single-spawn presets do.
+-- Press "Mass Spawn" in the GUI to inject every entry in this table at once.
+
+local MASS_SPAWN_PRESETS = {
+	{
+		id      = 370,
+		name    = "Mass Horse 1",
+		pId     = 1,
+		gId     = 2,
+		height  = 0.6,
+		purity  = 0.7,
+		stats   = { speed = 0.8, agility = 0.7, strength = 0.6, stamina = 0.75, jump = 0.5 },
+		variants = { colour = "bay", maneColour = "black", tailColour = "black", maneStyle = "longQH2", tailStyle = "mediumQH2" },
+	},
+	{
+		id      = 370,
+		name    = "Mass Horse 2",
+		pId     = 3,
+		gId     = 1,
+		height  = 0.72,
+		purity  = 0.85,
+		stats   = { speed = 0.9, agility = 0.6, strength = 0.8, stamina = 0.65, jump = 0.7 },
+		variants = { colour = "chestnut", maneColour = "flaxen", tailColour = "flaxen", maneStyle = "longQH2", tailStyle = "mediumQH2" },
+	},
+	{
+		id      = 370,
+		name    = "Mass Horse 3",
+		pId     = 2,
+		gId     = 1,
+		height  = 0.45,
+		purity  = 0.3,
+		baby    = true,
+		timeUntilGrown = 3600,
+		stats   = { speed = 0.3, agility = 0.4, strength = 0.3, stamina = 0.35, jump = 0.25 },
+		variants = { colour = "grey", maneColour = "white", tailColour = "white", maneStyle = "longQH2", tailStyle = "mediumQH2" },
 	},
 }
 
@@ -181,33 +221,22 @@ end
 local spawnedSlots = {}  -- array of slotId strings injected by this script
 
 local function SpawnHorse(overrides)
-    local itemData = Merge(DefaultItemData(), overrides or {})
-    itemData.madeAt = os.time()
+	local itemData = Merge(DefaultItemData(), overrides or {})
+	itemData.madeAt = os.time()
 
-    local slotId = HttpService:GenerateGUID(false)
-    table.insert(spawnedSlots, slotId)
+	local slotId = HttpService:GenerateGUID(false)
+	table.insert(spawnedSlots, slotId)
 
-    -- Write into Data cache so trade validation can find it
-    local Data = require(Players.LocalPlayer.PlayerScripts.Priority.Data)
-    local cache = Data.Get(Players.LocalPlayer)  -- gets the full data table (by ref)
-    if cache and cache.inventory then
-        cache.inventory[slotId] = itemData
-    end
-
-    InventoryMenu.AddOrUpdateItem(slotId, itemData, nil, false)
-    return slotId
+	-- isInitialLoad = false so the "item added" alert fires, matching live behaviour
+	InventoryMenu.AddOrUpdateItem(slotId, itemData, nil, false)
+	return slotId
 end
 
 local function ClearAllMock()
-    local Data = require(Players.LocalPlayer.PlayerScripts.Priority.Data)
-    local cache = Data.Get(Players.LocalPlayer)
-    for _, slotId in ipairs(spawnedSlots) do
-        if cache and cache.inventory then
-            cache.inventory[slotId] = nil
-        end
-        InventoryMenu.RemoveItem(slotId)
-    end
-    spawnedSlots = {}
+	for _, slotId in ipairs(spawnedSlots) do
+		InventoryMenu.RemoveItem(slotId)
+	end
+	spawnedSlots = {}
 end
 
 -- ── GUI ───────────────────────────────────────────────────────────────────────
@@ -457,16 +486,18 @@ end)
 
 -- ── Override fields (shown always; populated from preset on spawn) ─────────────
 
-local overrideName    = MakeInput(MakeRow("NAME OVERRIDE", 1), "leave blank = preset name")
-local overrideId      = MakeInput(MakeRow("ITEM ID",   2), "e.g. 370")
-local overrideColour  = MakeInput(MakeRow("COLOUR",    3), "e.g. bay, chestnut, grey")
+local overrideName       = MakeInput(MakeRow("NAME OVERRIDE", 1), "leave blank = preset name")
+local overrideId         = MakeInput(MakeRow("ITEM ID",        2), "e.g. 370")
+local overrideColour     = MakeInput(MakeRow("COLOUR",         3), "e.g. bay, chestnut, grey")
+local overrideManeColour = MakeInput(MakeRow("MANE COLOUR",    4), "e.g. black, flaxen, white")
+local overrideTailColour = MakeInput(MakeRow("TAIL COLOUR",    5), "e.g. black, flaxen, white")
 
 -- Stat overrides (compact)
 local statRow = Instance.new("Frame")
 statRow.Size              = UDim2.new(1, 0, 0, 0)
 statRow.AutomaticSize     = Enum.AutomaticSize.Y
 statRow.BackgroundTransparency = 1
-statRow.LayoutOrder       = 4
+statRow.LayoutOrder       = 6
 statRow.Parent            = body
 
 local statLayout = Instance.new("UIListLayout")
@@ -497,10 +528,11 @@ statGrid.LayoutOrder       = 1
 statGrid.Parent            = statRow
 
 local statGridLayout = Instance.new("UIGridLayout")
-statGridLayout.CellSize    = UDim2.new(0.5, -3, 0, 26)
-statGridLayout.CellPadding = UDim2.new(0, 6, 0, 4)   -- ✅ X=6px, Y=4px
-statGridLayout.SortOrder   = Enum.SortOrder.LayoutOrder
-statGridLayout.Parent      = statGrid
+statGridLayout.CellSize        = UDim2.new(0.5, -3, 0, 26)
+statGridLayout.CellPaddingX    = UDim2.new(0, 6, 0, 0)
+statGridLayout.CellPaddingY    = UDim2.new(0, 4, 0, 0)
+statGridLayout.SortOrder       = Enum.SortOrder.LayoutOrder
+statGridLayout.Parent          = statGrid
 
 for i, statName in ipairs(STAT_NAMES) do
 	local box = Instance.new("TextBox")
@@ -533,12 +565,14 @@ UpdateStatGridHeight()
 
 -- ── Buttons ───────────────────────────────────────────────────────────────────
 
-local spawnBtn = MakeButton("🐎  Spawn Horse", Color3.fromRGB(60, 42, 18), body, 10)
-local clearBtn = MakeButton("✕  Clear All Mock Horses", Color3.fromRGB(50, 18, 18), body, 11)
+local spawnBtn     = MakeButton("🐎  Spawn Horse",             Color3.fromRGB(60, 42, 18),  body, 10)
+local massSpawnBtn = MakeButton("🐎🐎  Mass Spawn Horses",     Color3.fromRGB(35, 50, 20),  body, 11)
+local clearBtn     = MakeButton("✕  Clear All Mock Horses",    Color3.fromRGB(50, 18, 18),  body, 12)
 
 do
-	local s = Instance.new("UIStroke"); s.Color = Color3.fromRGB(100,75,40); s.Thickness = 1; s.Parent = spawnBtn
-	local s2 = Instance.new("UIStroke"); s2.Color = Color3.fromRGB(120,40,40); s2.Thickness = 1; s2.Parent = clearBtn
+	local s  = Instance.new("UIStroke"); s.Color  = Color3.fromRGB(100, 75,  40); s.Thickness = 1; s.Parent = spawnBtn
+	local s2 = Instance.new("UIStroke"); s2.Color = Color3.fromRGB(70,  110, 40); s2.Thickness = 1; s2.Parent = massSpawnBtn
+	local s3 = Instance.new("UIStroke"); s3.Color = Color3.fromRGB(120, 40,  40); s3.Thickness = 1; s3.Parent = clearBtn
 end
 
 -- ── Spawn logic ───────────────────────────────────────────────────────────────
@@ -573,6 +607,20 @@ spawnBtn.MouseButton1Click:Connect(function()
 		overrides.variants.colour = colText
 	end
 
+	-- Mane colour override
+	local maneText = overrideManeColour.Text ~= "" and overrideManeColour.Text or nil
+	if maneText then
+		overrides.variants = overrides.variants or {}
+		overrides.variants.maneColour = maneText
+	end
+
+	-- Tail colour override
+	local tailText = overrideTailColour.Text ~= "" and overrideTailColour.Text or nil
+	if tailText then
+		overrides.variants = overrides.variants or {}
+		overrides.variants.tailColour = tailText
+	end
+
 	-- Stat overrides
 	local statsOverride = {}
 	for _, statName in ipairs(STAT_NAMES) do
@@ -599,6 +647,20 @@ clearBtn.MouseButton1Click:Connect(function()
 	if not ok then
 		warn("[MockInventoryTester] ClearAllMock failed:", err)
 	end
+end)
+
+massSpawnBtn.MouseButton1Click:Connect(function()
+	if #MASS_SPAWN_PRESETS == 0 then
+		warn("[MockInventoryTester] MASS_SPAWN_PRESETS is empty — add entries to the table at the top of the script.")
+		return
+	end
+	for _, horseData in ipairs(MASS_SPAWN_PRESETS) do
+		local ok, err = pcall(SpawnHorse, horseData)
+		if not ok then
+			warn("[MockInventoryTester] Mass spawn entry failed:", err)
+		end
+	end
+	print(("[MockInventoryTester] Mass spawned %d horses."):format(#MASS_SPAWN_PRESETS))
 end)
 
 -- ── Drag logic ────────────────────────────────────────────────────────────────
