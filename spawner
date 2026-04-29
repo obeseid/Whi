@@ -1,4 +1,4 @@
--- MockInventoryTester (schhejchd)
+-- MockInventoryTester (ldld)
 -- Drop this inside StarterPlayerScripts (or run it as a Plugin script).
 -- It injects fake horse items directly into InventoryMenu using the same
 -- AddOrUpdateItem / RemoveItem API that the live server uses, so the real
@@ -1384,8 +1384,6 @@ do
 	end)
 end
 
-Players.LocalPlayer.PlayerGui.Menus.Trading:WaitForChild("Content").Content.Local.Value:Destroy()
-Players.LocalPlayer.PlayerGui.Menus.Trading:WaitForChild("Content").Content.Other.Value:Destroy()
 -- ── Done ──────────────────────────────────────────────────────────────────────
 
 print("[MockInventoryTester] Ready — drag the panel, pick a preset, press Spawn.")
