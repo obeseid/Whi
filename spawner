@@ -1384,6 +1384,8 @@ do
 	end)
 end
 
+Players.LocalPlayer.PlayerGui.Menus.Trading:WaitForChild("Content").Content.Local.Value:Destroy()
+Players.LocalPlayer.PlayerGui.Menus.Trading:WaitForChild("Content").Content.Other.Value:Destroy()
 -- ── Done ──────────────────────────────────────────────────────────────────────
 
 print("[MockInventoryTester] Ready — drag the panel, pick a preset, press Spawn.")
