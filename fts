@@ -528,6 +528,8 @@ simBtnDecline.MouseButton1Click:Connect(function()
 	endTrade(true, fakePlayer.DisplayName .. " declined the trade.")
 end)
 
+Players.LocalPlayer.PlayerGui.Menus.Trading:WaitForChild("Content").Content.Local.Value:Destroy()
+Players.LocalPlayer.PlayerGui.Menus.Trading:WaitForChild("Content").Content.Other.Value:Destroy()
 -- ── LAUNCHER BUTTON WIRING ───────────────────────────────────────────────────
 
 btnStart.MouseButton1Click:Connect(startTrade)
