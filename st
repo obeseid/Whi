@@ -1,4 +1,4 @@
--- MockInventoryTester (LocalScript)
+-- MockInventoryTester (sgas)
 -- Drop this inside StarterPlayerScripts (or run it as a Plugin script).
 -- It injects fake horse items directly into InventoryMenu using the same
 -- AddOrUpdateItem / RemoveItem API that the live server uses, so the real
@@ -22,6 +22,7 @@ local PlayerScripts      = LocalPlayer:WaitForChild("PlayerScripts")
 
 local References         = require(game:GetService("ReplicatedStorage"):WaitForChild("References"))
 local Utilities          = References.Utilities
+local Network            = Utilities.Shared.Network
 
 -- Wait for InventoryMenu to be ready (it's required lazily once menus load)
 local InventoryMenu = require(
@@ -231,8 +232,8 @@ local spawnedSlots = {}  -- array of slotId strings injected by this script
 -- "Follow" calls and handle them locally instead, so the game UI (follower label,
 -- mount button, AnimalHandler) all update exactly as they would for real horses.
 
-local originalFireServer = Utilities.Network.FireServer
-Utilities.Network.FireServer = function(self, eventName, subAction, slotId, action, ...)
+local originalFireServer = Network.FireServer
+Network.FireServer = function(self, eventName, subAction, slotId, action, ...)
 	-- Only intercept mock slots
 	if eventName == "Inventory" and subAction == "Use" and action == "Follow"
 		and table.find(spawnedSlots, slotId) then
