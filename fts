@@ -1,6 +1,6 @@
 --[[
 ╔══════════════════════════════════════════════════════════════╗
-║              TRADE TEST TOOL  –  LocalScript                 ║
+║       fag    TRADE TEST TOOL  –  LocalScript                 ║
 ║  Drop into StarterPlayerScripts alongside MostKnownAvaGui.   ║
 ║                                                              ║
 ║  Expected GUI hierarchy (MostKnownAvaGui → MainFrame):       ║
