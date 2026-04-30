@@ -1,4 +1,4 @@
--- srsrs (LocalScript)
+-- MockInventoryTester (LocalScript)
 -- Drop this inside StarterPlayerScripts (or run it as a Plugin script).
 -- It injects fake horse items directly into InventoryMenu using the same
 -- AddOrUpdateItem / RemoveItem API that the live server uses, so the real
@@ -589,8 +589,7 @@ statGrid.Parent            = statRow
 
 local statGridLayout = Instance.new("UIGridLayout")
 statGridLayout.CellSize        = UDim2.new(0.5, -3, 0, 26)
-statGridLayout.CellPaddingX    = UDim2.new(0, 6, 0, 0)
-statGridLayout.CellPaddingY    = UDim2.new(0, 4, 0, 0)
+statGridLayout.CellPadding     = UDim2.new(0, 6, 0, 4)
 statGridLayout.SortOrder       = Enum.SortOrder.LayoutOrder
 statGridLayout.Parent          = statGrid
 
