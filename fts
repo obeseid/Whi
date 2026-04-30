@@ -1,6 +1,6 @@
 --[[
 ╔══════════════════════════════════════════════════════════════╗
-║              TRADE TEST TOOL  –  LocalScript                 ║
+║       fag    TRADE TEST TOOL  –  LocalScript                 ║
 ║  Drop into StarterPlayerScripts alongside MostKnownAvaGui.   ║
 ║                                                              ║
 ║  Expected GUI hierarchy (MostKnownAvaGui → MainFrame):       ║
@@ -465,8 +465,8 @@ local function getNextOtherSlot()
 			table.insert(keys, k)
 		end
 	end
-	table.sort(keys)
-	return keys[1]
+	if #keys == 0 then return nil end
+	return keys[math.random(1, #keys)]
 end
 
 simBtnAdd.MouseButton1Click:Connect(function()
@@ -486,7 +486,7 @@ simBtnAdd.MouseButton1Click:Connect(function()
 	TradeHandler.Server.ItemAdded(
 		fakePlayer,
 		slotKey,
-		{ id = itemData.id or slotId, name = itemData.name, amt = qty or itemData.amt, value = itemData.value, pId = itemData.pId, gId = itemData.gId, madeAt = itemData.madeAt, height = itemData.height, variants = itemData.variants, lineage = itemData.lineage, food = itemData.food }
+		{ id = itemData.id or slotKey, name = itemData.name, amt = itemData.amt, value = itemData.value }
 	)
 end)
 
