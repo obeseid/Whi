@@ -32,8 +32,8 @@
 -- These are purely local — no real player is needed.
 
 local FAKE_PLAYERS = {
-	{ username = "FakePlayer1" },
-	{ username = "FakePlayer2" },
+	{ username = "motherchip" },
+	{ username = "david_faggy" },
 }
 
 -- ── SERVICES / REFERENCES ────────────────────────────────────────────────────
