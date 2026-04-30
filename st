@@ -1,4 +1,4 @@
--- MockInventoryTester (LocalScript)
+-- MockInventoryTester (rtdr)
 -- Drop this inside StarterPlayerScripts (or run it as a Plugin script).
 -- It injects fake horse items directly into InventoryMenu using the same
 -- AddOrUpdateItem / RemoveItem API that the live server uses, so the real
@@ -19,6 +19,9 @@ local HttpService        = game:GetService("HttpService")
 
 local LocalPlayer        = Players.LocalPlayer
 local PlayerScripts      = LocalPlayer:WaitForChild("PlayerScripts")
+
+local References         = require(game:GetService("ReplicatedStorage"):WaitForChild("References"))
+local Utilities          = References.Utilities
 
 -- Wait for InventoryMenu to be ready (it's required lazily once menus load)
 local InventoryMenu = require(
