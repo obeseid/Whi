@@ -1,4 +1,4 @@
--- MockInventoryTester (rtdr)
+-- MockInventoryTester (LocalScript)
 -- Drop this inside StarterPlayerScripts (or run it as a Plugin script).
 -- It injects fake horse items directly into InventoryMenu using the same
 -- AddOrUpdateItem / RemoveItem API that the live server uses, so the real
