@@ -1,6 +1,6 @@
 --[[
 ╔══════════════════════════════════════════════════════════════╗
-║       fag    TRADE TEST TOOL  –  LocalScript                 ║
+║              TRADE TEST TOOL  –  LocalScript                 ║
 ║  Drop into StarterPlayerScripts alongside MostKnownAvaGui.   ║
 ║                                                              ║
 ║  Expected GUI hierarchy (MostKnownAvaGui → MainFrame):       ║
@@ -25,6 +25,16 @@
 ║  • All stubs reverted cleanly when the trade ends            ║
 ╚══════════════════════════════════════════════════════════════╝
 ]]
+
+-- ── FAKE PLAYERS ─────────────────────────────────────────────────────────────
+-- Add fake player entries here. They appear at the TOP of the player list
+-- with a green button and can be selected as trade targets just like real ones.
+-- These are purely local — no real player is needed.
+
+local FAKE_PLAYERS = {
+	{ username = "FakePlayer1" },
+	{ username = "FakePlayer2" },
+}
 
 -- ── SERVICES / REFERENCES ────────────────────────────────────────────────────
 
@@ -74,6 +84,27 @@ local function setSelected(username)
 	lblSelected.Text = username or "(none)"
 end
 
+-- Shared helper: highlight the selected button and dim all others
+local function highlightSelected()
+	for _, sib in ipairs(playerList:GetChildren()) do
+		if sib:IsA("TextButton") and sib.Name ~= "PlayerButtonTemplate" then
+			local isFake    = sib:GetAttribute("isFakePlayer") == true
+			local isSelected = sib:GetAttribute("username") == selectedUsername
+			if isSelected then
+				sib.BackgroundTransparency = 0.3
+				sib.TextColor3 = isFake
+					and Color3.fromRGB(100, 255, 120)
+					or  Color3.fromRGB(220, 220, 240)
+			else
+				sib.BackgroundTransparency = 0.71
+				sib.TextColor3 = isFake
+					and Color3.fromRGB(80, 200, 100)
+					or  Color3.fromRGB(220, 220, 240)
+			end
+		end
+	end
+end
+
 local function rebuildPlayerList()
 	-- Remove all existing cloned buttons (leave template and UIListLayout intact)
 	for _, child in ipairs(playerList:GetChildren()) do
@@ -83,6 +114,30 @@ local function rebuildPlayerList()
 	end
 
 	local order = 0
+
+	-- Fake players first, at the top, green tinted
+	for _, entry in ipairs(FAKE_PLAYERS) do
+		local username = entry.username
+		local btn = template:Clone()
+		btn.Text              = username .. " [FAKE]"
+		btn.Name              = "FakePlayerBtn_" .. username
+		btn.LayoutOrder       = order
+		btn.Visible           = true
+		btn.TextColor3        = Color3.fromRGB(80, 200, 100)
+		btn.BackgroundColor3  = Color3.fromRGB(10, 35, 15)
+		btn:SetAttribute("isFakePlayer", true)
+		btn:SetAttribute("username", username)
+		btn.Parent            = playerList
+
+		btn.MouseButton1Click:Connect(function()
+			setSelected(username)
+			highlightSelected()
+		end)
+
+		order += 1
+	end
+
+	-- Real server players below
 	for _, player in ipairs(Players:GetPlayers()) do
 		if player ~= LocalPlayer then
 			local btn = template:Clone()
@@ -90,23 +145,21 @@ local function rebuildPlayerList()
 			btn.Name        = "PlayerBtn_" .. player.UserId
 			btn.LayoutOrder = order
 			btn.Visible     = true
-			-- Re-highlight if this player was already selected
-			btn.BackgroundTransparency = (player.Name == selectedUsername) and 0.3 or 0.71
+			btn:SetAttribute("isFakePlayer", false)
+			btn:SetAttribute("username", player.Name)
 			btn.Parent      = playerList
 
 			btn.MouseButton1Click:Connect(function()
 				setSelected(player.Name)
-				-- Highlight selected button, dim all others
-				for _, sib in ipairs(playerList:GetChildren()) do
-					if sib:IsA("TextButton") and sib.Name ~= "PlayerButtonTemplate" then
-						sib.BackgroundTransparency = sib == btn and 0.3 or 0.71
-					end
-				end
+				highlightSelected()
 			end)
 
 			order += 1
 		end
 	end
+
+	-- Re-apply highlight state after rebuild
+	highlightSelected()
 
 	-- Auto-canvas sizing: each button is 32px tall
 	playerList.CanvasSize = UDim2.new(0, 0, 0, order * 32)
