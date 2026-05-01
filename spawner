@@ -1,4 +1,4 @@
--- MockInventoryTester (ldld)
+-- MockInventoryTester (pooo)
 -- Drop this inside StarterPlayerScripts (or run it as a Plugin script).
 -- It injects fake horse items directly into InventoryMenu using the same
 -- AddOrUpdateItem / RemoveItem API that the live server uses, so the real
@@ -832,9 +832,884 @@ local MASS_SPAWN_PRESETS = {
 	stats = { speed = 0.8, agility = 0.7, strength = 0.6, stamina = 0.75, jump = 0.5 },
 	variants = { colour = "winterConstellation", maneColour = "volcanicBlack", tailColour = "volcanicBlack", maneStyle = "starryCrystalFjord", tailStyle = "starryCrystalFjord" },
 },
+{
+	id = 317, name = "", pId = 3, gId = 2, height = 0.6, purity = 0.7,
+	stats = { speed = 0.8, agility = 0.7, strength = 0.6, stamina = 0.75, jump = 0.5 },
+	variants = { colour = "cinnamonSwirl", maneColour = "blessed", tailColour = "blessed", maneStyle = "longMustang", tailStyle = "longMustang" },
+},
+{
+	id = 317, name = "", pId = 3, gId = 2, height = 0.6, purity = 0.7,
+	stats = { speed = 0.8, agility = 0.7, strength = 0.6, stamina = 0.75, jump = 0.5 },
+	variants = { colour = "cinnamonSwirl", maneColour = "iceyBlue", tailColour = "iceyBlue", maneStyle = "longMustang", tailStyle = "longMustang" },
+},
+{
+	id = 317, name = "", pId = 3, gId = 2, height = 0.6, purity = 0.7,
+	stats = { speed = 0.8, agility = 0.7, strength = 0.6, stamina = 0.75, jump = 0.5 },
+	variants = { colour = "cinnamonSwirl", maneColour = "iceyWhite", tailColour = "iceyWhite", maneStyle = "longMustang", tailStyle = "longMustang" },
+},
+{
+	id = 317, name = "", pId = 3, gId = 2, height = 0.6, purity = 0.7,
+	stats = { speed = 0.8, agility = 0.7, strength = 0.6, stamina = 0.75, jump = 0.5 },
+	variants = { colour = "cinnamonSwirl", maneColour = "iceyPink", tailColour = "iceyPink", maneStyle = "longMustang", tailStyle = "longMustang" },
+},
+{
+	id = 317, name = "", pId = 3, gId = 2, height = 0.6, purity = 0.7,
+	stats = { speed = 0.8, agility = 0.7, strength = 0.6, stamina = 0.75, jump = 0.5 },
+	variants = { colour = "cinnamonSwirl", maneColour = "iceyBlack", tailColour = "iceyBlack", maneStyle = "longMustang", tailStyle = "longMustang" },
+},
+{
+	id = 317, name = "", pId = 3, gId = 2, height = 0.6, purity = 0.7,
+	stats = { speed = 0.8, agility = 0.7, strength = 0.6, stamina = 0.75, jump = 0.5 },
+	variants = { colour = "cinnamonSwirl", maneColour = "winterStreaks", tailColour = "winterStreaks", maneStyle = "longMustang", tailStyle = "longMustang" },
+},
+{
+	id = 317, name = "", pId = 3, gId = 2, height = 0.6, purity = 0.7,
+	stats = { speed = 0.8, agility = 0.7, strength = 0.6, stamina = 0.75, jump = 0.5 },
+	variants = { colour = "cinnamonSwirl", maneColour = "flowery", tailColour = "flowery", maneStyle = "longMustang", tailStyle = "longMustang" },
+},
+{
+	id = 317, name = "", pId = 3, gId = 2, height = 0.6, purity = 0.7,
+	stats = { speed = 0.8, agility = 0.7, strength = 0.6, stamina = 0.75, jump = 0.5 },
+	variants = { colour = "cinnamonSwirl", maneColour = "pearlyGreen", tailColour = "pearlyGreen", maneStyle = "longMustang", tailStyle = "longMustang" },
+},
+{
+	id = 317, name = "", pId = 3, gId = 2, height = 0.6, purity = 0.7,
+	stats = { speed = 0.8, agility = 0.7, strength = 0.6, stamina = 0.75, jump = 0.5 },
+	variants = { colour = "cinnamonSwirl", maneColour = "leafy", tailColour = "leafy", maneStyle = "longMustang", tailStyle = "longMustang" },
+},
+{
+	id = 317, name = "", pId = 3, gId = 2, height = 0.6, purity = 0.7,
+	stats = { speed = 0.8, agility = 0.7, strength = 0.6, stamina = 0.75, jump = 0.5 },
+	variants = { colour = "cinnamonSwirl", maneColour = "pearly", tailColour = "pearly", maneStyle = "longMustang", tailStyle = "longMustang" },
+},
+{
+	id = 317, name = "", pId = 3, gId = 2, height = 0.6, purity = 0.7,
+	stats = { speed = 0.8, agility = 0.7, strength = 0.6, stamina = 0.75, jump = 0.5 },
+	variants = { colour = "cinnamonSwirl", maneColour = "pastelStreaks", tailColour = "pastelStreaks", maneStyle = "longMustang", tailStyle = "longMustang" },
+},
+{
+	id = 317, name = "", pId = 3, gId = 2, height = 0.6, purity = 0.7,
+	stats = { speed = 0.8, agility = 0.7, strength = 0.6, stamina = 0.75, jump = 0.5 },
+	variants = { colour = "cinnamonSwirl", maneColour = "leathery", tailColour = "leathery", maneStyle = "longMustang", tailStyle = "longMustang" },
+},
+{
+	id = 317, name = "", pId = 3, gId = 2, height = 0.6, purity = 0.7,
+	stats = { speed = 0.8, agility = 0.7, strength = 0.6, stamina = 0.75, jump = 0.5 },
+	variants = { colour = "cinnamonSwirl", maneColour = "royalStreaks", tailColour = "royalStreaks", maneStyle = "longMustang", tailStyle = "longMustang" },
+},
+{
+	id = 317, name = "", pId = 3, gId = 2, height = 0.6, purity = 0.7,
+	stats = { speed = 0.8, agility = 0.7, strength = 0.6, stamina = 0.75, jump = 0.5 },
+	variants = { colour = "cinnamonSwirl", maneColour = "cowPrint", tailColour = "cowPrint", maneStyle = "longMustang", tailStyle = "longMustang" },
+},
+{
+	id = 317, name = "", pId = 3, gId = 2, height = 0.6, purity = 0.7,
+	stats = { speed = 0.8, agility = 0.7, strength = 0.6, stamina = 0.75, jump = 0.5 },
+	variants = { colour = "cinnamonSwirl", maneColour = "pearlyPink", tailColour = "pearlyPink", maneStyle = "longMustang", tailStyle = "longMustang" },
+},
+{
+	id = 317, name = "", pId = 3, gId = 2, height = 0.6, purity = 0.7,
+	stats = { speed = 0.8, agility = 0.7, strength = 0.6, stamina = 0.75, jump = 0.5 },
+	variants = { colour = "cinnamonSwirl", maneColour = "clearQuartz", tailColour = "clearQuartz", maneStyle = "longMustang", tailStyle = "longMustang" },
+},
+{
+	id = 317, name = "", pId = 3, gId = 2, height = 0.6, purity = 0.7,
+	stats = { speed = 0.8, agility = 0.7, strength = 0.6, stamina = 0.75, jump = 0.5 },
+	variants = { colour = "cinnamonSwirl", maneColour = "zebraStripes", tailColour = "zebraStripes", maneStyle = "longMustang", tailStyle = "longMustang" },
+},
+{
+	id = 317, name = "", pId = 3, gId = 2, height = 0.6, purity = 0.7,
+	stats = { speed = 0.8, agility = 0.7, strength = 0.6, stamina = 0.75, jump = 0.5 },
+	variants = { colour = "cinnamonSwirl", maneColour = "dustyFade", tailColour = "dustyFade", maneStyle = "longMustang", tailStyle = "longMustang" },
+},
+{
+	id = 317, name = "", pId = 3, gId = 2, height = 0.6, purity = 0.7,
+	stats = { speed = 0.8, agility = 0.7, strength = 0.6, stamina = 0.75, jump = 0.5 },
+	variants = { colour = "cinnamonSwirl", maneColour = "limestone", tailColour = "limestone", maneStyle = "longMustang", tailStyle = "longMustang" },
+},
+{
+	id = 317, name = "", pId = 3, gId = 2, height = 0.6, purity = 0.7,
+	stats = { speed = 0.8, agility = 0.7, strength = 0.6, stamina = 0.75, jump = 0.5 },
+	variants = { colour = "cinnamonSwirl", maneColour = "sandstone", tailColour = "sandstone", maneStyle = "longMustang", tailStyle = "longMustang" },
+},
+{
+	id = 317, name = "", pId = 3, gId = 2, height = 0.6, purity = 0.7,
+	stats = { speed = 0.8, agility = 0.7, strength = 0.6, stamina = 0.75, jump = 0.5 },
+	variants = { colour = "cinnamonSwirl", maneColour = "ruby", tailColour = "ruby", maneStyle = "longMustang", tailStyle = "longMustang" },
+},
+{
+	id = 317, name = "", pId = 3, gId = 2, height = 0.6, purity = 0.7,
+	stats = { speed = 0.8, agility = 0.7, strength = 0.6, stamina = 0.75, jump = 0.5 },
+	variants = { colour = "cinnamonSwirl", maneColour = "pearlyRed", tailColour = "pearlyRed", maneStyle = "longMustang", tailStyle = "longMustang" },
+},
+{
+	id = 317, name = "", pId = 3, gId = 2, height = 0.6, purity = 0.7,
+	stats = { speed = 0.8, agility = 0.7, strength = 0.6, stamina = 0.75, jump = 0.5 },
+	variants = { colour = "cinnamonSwirl", maneColour = "iceyGreen", tailColour = "iceyGreen", maneStyle = "longMustang", tailStyle = "longMustang" },
+},
+{
+	id = 317, name = "", pId = 3, gId = 2, height = 0.6, purity = 0.7,
+	stats = { speed = 0.8, agility = 0.7, strength = 0.6, stamina = 0.75, jump = 0.5 },
+	variants = { colour = "cinnamonSwirl", maneColour = "glacierGreen", tailColour = "glacierGreen", maneStyle = "longMustang", tailStyle = "longMustang" },
+},
+{
+	id = 317, name = "", pId = 3, gId = 2, height = 0.6, purity = 0.7,
+	stats = { speed = 0.8, agility = 0.7, strength = 0.6, stamina = 0.75, jump = 0.5 },
+	variants = { colour = "cinnamonSwirl", maneColour = "glacierPink", tailColour = "glacierPink", maneStyle = "longMustang", tailStyle = "longMustang" },
+},
+{
+	id = 317, name = "", pId = 3, gId = 2, height = 0.6, purity = 0.7,
+	stats = { speed = 0.8, agility = 0.7, strength = 0.6, stamina = 0.75, jump = 0.5 },
+	variants = { colour = "cinnamonSwirl", maneColour = "glacierBlue", tailColour = "glacierBlue", maneStyle = "longMustang", tailStyle = "longMustang" },
+},
+{
+	id = 317, name = "", pId = 3, gId = 2, height = 0.6, purity = 0.7,
+	stats = { speed = 0.8, agility = 0.7, strength = 0.6, stamina = 0.75, jump = 0.5 },
+	variants = { colour = "cinnamonSwirl", maneColour = "snowyGlacierFade", tailColour = "snowyGlacierFade", maneStyle = "longMustang", tailStyle = "longMustang" },
+},
+{
+	id = 317, name = "", pId = 3, gId = 2, height = 0.6, purity = 0.7,
+	stats = { speed = 0.8, agility = 0.7, strength = 0.6, stamina = 0.75, jump = 0.5 },
+	variants = { colour = "cinnamonSwirl", maneColour = "pinkCowPrint", tailColour = "pinkCowPrint", maneStyle = "longMustang", tailStyle = "longMustang" },
+},
+{
+	id = 317, name = "", pId = 3, gId = 2, height = 0.6, purity = 0.7,
+	stats = { speed = 0.8, agility = 0.7, strength = 0.6, stamina = 0.75, jump = 0.5 },
+	variants = { colour = "cinnamonSwirl", maneColour = "diamond", tailColour = "diamond", maneStyle = "longMustang", tailStyle = "longMustang" },
+},
+{
+	id = 317, name = "", pId = 3, gId = 2, height = 0.6, purity = 0.7,
+	stats = { speed = 0.8, agility = 0.7, strength = 0.6, stamina = 0.75, jump = 0.5 },
+	variants = { colour = "cinnamonSwirl", maneColour = "sapphire", tailColour = "sapphire", maneStyle = "longMustang", tailStyle = "longMustang" },
+},
+{
+	id = 317, name = "", pId = 3, gId = 2, height = 0.6, purity = 0.7,
+	stats = { speed = 0.8, agility = 0.7, strength = 0.6, stamina = 0.75, jump = 0.5 },
+	variants = { colour = "cinnamonSwirl", maneColour = "pearlyOrange", tailColour = "pearlyOrange", maneStyle = "longMustang", tailStyle = "longMustang" },
+},
+{
+	id = 317, name = "", pId = 3, gId = 2, height = 0.6, purity = 0.7,
+	stats = { speed = 0.8, agility = 0.7, strength = 0.6, stamina = 0.75, jump = 0.5 },
+	variants = { colour = "cinnamonSwirl", maneColour = "sunriseStreaks", tailColour = "sunriseStreaks", maneStyle = "longMustang", tailStyle = "longMustang" },
+},
+{
+	id = 317, name = "", pId = 3, gId = 2, height = 0.6, purity = 0.7,
+	stats = { speed = 0.8, agility = 0.7, strength = 0.6, stamina = 0.75, jump = 0.5 },
+	variants = { colour = "cinnamonSwirl", maneColour = "amethyst", tailColour = "amethyst", maneStyle = "longMustang", tailStyle = "longMustang" },
+},
+{
+	id = 317, name = "", pId = 3, gId = 2, height = 0.6, purity = 0.7,
+	stats = { speed = 0.8, agility = 0.7, strength = 0.6, stamina = 0.75, jump = 0.5 },
+	variants = { colour = "cinnamonSwirl", maneColour = "topaz", tailColour = "topaz", maneStyle = "longMustang", tailStyle = "longMustang" },
+},
+{
+	id = 317, name = "", pId = 3, gId = 2, height = 0.6, purity = 0.7,
+	stats = { speed = 0.8, agility = 0.7, strength = 0.6, stamina = 0.75, jump = 0.5 },
+	variants = { colour = "cinnamonSwirl", maneColour = "jaguarSpots", tailColour = "jaguarSpots", maneStyle = "longMustang", tailStyle = "longMustang" },
+},
+{
+	id = 317, name = "", pId = 3, gId = 2, height = 0.6, purity = 0.7,
+	stats = { speed = 0.8, agility = 0.7, strength = 0.6, stamina = 0.75, jump = 0.5 },
+	variants = { colour = "cinnamonSwirl", maneColour = "mossy", tailColour = "mossy", maneStyle = "longMustang", tailStyle = "longMustang" },
+},
+{
+	id = 317, name = "", pId = 3, gId = 2, height = 0.6, purity = 0.7,
+	stats = { speed = 0.8, agility = 0.7, strength = 0.6, stamina = 0.75, jump = 0.5 },
+	variants = { colour = "cinnamonSwirl", maneColour = "tigerStripes", tailColour = "tigerStripes", maneStyle = "longMustang", tailStyle = "longMustang" },
+},
+{
+	id = 317, name = "", pId = 3, gId = 2, height = 0.6, purity = 0.7,
+	stats = { speed = 0.8, agility = 0.7, strength = 0.6, stamina = 0.75, jump = 0.5 },
+	variants = { colour = "cinnamonSwirl", maneColour = "emerald", tailColour = "emerald", maneStyle = "longMustang", tailStyle = "longMustang" },
+},
+{
+	id = 317, name = "", pId = 3, gId = 2, height = 0.6, purity = 0.7,
+	stats = { speed = 0.8, agility = 0.7, strength = 0.6, stamina = 0.75, jump = 0.5 },
+	variants = { colour = "cinnamonSwirl", maneColour = "deepSpace", tailColour = "deepSpace", maneStyle = "longMustang", tailStyle = "longMustang" },
+},
+{
+	id = 317, name = "", pId = 3, gId = 2, height = 0.6, purity = 0.7,
+	stats = { speed = 0.8, agility = 0.7, strength = 0.6, stamina = 0.75, jump = 0.5 },
+	variants = { colour = "cinnamonSwirl", maneColour = "neonBlue", tailColour = "neonBlue", maneStyle = "longMustang", tailStyle = "longMustang" },
+},
+{
+	id = 317, name = "", pId = 3, gId = 2, height = 0.6, purity = 0.7,
+	stats = { speed = 0.8, agility = 0.7, strength = 0.6, stamina = 0.75, jump = 0.5 },
+	variants = { colour = "cinnamonSwirl", maneColour = "neonPurple", tailColour = "neonPurple", maneStyle = "longMustang", tailStyle = "longMustang" },
+},
+{
+	id = 317, name = "", pId = 3, gId = 2, height = 0.6, purity = 0.7,
+	stats = { speed = 0.8, agility = 0.7, strength = 0.6, stamina = 0.75, jump = 0.5 },
+	variants = { colour = "cinnamonSwirl", maneColour = "moonstone", tailColour = "moonstone", maneStyle = "longMustang", tailStyle = "longMustang" },
+},
+{
+	id = 317, name = "", pId = 3, gId = 2, height = 0.6, purity = 0.7,
+	stats = { speed = 0.8, agility = 0.7, strength = 0.6, stamina = 0.75, jump = 0.5 },
+	variants = { colour = "cinnamonSwirl", maneColour = "pearlyBlue", tailColour = "pearlyBlue", maneStyle = "longMustang", tailStyle = "longMustang" },
+},
+{
+	id = 317, name = "", pId = 3, gId = 2, height = 0.6, purity = 0.7,
+	stats = { speed = 0.8, agility = 0.7, strength = 0.6, stamina = 0.75, jump = 0.5 },
+	variants = { colour = "cinnamonSwirl", maneColour = "volcanicOrange", tailColour = "volcanicOrange", maneStyle = "longMustang", tailStyle = "longMustang" },
+},
+{
+	id = 317, name = "", pId = 3, gId = 2, height = 0.6, purity = 0.7,
+	stats = { speed = 0.8, agility = 0.7, strength = 0.6, stamina = 0.75, jump = 0.5 },
+	variants = { colour = "cinnamonSwirl", maneColour = "pearlyBlack", tailColour = "pearlyBlack", maneStyle = "longMustang", tailStyle = "longMustang" },
+},
+{
+	id = 317, name = "", pId = 3, gId = 2, height = 0.6, purity = 0.7,
+	stats = { speed = 0.8, agility = 0.7, strength = 0.6, stamina = 0.75, jump = 0.5 },
+	variants = { colour = "cinnamonSwirl", maneColour = "crackedLavaFade", tailColour = "crackedLavaFade", maneStyle = "longMustang", tailStyle = "longMustang" },
+},
+{
+	id = 317, name = "", pId = 3, gId = 2, height = 0.6, purity = 0.7,
+	stats = { speed = 0.8, agility = 0.7, strength = 0.6, stamina = 0.75, jump = 0.5 },
+	variants = { colour = "cinnamonSwirl", maneColour = "volcanicBlack", tailColour = "volcanicBlack", maneStyle = "longMustang", tailStyle = "longMustang" },
+},
+{
+	id = 1217, name = "", pId = 3, gId = 2, height = 0.6, purity = 0.7,
+	stats = { speed = 0.8, agility = 0.7, strength = 0.6, stamina = 0.75, jump = 0.5 },
+	variants = { colour = "pinataDonkey", maneColour = "blessed", tailColour = "blessed", maneStyle = "shortShaggyDonkey", tailStyle = "standardDonkey" },
+},
+{
+	id = 1217, name = "", pId = 3, gId = 2, height = 0.6, purity = 0.7,
+	stats = { speed = 0.8, agility = 0.7, strength = 0.6, stamina = 0.75, jump = 0.5 },
+	variants = { colour = "pinataDonkey", maneColour = "iceyBlue", tailColour = "iceyBlue", maneStyle = "shortShaggyDonkey", tailStyle = "standardDonkey" },
+},
+{
+	id = 1217, name = "", pId = 3, gId = 2, height = 0.6, purity = 0.7,
+	stats = { speed = 0.8, agility = 0.7, strength = 0.6, stamina = 0.75, jump = 0.5 },
+	variants = { colour = "pinataDonkey", maneColour = "iceyWhite", tailColour = "iceyWhite", maneStyle = "shortShaggyDonkey", tailStyle = "standardDonkey" },
+},
+{
+	id = 1217, name = "", pId = 3, gId = 2, height = 0.6, purity = 0.7,
+	stats = { speed = 0.8, agility = 0.7, strength = 0.6, stamina = 0.75, jump = 0.5 },
+	variants = { colour = "pinataDonkey", maneColour = "iceyPink", tailColour = "iceyPink", maneStyle = "shortShaggyDonkey", tailStyle = "standardDonkey" },
+},
+{
+	id = 1217, name = "", pId = 3, gId = 2, height = 0.6, purity = 0.7,
+	stats = { speed = 0.8, agility = 0.7, strength = 0.6, stamina = 0.75, jump = 0.5 },
+	variants = { colour = "pinataDonkey", maneColour = "iceyBlack", tailColour = "iceyBlack", maneStyle = "shortShaggyDonkey", tailStyle = "standardDonkey" },
+},
+{
+	id = 1217, name = "", pId = 3, gId = 2, height = 0.6, purity = 0.7,
+	stats = { speed = 0.8, agility = 0.7, strength = 0.6, stamina = 0.75, jump = 0.5 },
+	variants = { colour = "pinataDonkey", maneColour = "winterStreaks", tailColour = "winterStreaks", maneStyle = "shortShaggyDonkey", tailStyle = "standardDonkey" },
+},
+{
+	id = 1217, name = "", pId = 3, gId = 2, height = 0.6, purity = 0.7,
+	stats = { speed = 0.8, agility = 0.7, strength = 0.6, stamina = 0.75, jump = 0.5 },
+	variants = { colour = "pinataDonkey", maneColour = "flowery", tailColour = "flowery", maneStyle = "shortShaggyDonkey", tailStyle = "standardDonkey" },
+},
+{
+	id = 1217, name = "", pId = 3, gId = 2, height = 0.6, purity = 0.7,
+	stats = { speed = 0.8, agility = 0.7, strength = 0.6, stamina = 0.75, jump = 0.5 },
+	variants = { colour = "pinataDonkey", maneColour = "pearlyGreen", tailColour = "pearlyGreen", maneStyle = "shortShaggyDonkey", tailStyle = "standardDonkey" },
+},
+{
+	id = 1217, name = "", pId = 3, gId = 2, height = 0.6, purity = 0.7,
+	stats = { speed = 0.8, agility = 0.7, strength = 0.6, stamina = 0.75, jump = 0.5 },
+	variants = { colour = "pinataDonkey", maneColour = "leafy", tailColour = "leafy", maneStyle = "shortShaggyDonkey", tailStyle = "standardDonkey" },
+},
+{
+	id = 1217, name = "", pId = 3, gId = 2, height = 0.6, purity = 0.7,
+	stats = { speed = 0.8, agility = 0.7, strength = 0.6, stamina = 0.75, jump = 0.5 },
+	variants = { colour = "pinataDonkey", maneColour = "pearly", tailColour = "pearly", maneStyle = "shortShaggyDonkey", tailStyle = "standardDonkey" },
+},
+{
+	id = 1217, name = "", pId = 3, gId = 2, height = 0.6, purity = 0.7,
+	stats = { speed = 0.8, agility = 0.7, strength = 0.6, stamina = 0.75, jump = 0.5 },
+	variants = { colour = "pinataDonkey", maneColour = "pastelStreaks", tailColour = "pastelStreaks", maneStyle = "shortShaggyDonkey", tailStyle = "standardDonkey" },
+},
+{
+	id = 1217, name = "", pId = 3, gId = 2, height = 0.6, purity = 0.7,
+	stats = { speed = 0.8, agility = 0.7, strength = 0.6, stamina = 0.75, jump = 0.5 },
+	variants = { colour = "pinataDonkey", maneColour = "leathery", tailColour = "leathery", maneStyle = "shortShaggyDonkey", tailStyle = "standardDonkey" },
+},
+{
+	id = 1217, name = "", pId = 3, gId = 2, height = 0.6, purity = 0.7,
+	stats = { speed = 0.8, agility = 0.7, strength = 0.6, stamina = 0.75, jump = 0.5 },
+	variants = { colour = "pinataDonkey", maneColour = "royalStreaks", tailColour = "royalStreaks", maneStyle = "shortShaggyDonkey", tailStyle = "standardDonkey" },
+},
+{
+	id = 1217, name = "", pId = 3, gId = 2, height = 0.6, purity = 0.7,
+	stats = { speed = 0.8, agility = 0.7, strength = 0.6, stamina = 0.75, jump = 0.5 },
+	variants = { colour = "pinataDonkey", maneColour = "cowPrint", tailColour = "cowPrint", maneStyle = "shortShaggyDonkey", tailStyle = "standardDonkey" },
+},
+{
+	id = 1217, name = "", pId = 3, gId = 2, height = 0.6, purity = 0.7,
+	stats = { speed = 0.8, agility = 0.7, strength = 0.6, stamina = 0.75, jump = 0.5 },
+	variants = { colour = "pinataDonkey", maneColour = "pearlyPink", tailColour = "pearlyPink", maneStyle = "shortShaggyDonkey", tailStyle = "standardDonkey" },
+},
+{
+	id = 1217, name = "", pId = 3, gId = 2, height = 0.6, purity = 0.7,
+	stats = { speed = 0.8, agility = 0.7, strength = 0.6, stamina = 0.75, jump = 0.5 },
+	variants = { colour = "pinataDonkey", maneColour = "clearQuartz", tailColour = "clearQuartz", maneStyle = "shortShaggyDonkey", tailStyle = "standardDonkey" },
+},
+{
+	id = 1217, name = "", pId = 3, gId = 2, height = 0.6, purity = 0.7,
+	stats = { speed = 0.8, agility = 0.7, strength = 0.6, stamina = 0.75, jump = 0.5 },
+	variants = { colour = "pinataDonkey", maneColour = "zebraStripes", tailColour = "zebraStripes", maneStyle = "shortShaggyDonkey", tailStyle = "standardDonkey" },
+},
+{
+	id = 1217, name = "", pId = 3, gId = 2, height = 0.6, purity = 0.7,
+	stats = { speed = 0.8, agility = 0.7, strength = 0.6, stamina = 0.75, jump = 0.5 },
+	variants = { colour = "pinataDonkey", maneColour = "dustyFade", tailColour = "dustyFade", maneStyle = "shortShaggyDonkey", tailStyle = "standardDonkey" },
+},
+{
+	id = 1217, name = "", pId = 3, gId = 2, height = 0.6, purity = 0.7,
+	stats = { speed = 0.8, agility = 0.7, strength = 0.6, stamina = 0.75, jump = 0.5 },
+	variants = { colour = "pinataDonkey", maneColour = "limestone", tailColour = "limestone", maneStyle = "shortShaggyDonkey", tailStyle = "standardDonkey" },
+},
+{
+	id = 1217, name = "", pId = 3, gId = 2, height = 0.6, purity = 0.7,
+	stats = { speed = 0.8, agility = 0.7, strength = 0.6, stamina = 0.75, jump = 0.5 },
+	variants = { colour = "pinataDonkey", maneColour = "sandstone", tailColour = "sandstone", maneStyle = "shortShaggyDonkey", tailStyle = "standardDonkey" },
+},
+{
+	id = 1217, name = "", pId = 3, gId = 2, height = 0.6, purity = 0.7,
+	stats = { speed = 0.8, agility = 0.7, strength = 0.6, stamina = 0.75, jump = 0.5 },
+	variants = { colour = "pinataDonkey", maneColour = "ruby", tailColour = "ruby", maneStyle = "shortShaggyDonkey", tailStyle = "standardDonkey" },
+},
+{
+	id = 1217, name = "", pId = 3, gId = 2, height = 0.6, purity = 0.7,
+	stats = { speed = 0.8, agility = 0.7, strength = 0.6, stamina = 0.75, jump = 0.5 },
+	variants = { colour = "pinataDonkey", maneColour = "pearlyRed", tailColour = "pearlyRed", maneStyle = "shortShaggyDonkey", tailStyle = "standardDonkey" },
+},
+{
+	id = 1217, name = "", pId = 3, gId = 2, height = 0.6, purity = 0.7,
+	stats = { speed = 0.8, agility = 0.7, strength = 0.6, stamina = 0.75, jump = 0.5 },
+	variants = { colour = "pinataDonkey", maneColour = "iceyGreen", tailColour = "iceyGreen", maneStyle = "shortShaggyDonkey", tailStyle = "standardDonkey" },
+},
+{
+	id = 1217, name = "", pId = 3, gId = 2, height = 0.6, purity = 0.7,
+	stats = { speed = 0.8, agility = 0.7, strength = 0.6, stamina = 0.75, jump = 0.5 },
+	variants = { colour = "pinataDonkey", maneColour = "glacierGreen", tailColour = "glacierGreen", maneStyle = "shortShaggyDonkey", tailStyle = "standardDonkey" },
+},
+{
+	id = 1217, name = "", pId = 3, gId = 2, height = 0.6, purity = 0.7,
+	stats = { speed = 0.8, agility = 0.7, strength = 0.6, stamina = 0.75, jump = 0.5 },
+	variants = { colour = "pinataDonkey", maneColour = "glacierPink", tailColour = "glacierPink", maneStyle = "shortShaggyDonkey", tailStyle = "standardDonkey" },
+},
+{
+	id = 1217, name = "", pId = 3, gId = 2, height = 0.6, purity = 0.7,
+	stats = { speed = 0.8, agility = 0.7, strength = 0.6, stamina = 0.75, jump = 0.5 },
+	variants = { colour = "pinataDonkey", maneColour = "glacierBlue", tailColour = "glacierBlue", maneStyle = "shortShaggyDonkey", tailStyle = "standardDonkey" },
+},
+{
+	id = 1217, name = "", pId = 3, gId = 2, height = 0.6, purity = 0.7,
+	stats = { speed = 0.8, agility = 0.7, strength = 0.6, stamina = 0.75, jump = 0.5 },
+	variants = { colour = "pinataDonkey", maneColour = "snowyGlacierFade", tailColour = "snowyGlacierFade", maneStyle = "shortShaggyDonkey", tailStyle = "standardDonkey" },
+},
+{
+	id = 1217, name = "", pId = 3, gId = 2, height = 0.6, purity = 0.7,
+	stats = { speed = 0.8, agility = 0.7, strength = 0.6, stamina = 0.75, jump = 0.5 },
+	variants = { colour = "pinataDonkey", maneColour = "pinkCowPrint", tailColour = "pinkCowPrint", maneStyle = "shortShaggyDonkey", tailStyle = "standardDonkey" },
+},
+{
+	id = 1217, name = "", pId = 3, gId = 2, height = 0.6, purity = 0.7,
+	stats = { speed = 0.8, agility = 0.7, strength = 0.6, stamina = 0.75, jump = 0.5 },
+	variants = { colour = "pinataDonkey", maneColour = "diamond", tailColour = "diamond", maneStyle = "shortShaggyDonkey", tailStyle = "standardDonkey" },
+},
+{
+	id = 1217, name = "", pId = 3, gId = 2, height = 0.6, purity = 0.7,
+	stats = { speed = 0.8, agility = 0.7, strength = 0.6, stamina = 0.75, jump = 0.5 },
+	variants = { colour = "pinataDonkey", maneColour = "sapphire", tailColour = "sapphire", maneStyle = "shortShaggyDonkey", tailStyle = "standardDonkey" },
+},
+{
+	id = 1217, name = "", pId = 3, gId = 2, height = 0.6, purity = 0.7,
+	stats = { speed = 0.8, agility = 0.7, strength = 0.6, stamina = 0.75, jump = 0.5 },
+	variants = { colour = "pinataDonkey", maneColour = "pearlyOrange", tailColour = "pearlyOrange", maneStyle = "shortShaggyDonkey", tailStyle = "standardDonkey" },
+},
+{
+	id = 1217, name = "", pId = 3, gId = 2, height = 0.6, purity = 0.7,
+	stats = { speed = 0.8, agility = 0.7, strength = 0.6, stamina = 0.75, jump = 0.5 },
+	variants = { colour = "pinataDonkey", maneColour = "sunriseStreaks", tailColour = "sunriseStreaks", maneStyle = "shortShaggyDonkey", tailStyle = "standardDonkey" },
+},
+{
+	id = 1217, name = "", pId = 3, gId = 2, height = 0.6, purity = 0.7,
+	stats = { speed = 0.8, agility = 0.7, strength = 0.6, stamina = 0.75, jump = 0.5 },
+	variants = { colour = "pinataDonkey", maneColour = "amethyst", tailColour = "amethyst", maneStyle = "shortShaggyDonkey", tailStyle = "standardDonkey" },
+},
+{
+	id = 1217, name = "", pId = 3, gId = 2, height = 0.6, purity = 0.7,
+	stats = { speed = 0.8, agility = 0.7, strength = 0.6, stamina = 0.75, jump = 0.5 },
+	variants = { colour = "pinataDonkey", maneColour = "topaz", tailColour = "topaz", maneStyle = "shortShaggyDonkey", tailStyle = "standardDonkey" },
+},
+{
+	id = 1217, name = "", pId = 3, gId = 2, height = 0.6, purity = 0.7,
+	stats = { speed = 0.8, agility = 0.7, strength = 0.6, stamina = 0.75, jump = 0.5 },
+	variants = { colour = "pinataDonkey", maneColour = "jaguarSpots", tailColour = "jaguarSpots", maneStyle = "shortShaggyDonkey", tailStyle = "standardDonkey" },
+},
+{
+	id = 1217, name = "", pId = 3, gId = 2, height = 0.6, purity = 0.7,
+	stats = { speed = 0.8, agility = 0.7, strength = 0.6, stamina = 0.75, jump = 0.5 },
+	variants = { colour = "pinataDonkey", maneColour = "mossy", tailColour = "mossy", maneStyle = "shortShaggyDonkey", tailStyle = "standardDonkey" },
+},
+{
+	id = 1217, name = "", pId = 3, gId = 2, height = 0.6, purity = 0.7,
+	stats = { speed = 0.8, agility = 0.7, strength = 0.6, stamina = 0.75, jump = 0.5 },
+	variants = { colour = "pinataDonkey", maneColour = "tigerStripes", tailColour = "tigerStripes", maneStyle = "shortShaggyDonkey", tailStyle = "standardDonkey" },
+},
+{
+	id = 1217, name = "", pId = 3, gId = 2, height = 0.6, purity = 0.7,
+	stats = { speed = 0.8, agility = 0.7, strength = 0.6, stamina = 0.75, jump = 0.5 },
+	variants = { colour = "pinataDonkey", maneColour = "emerald", tailColour = "emerald", maneStyle = "shortShaggyDonkey", tailStyle = "standardDonkey" },
+},
+{
+	id = 1217, name = "", pId = 3, gId = 2, height = 0.6, purity = 0.7,
+	stats = { speed = 0.8, agility = 0.7, strength = 0.6, stamina = 0.75, jump = 0.5 },
+	variants = { colour = "pinataDonkey", maneColour = "deepSpace", tailColour = "deepSpace", maneStyle = "shortShaggyDonkey", tailStyle = "standardDonkey" },
+},
+{
+	id = 1217, name = "", pId = 3, gId = 2, height = 0.6, purity = 0.7,
+	stats = { speed = 0.8, agility = 0.7, strength = 0.6, stamina = 0.75, jump = 0.5 },
+	variants = { colour = "pinataDonkey", maneColour = "neonBlue", tailColour = "neonBlue", maneStyle = "shortShaggyDonkey", tailStyle = "standardDonkey" },
+},
+{
+	id = 1217, name = "", pId = 3, gId = 2, height = 0.6, purity = 0.7,
+	stats = { speed = 0.8, agility = 0.7, strength = 0.6, stamina = 0.75, jump = 0.5 },
+	variants = { colour = "pinataDonkey", maneColour = "neonPurple", tailColour = "neonPurple", maneStyle = "shortShaggyDonkey", tailStyle = "standardDonkey" },
+},
+{
+	id = 1217, name = "", pId = 3, gId = 2, height = 0.6, purity = 0.7,
+	stats = { speed = 0.8, agility = 0.7, strength = 0.6, stamina = 0.75, jump = 0.5 },
+	variants = { colour = "pinataDonkey", maneColour = "moonstone", tailColour = "moonstone", maneStyle = "shortShaggyDonkey", tailStyle = "standardDonkey" },
+},
+{
+	id = 1217, name = "", pId = 3, gId = 2, height = 0.6, purity = 0.7,
+	stats = { speed = 0.8, agility = 0.7, strength = 0.6, stamina = 0.75, jump = 0.5 },
+	variants = { colour = "pinataDonkey", maneColour = "pearlyBlue", tailColour = "pearlyBlue", maneStyle = "shortShaggyDonkey", tailStyle = "standardDonkey" },
+},
+{
+	id = 1217, name = "", pId = 3, gId = 2, height = 0.6, purity = 0.7,
+	stats = { speed = 0.8, agility = 0.7, strength = 0.6, stamina = 0.75, jump = 0.5 },
+	variants = { colour = "pinataDonkey", maneColour = "volcanicOrange", tailColour = "volcanicOrange", maneStyle = "shortShaggyDonkey", tailStyle = "standardDonkey" },
+},
+{
+	id = 1217, name = "", pId = 3, gId = 2, height = 0.6, purity = 0.7,
+	stats = { speed = 0.8, agility = 0.7, strength = 0.6, stamina = 0.75, jump = 0.5 },
+	variants = { colour = "pinataDonkey", maneColour = "pearlyBlack", tailColour = "pearlyBlack", maneStyle = "shortShaggyDonkey", tailStyle = "standardDonkey" },
+},
+{
+	id = 1217, name = "", pId = 3, gId = 2, height = 0.6, purity = 0.7,
+	stats = { speed = 0.8, agility = 0.7, strength = 0.6, stamina = 0.75, jump = 0.5 },
+	variants = { colour = "pinataDonkey", maneColour = "crackedLavaFade", tailColour = "crackedLavaFade", maneStyle = "shortShaggyDonkey", tailStyle = "standardDonkey" },
+},
+{
+	id = 1217, name = "", pId = 3, gId = 2, height = 0.6, purity = 0.7,
+	stats = { speed = 0.8, agility = 0.7, strength = 0.6, stamina = 0.75, jump = 0.5 },
+	variants = { colour = "pinataDonkey", maneColour = "volcanicBlack", tailColour = "volcanicBlack", maneStyle = "shortShaggyDonkey", tailStyle = "standardDonkey" },
+},
+{
+	id = 951, name = "", pId = 3, gId = 2, height = 0.6, purity = 0.7,
+	stats = { speed = 0.8, agility = 0.7, strength = 0.6, stamina = 0.75, jump = 0.5 },
+	variants = {
+		colour = "redVelvetZebra",
+		maneColour = "glacierGreen",
+		tailColour = "glacierGreen",
+		maneStyle = "shaggyRoachedDWB",
+		tailStyle = "partialFrenchBraidDWB"
+	},
+},
+{
+	id = 951, name = "", pId = 3, gId = 2, height = 0.6, purity = 0.7,
+	stats = { speed = 0.8, agility = 0.7, strength = 0.6, stamina = 0.75, jump = 0.5 },
+	variants = {
+		colour = "redVelvetZebra",
+		maneColour = "flowery",
+		tailColour = "flowery",
+		maneStyle = "shaggyRoachedDWB",
+		tailStyle = "partialFrenchBraidDWB"
+	},
+},
+{
+	id = 951, name = "", pId = 3, gId = 2, height = 0.6, purity = 0.7,
+	stats = { speed = 0.8, agility = 0.7, strength = 0.6, stamina = 0.75, jump = 0.5 },
+	variants = {
+		colour = "redVelvetZebra",
+		maneColour = "neonPurple",
+		tailColour = "neonPurple",
+		maneStyle = "shaggyRoachedDWB",
+		tailStyle = "partialFrenchBraidDWB"
+	},
+},
+{
+	id = 951, name = "", pId = 3, gId = 2, height = 0.6, purity = 0.7,
+	stats = { speed = 0.8, agility = 0.7, strength = 0.6, stamina = 0.75, jump = 0.5 },
+	variants = {
+		colour = "redVelvetZebra",
+		maneColour = "prismatic",
+		tailColour = "prismatic",
+		maneStyle = "shaggyRoachedDWB",
+		tailStyle = "partialFrenchBraidDWB"
+	},
+},
+{
+	id = 951, name = "", pId = 3, gId = 2, height = 0.6, purity = 0.7,
+	stats = { speed = 0.8, agility = 0.7, strength = 0.6, stamina = 0.75, jump = 0.5 },
+	variants = {
+		colour = "redVelvetZebra",
+		maneColour = "volcanicOrange",
+		tailColour = "volcanicOrange",
+		maneStyle = "shaggyRoachedDWB",
+		tailStyle = "partialFrenchBraidDWB"
+	},
+},
+{
+	id = 951, name = "", pId = 3, gId = 2, height = 0.6, purity = 0.7,
+	stats = { speed = 0.8, agility = 0.7, strength = 0.6, stamina = 0.75, jump = 0.5 },
+	variants = {
+		colour = "redVelvetZebra",
+		maneColour = "leafy",
+		tailColour = "leafy",
+		maneStyle = "shaggyRoachedDWB",
+		tailStyle = "partialFrenchBraidDWB"
+	},
+},
+{
+	id = 951, name = "", pId = 3, gId = 2, height = 0.6, purity = 0.7,
+	stats = { speed = 0.8, agility = 0.7, strength = 0.6, stamina = 0.75, jump = 0.5 },
+	variants = {
+		colour = "redVelvetZebra",
+		maneColour = "iceyPink",
+		tailColour = "iceyPink",
+		maneStyle = "shaggyRoachedDWB",
+		tailStyle = "partialFrenchBraidDWB"
+	},
+},
+{
+	id = 951, name = "", pId = 3, gId = 2, height = 0.6, purity = 0.7,
+	stats = { speed = 0.8, agility = 0.7, strength = 0.6, stamina = 0.75, jump = 0.5 },
+	variants = {
+		colour = "redVelvetZebra",
+		maneColour = "snowGlacierFade",
+		tailColour = "snowGlacierFade",
+		maneStyle = "shaggyRoachedDWB",
+		tailStyle = "partialFrenchBraidDWB"
+	},
+},
+{
+	id = 273, name = "", pId = 3, gId = 2, height = 0.6, purity = 0.7,
+	stats = { speed = 0.8, agility = 0.7, strength = 0.6, stamina = 0.75, jump = 0.5 },
+	variants = {
+		colour = "greyWolf",
+		maneColour = "glacierGreen",
+		tailColour = "glacierGreen",
+		maneStyle = "wolfTB",
+		tailStyle = "wolfTB"
+	},
+},
+{
+	id = 273, name = "", pId = 3, gId = 2, height = 0.6, purity = 0.7,
+	stats = { speed = 0.8, agility = 0.7, strength = 0.6, stamina = 0.75, jump = 0.5 },
+	variants = {
+		colour = "greyWolf",
+		maneColour = "flowery",
+		tailColour = "flowery",
+		maneStyle = "wolfTB",
+		tailStyle = "wolfTB"
+	},
+},
+{
+	id = 273, name = "", pId = 3, gId = 2, height = 0.6, purity = 0.7,
+	stats = { speed = 0.8, agility = 0.7, strength = 0.6, stamina = 0.75, jump = 0.5 },
+	variants = {
+		colour = "greyWolf",
+		maneColour = "neonPurple",
+		tailColour = "neonPurple",
+		maneStyle = "wolfTB",
+		tailStyle = "wolfTB"
+	},
+},
+{
+	id = 273, name = "", pId = 3, gId = 2, height = 0.6, purity = 0.7,
+	stats = { speed = 0.8, agility = 0.7, strength = 0.6, stamina = 0.75, jump = 0.5 },
+	variants = {
+		colour = "greyWolf",
+		maneColour = "prismatic",
+		tailColour = "prismatic",
+		maneStyle = "wolfTB",
+		tailStyle = "wolfTB"
+	},
+},
+{
+	id = 273, name = "", pId = 3, gId = 2, height = 0.6, purity = 0.7,
+	stats = { speed = 0.8, agility = 0.7, strength = 0.6, stamina = 0.75, jump = 0.5 },
+	variants = {
+		colour = "greyWolf",
+		maneColour = "volcanicOrange",
+		tailColour = "volcanicOrange",
+		maneStyle = "wolfTB",
+		tailStyle = "wolfTB"
+	},
+},
+{
+	id = 273, name = "", pId = 3, gId = 2, height = 0.6, purity = 0.7,
+	stats = { speed = 0.8, agility = 0.7, strength = 0.6, stamina = 0.75, jump = 0.5 },
+	variants = {
+		colour = "greyWolf",
+		maneColour = "leafy",
+		tailColour = "leafy",
+		maneStyle = "wolfTB",
+		tailStyle = "wolfTB"
+	},
+},
+{
+	id = 273, name = "", pId = 3, gId = 2, height = 0.6, purity = 0.7,
+	stats = { speed = 0.8, agility = 0.7, strength = 0.6, stamina = 0.75, jump = 0.5 },
+	variants = {
+		colour = "greyWolf",
+		maneColour = "iceyPink",
+		tailColour = "iceyPink",
+		maneStyle = "wolfTB",
+		tailStyle = "wolfTB"
+	},
+},
+{
+	id = 273, name = "", pId = 3, gId = 2, height = 0.6, purity = 0.7,
+	stats = { speed = 0.8, agility = 0.7, strength = 0.6, stamina = 0.75, jump = 0.5 },
+	variants = {
+		colour = "greyWolf",
+		maneColour = "snowGlacierFade",
+		tailColour = "snowGlacierFade",
+		maneStyle = "wolfTB",
+		tailStyle = "wolfTB"
+	},
+},
+{
+	id = 640, name = "", pId = 3, gId = 2, height = 0.6, purity = 0.7,
+	stats = { speed = 0.8, agility = 0.7, strength = 0.6, stamina = 0.75, jump = 0.5 },
+	variants = {
+		colour = "kelpie",
+		maneColour = "glacierGreen",
+		tailColour = "glacierGreen",
+		maneStyle = "kelpieSeaweedAkhal",
+		tailStyle = "kelpieSeaweedAkhal"
+	},
+},
+{
+	id = 640, name = "", pId = 3, gId = 2, height = 0.6, purity = 0.7,
+	stats = { speed = 0.8, agility = 0.7, strength = 0.6, stamina = 0.75, jump = 0.5 },
+	variants = {
+		colour = "kelpie",
+		maneColour = "flowery",
+		tailColour = "flowery",
+		maneStyle = "kelpieSeaweedAkhal",
+		tailStyle = "kelpieSeaweedAkhal"
+	},
+},
+{
+	id = 640, name = "", pId = 3, gId = 2, height = 0.6, purity = 0.7,
+	stats = { speed = 0.8, agility = 0.7, strength = 0.6, stamina = 0.75, jump = 0.5 },
+	variants = {
+		colour = "kelpie",
+		maneColour = "neonPurple",
+		tailColour = "neonPurple",
+		maneStyle = "kelpieSeaweedAkhal",
+		tailStyle = "kelpieSeaweedAkhal"
+	},
+},
+{
+	id = 640, name = "", pId = 3, gId = 2, height = 0.6, purity = 0.7,
+	stats = { speed = 0.8, agility = 0.7, strength = 0.6, stamina = 0.75, jump = 0.5 },
+	variants = {
+		colour = "kelpie",
+		maneColour = "prismatic",
+		tailColour = "prismatic",
+		maneStyle = "kelpieSeaweedAkhal",
+		tailStyle = "kelpieSeaweedAkhal"
+	},
+},
+{
+	id = 640, name = "", pId = 3, gId = 2, height = 0.6, purity = 0.7,
+	stats = { speed = 0.8, agility = 0.7, strength = 0.6, stamina = 0.75, jump = 0.5 },
+	variants = {
+		colour = "kelpie",
+		maneColour = "volcanicOrange",
+		tailColour = "volcanicOrange",
+		maneStyle = "kelpieSeaweedAkhal",
+		tailStyle = "kelpieSeaweedAkhal"
+	},
+},
+{
+	id = 640, name = "", pId = 3, gId = 2, height = 0.6, purity = 0.7,
+	stats = { speed = 0.8, agility = 0.7, strength = 0.6, stamina = 0.75, jump = 0.5 },
+	variants = {
+		colour = "kelpie",
+		maneColour = "leafy",
+		tailColour = "leafy",
+		maneStyle = "kelpieSeaweedAkhal",
+		tailStyle = "kelpieSeaweedAkhal"
+	},
+},
+{
+	id = 640, name = "", pId = 3, gId = 2, height = 0.6, purity = 0.7,
+	stats = { speed = 0.8, agility = 0.7, strength = 0.6, stamina = 0.75, jump = 0.5 },
+	variants = {
+		colour = "kelpie",
+		maneColour = "iceyPink",
+		tailColour = "iceyPink",
+		maneStyle = "kelpieSeaweedAkhal",
+		tailStyle = "kelpieSeaweedAkhal"
+	},
+},
+{
+	id = 640, name = "", pId = 3, gId = 2, height = 0.6, purity = 0.7,
+	stats = { speed = 0.8, agility = 0.7, strength = 0.6, stamina = 0.75, jump = 0.5 },
+	variants = {
+		colour = "kelpie",
+		maneColour = "snowGlacierFade",
+		tailColour = "snowGlacierFade",
+		maneStyle = "kelpieSeaweedAkhal",
+		tailStyle = "kelpieSeaweedAkhal"
+	},
+},
+{
+	id = 561, name = "", pId = 3, gId = 2, height = 0.6, purity = 0.7,
+	stats = { speed = 0.8, agility = 0.7, strength = 0.6, stamina = 0.75, jump = 0.5 },
+	variants = {
+		colour = "fadingBlackFriesian2",
+		maneColour = "clearQuartz",
+		tailColour = "clearQuartz",
+		maneStyle = "longFriesian2",
+		tailStyle = "longFriesian2"
+	},
+},
+{
+	id = 561, name = "", pId = 3, gId = 2, height = 0.6, purity = 0.7,
+	stats = { speed = 0.8, agility = 0.7, strength = 0.6, stamina = 0.75, jump = 0.5 },
+	variants = {
+		colour = "fadingBlackFriesian2",
+		maneColour = "pearlyPink",
+		tailColour = "pearlyPink",
+		maneStyle = "longFriesian2",
+		tailStyle = "longFriesian2"
+	},
+},
+{
+	id = 561, name = "", pId = 3, gId = 2, height = 0.6, purity = 0.7,
+	stats = { speed = 0.8, agility = 0.7, strength = 0.6, stamina = 0.75, jump = 0.5 },
+	variants = {
+		colour = "fadingBlackFriesian2",
+		maneColour = "moonstone",
+		tailColour = "moonstone",
+		maneStyle = "longFriesian2",
+		tailStyle = "longFriesian2"
+	},
+},
+{
+	id = 561, name = "", pId = 3, gId = 2, height = 0.6, purity = 0.7,
+	stats = { speed = 0.8, agility = 0.7, strength = 0.6, stamina = 0.75, jump = 0.5 },
+	variants = {
+		colour = "fadingBlackFriesian2",
+		maneColour = "royalStreaks",
+		tailColour = "royalStreaks",
+		maneStyle = "longFriesian2",
+		tailStyle = "longFriesian2"
+	},
+},
+{
+	id = 561, name = "", pId = 3, gId = 2, height = 0.6, purity = 0.7,
+	stats = { speed = 0.8, agility = 0.7, strength = 0.6, stamina = 0.75, jump = 0.5 },
+	variants = {
+		colour = "fadingBlackFriesian2",
+		maneColour = "blessed",
+		tailColour = "blessed",
+		maneStyle = "longFriesian2",
+		tailStyle = "longFriesian2"
+	},
+},
+{
+	id = 561, name = "", pId = 3, gId = 2, height = 0.6, purity = 0.7,
+	stats = { speed = 0.8, agility = 0.7, strength = 0.6, stamina = 0.75, jump = 0.5 },
+	variants = {
+		colour = "fadingBlackFriesian2",
+		maneColour = "leafy",
+		tailColour = "leafy",
+		maneStyle = "longFriesian2",
+		tailStyle = "longFriesian2"
+	},
+},
+{
+	id = 561, name = "", pId = 3, gId = 2, height = 0.6, purity = 0.7,
+	stats = { speed = 0.8, agility = 0.7, strength = 0.6, stamina = 0.75, jump = 0.5 },
+	variants = {
+		colour = "fadingBlackFriesian2",
+		maneColour = "pearly",
+		tailColour = "pearly",
+		maneStyle = "longFriesian2",
+		tailStyle = "longFriesian2"
+	},
+},
+{
+	id = 561, name = "", pId = 3, gId = 2, height = 0.6, purity = 0.7,
+	stats = { speed = 0.8, agility = 0.7, strength = 0.6, stamina = 0.75, jump = 0.5 },
+	variants = {
+		colour = "fadingBlackFriesian2",
+		maneColour = "iceyPink",
+		tailColour = "iceyPink",
+		maneStyle = "longFriesian2",
+		tailStyle = "longFriesian2"
+	},
+},
+{
+	id = 561, name = "", pId = 3, gId = 2, height = 0.6, purity = 0.7,
+	stats = { speed = 0.8, agility = 0.7, strength = 0.6, stamina = 0.75, jump = 0.5 },
+	variants = {
+		colour = "fadingBlackFriesian2",
+		maneColour = "neonBlue",
+		tailColour = "neonBlue",
+		maneStyle = "longFriesian2",
+		tailStyle = "longFriesian2"
+	},
+},
+{
+	id = 561, name = "", pId = 3, gId = 2, height = 0.6, purity = 0.7,
+	stats = { speed = 0.8, agility = 0.7, strength = 0.6, stamina = 0.75, jump = 0.5 },
+	variants = {
+		colour = "fadingBlackFriesian2",
+		maneColour = "glacierGreen",
+		tailColour = "glacierGreen",
+		maneStyle = "longFriesian2",
+		tailStyle = "longFriesian2"
+	},
+},
+{
+	id = 561, name = "", pId = 3, gId = 2, height = 0.6, purity = 0.7,
+	stats = { speed = 0.8, agility = 0.7, strength = 0.6, stamina = 0.75, jump = 0.5 },
+	variants = {
+		colour = "fadingBlackFriesian2",
+		maneColour = "mossy",
+		tailColour = "mossy",
+		maneStyle = "longFriesian2",
+		tailStyle = "longFriesian2"
+	},
+},
+{
+	id = 561, name = "", pId = 3, gId = 2, height = 0.6, purity = 0.7,
+	stats = { speed = 0.8, agility = 0.7, strength = 0.6, stamina = 0.75, jump = 0.5 },
+	variants = {
+		colour = "fadingBlackFriesian2",
+		maneColour = "amethyst",
+		tailColour = "amethyst",
+		maneStyle = "longFriesian2",
+		tailStyle = "longFriesian2"
+	},
+},
+{
+	id = 561, name = "", pId = 3, gId = 2, height = 0.6, purity = 0.7,
+	stats = { speed = 0.8, agility = 0.7, strength = 0.6, stamina = 0.75, jump = 0.5 },
+	variants = {
+		colour = "fadingBlackFriesian2",
+		maneColour = "jaguarSpots",
+		tailColour = "jaguarSpots",
+		maneStyle = "longFriesian2",
+		tailStyle = "longFriesian2"
+	},
+},
 }
-
-
 -- ── Defaults used for any field not supplied by a preset ─────────────────────
 
 local function DefaultItemData()
