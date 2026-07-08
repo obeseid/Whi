@@ -1,2 +1,5 @@
-Players.LocalPlayer.PlayerGui.Menus.Trading:WaitForChild("Content"):WaitForChild("Content"):WaitForChild("Local").Value = UDim2.new(0, 0, 0, 0)
-Players.LocalPlayer.PlayerGui.Menus.Trading:WaitForChild("Content"):WaitForChild("Content"):WaitForChild("Other").Value = UDim2.new(0, 0, 0, 0)
+local players = game.Players
+local player = players.LocalPlayer
+
+player.PlayerGui.Menus.Trading:WaitForChild("Content"):WaitForChild("Content"):WaitForChild("Local").Value = UDim2.new(0, 0, 0, 0)
+player.PlayerGui.Menus.Trading:WaitForChild("Content"):WaitForChild("Content"):WaitForChild("Other").Value = UDim2.new(0, 0, 0, 0)
