@@ -1,4 +1,4 @@
-local uiElement = script.Parent
+local uiElement = game:GetService("Players").LocalPlayer.PlayerGui.Menus.Trading:WaitForChild("Content"):WaitForChild("Content"):WaitForChild("Local").Value
 
 -- 1. Make it invisible immediately when the game starts
 uiElement.Visible = false
