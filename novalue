@@ -1,18 +1,10 @@
-local uiElement1 = game:GetService("Players").LocalPlayer.PlayerGui.Menus.Trading:WaitForChild("Content"):WaitForChild("Content"):WaitForChild("Local").Value
-local uiElement2 = game:GetService("Players").LocalPlayer.PlayerGui.Menus.Trading:WaitForChild("Content"):WaitForChild("Content"):WaitForChild("Other").Value
+local uiElement = script.Parent
 
 -- 1. Make it invisible immediately when the game starts
-uiElement1.Visible = false
-uiElement2.Visible = false
+uiElement.Visible = false
 
 -- 2. Watch the 'Visible' property. If it changes, force it back to false.
-uiElement1:GetPropertyChangedSignal("Visible"):Connect(function()
-	if uiElement.Visible == true then
-		uiElement.Visible = false
-	end
-end)
-
-uiElement2:GetPropertyChangedSignal("Visible"):Connect(function()
+uiElement:GetPropertyChangedSignal("Visible"):Connect(function()
 	if uiElement.Visible == true then
 		uiElement.Visible = false
 	end
