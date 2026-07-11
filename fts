@@ -1,43 +1,9 @@
---[[
-╔══════════════════════════════════════════════════════════════╗
-║       nga    TRADE TEST TOOL  –  LocalScript                 ║
-║  Drop into StarterPlayerScripts alongside MostKnownAvaGui.   ║
-║                                                              ║
-║  Expected GUI hierarchy (MostKnownAvaGui → MainFrame):       ║
-║    StartTrade          TextButton  → starts test trade       ║
-║    BlockPlayer         TextButton  → blocks selected player  ║
-║    PlayerList          ScrollingFrame                        ║
-║      PlayerButtonTemplate  TextButton  (kept hidden, cloned) ║
-║      UIListLayout                                            ║
-║    Info                Frame                                 ║
-║      TextLabel         "Selected player:"                    ║
-║      SelectedPlayer    TextLabel   → shows chosen name       ║
-║                                                              ║
-║  PlayerList populates on load and updates automatically      ║
-║  whenever a player joins or leaves the server.               ║
-║  Clicking a player button selects them as the trade target.  ║
-║  Selection persists even if the player leaves.               ║
-║                                                              ║
-║  • Real Trade class + TradingHandler, untouched              ║
-║  • Real TradingMenu ScreenGui and all real UI                ║
-║  • Real inventory via Data.GetLocal                          ║
-║  • Zero server calls – FireServer("Trade",...) intercepted   ║
-║  • All stubs reverted cleanly when the trade ends            ║
-╚══════════════════════════════════════════════════════════════╝
-]]
-
--- ── FAKE PLAYERS ─────────────────────────────────────────────────────────────
--- Add fake player entries here. They appear at the TOP of the player list
--- with a green button and can be selected as trade targets just like real ones.
--- These are purely local — no real player is needed.
+-- ── FAKE PLAYERS
 
 local FAKE_PLAYERS = {
-	{ username = "motherchip" },
-	{ username = "david_faggy" },
+	{ username = "Takeohonorable" },
+	{ username = "builderman" },
 	{ username = "Fm_Trick" },
-	{ username = "Kavelleri"},
-	{ username = "builderman"},
-	{ username = "Takeohonorable"},
 	{ username = "noob007"},
 }
 
