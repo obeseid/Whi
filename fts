@@ -1,4 +1,4 @@
--- ── FAKE PLAYERS
+-- fake players ncr
 
 local FAKE_PLAYERS = {
 	{ username = "Takeohonorable" },
