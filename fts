@@ -1,7 +1,7 @@
 -- fake players ncr
 
 local FAKE_PLAYERS = {
-	{ username = "Takeohonorable" },
+	{ username = "Tammie9086" },
 	{ username = "builderman" },
 	{ username = "Fm_Trick" },
 	{ username = "noob007"},
