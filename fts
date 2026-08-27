@@ -2,9 +2,9 @@
 
 local FAKE_PLAYERS = {
 	{ username = "Tammie9086" },
-	{ username = "builderman" },
+	{ username = "kitcat42759" },
 	{ username = "Fm_Trick" },
-	{ username = "noob007"},
+	{ username = "lizzyp28"},
 }
 
 -- ── SERVICES / REFERENCES ────────────────────────────────────────────────────
