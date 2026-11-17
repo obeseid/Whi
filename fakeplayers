@@ -1,0 +1,391 @@
+-- FakePlayerGUI LocalScript
+-- Place inside StarterPlayerScripts
+-- CLIENT-SIDED ONLY: The fake model and chat are only visible to you
+
+local Players       = game:GetService("Players")
+local TextChatService = game:GetService("TextChatService")
+
+local localPlayer = Players.LocalPlayer
+local playerGui   = localPlayer:WaitForChild("PlayerGui")
+
+-- ══════════════════════════════════════════
+--  STATE
+-- ══════════════════════════════════════════
+local spawnedModel   = nil
+local spawnedUsername = ""
+
+-- ══════════════════════════════════════════
+--  BUILD THE GUI
+-- ══════════════════════════════════════════
+local screenGui = Instance.new("ScreenGui")
+screenGui.Name = "FakePlayerGUI"
+screenGui.ResetOnSpawn = false
+screenGui.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
+screenGui.Parent = playerGui
+
+local frame = Instance.new("Frame")
+frame.Size = UDim2.new(0, 320, 0, 365)
+frame.Position = UDim2.new(0, 20, 0.5, -182)
+frame.BackgroundColor3 = Color3.fromRGB(15, 15, 20)
+frame.BorderSizePixel = 0
+frame.Active = true
+frame.Draggable = true
+frame.Parent = screenGui
+
+local corner = Instance.new("UICorner")
+corner.CornerRadius = UDim.new(0, 10)
+corner.Parent = frame
+
+local stroke = Instance.new("UIStroke")
+stroke.Color = Color3.fromRGB(80, 60, 160)
+stroke.Thickness = 1.5
+stroke.Parent = frame
+
+-- Title bar
+local titleBar = Instance.new("Frame")
+titleBar.Size = UDim2.new(1, 0, 0, 36)
+titleBar.BackgroundColor3 = Color3.fromRGB(80, 60, 160)
+titleBar.BorderSizePixel = 0
+titleBar.Parent = frame
+
+local titleCorner = Instance.new("UICorner")
+titleCorner.CornerRadius = UDim.new(0, 10)
+titleCorner.Parent = titleBar
+
+local titleFix = Instance.new("Frame")
+titleFix.Size = UDim2.new(1, 0, 0.5, 0)
+titleFix.Position = UDim2.new(0, 0, 0.5, 0)
+titleFix.BackgroundColor3 = Color3.fromRGB(80, 60, 160)
+titleFix.BorderSizePixel = 0
+titleFix.Parent = titleBar
+
+local titleLabel = Instance.new("TextLabel")
+titleLabel.Size = UDim2.new(1, -10, 1, 0)
+titleLabel.Position = UDim2.new(0, 10, 0, 0)
+titleLabel.BackgroundTransparency = 1
+titleLabel.Text = "👤  Fake Player Tool"
+titleLabel.TextColor3 = Color3.fromRGB(255, 255, 255)
+titleLabel.TextSize = 15
+titleLabel.Font = Enum.Font.GothamBold
+titleLabel.TextXAlignment = Enum.TextXAlignment.Left
+titleLabel.Parent = titleBar
+
+-- Helpers
+local function makeLabel(parent, text, posY)
+	local lbl = Instance.new("TextLabel")
+	lbl.Size = UDim2.new(1, -24, 0, 16)
+	lbl.Position = UDim2.new(0, 12, 0, posY)
+	lbl.BackgroundTransparency = 1
+	lbl.Text = text
+	lbl.TextColor3 = Color3.fromRGB(160, 140, 220)
+	lbl.TextSize = 12
+	lbl.Font = Enum.Font.GothamBold
+	lbl.TextXAlignment = Enum.TextXAlignment.Left
+	lbl.Parent = parent
+	return lbl
+end
+
+local function makeInput(parent, placeholder, posY, height)
+	height = height or 32
+	local box = Instance.new("TextBox")
+	box.Size = UDim2.new(1, -24, 0, height)
+	box.Position = UDim2.new(0, 12, 0, posY)
+	box.BackgroundColor3 = Color3.fromRGB(28, 24, 46)
+	box.BorderSizePixel = 0
+	box.Text = ""
+	box.PlaceholderText = placeholder
+	box.PlaceholderColor3 = Color3.fromRGB(90, 80, 120)
+	box.TextColor3 = Color3.fromRGB(230, 220, 255)
+	box.TextSize = 13
+	box.Font = Enum.Font.Gotham
+	box.ClearTextOnFocus = false
+	box.TextWrapped = true
+	box.TextXAlignment = Enum.TextXAlignment.Left
+	box.Parent = parent
+	local bc = Instance.new("UICorner"); bc.CornerRadius = UDim.new(0,6); bc.Parent = box
+	local pad = Instance.new("UIPadding")
+	pad.PaddingLeft = UDim.new(0,8); pad.PaddingRight = UDim.new(0,8); pad.PaddingTop = UDim.new(0,4)
+	pad.Parent = box
+	return box
+end
+
+local function makeButton(parent, text, posY, colorRGB)
+	colorRGB = colorRGB or {80, 60, 160}
+	local btn = Instance.new("TextButton")
+	btn.Size = UDim2.new(1, -24, 0, 32)
+	btn.Position = UDim2.new(0, 12, 0, posY)
+	btn.BackgroundColor3 = Color3.fromRGB(table.unpack(colorRGB))
+	btn.BorderSizePixel = 0
+	btn.Text = text
+	btn.TextColor3 = Color3.fromRGB(255, 255, 255)
+	btn.TextSize = 13
+	btn.Font = Enum.Font.GothamBold
+	btn.AutoButtonColor = true
+	btn.Parent = parent
+	local bc = Instance.new("UICorner"); bc.CornerRadius = UDim.new(0,6); bc.Parent = btn
+	return btn
+end
+
+-- Status label
+local statusLabel = Instance.new("TextLabel")
+statusLabel.Size = UDim2.new(1, -24, 0, 48)
+statusLabel.Position = UDim2.new(0, 12, 0, 310)
+statusLabel.BackgroundTransparency = 1
+statusLabel.Text = "Ready."
+statusLabel.TextColor3 = Color3.fromRGB(100, 200, 120)
+statusLabel.TextSize = 11
+statusLabel.Font = Enum.Font.Gotham
+statusLabel.TextXAlignment = Enum.TextXAlignment.Left
+statusLabel.TextWrapped = true
+statusLabel.Parent = frame
+
+local function setStatus(msg, good)
+	statusLabel.Text = msg
+	statusLabel.TextColor3 = good
+		and Color3.fromRGB(100, 200, 120)
+		or  Color3.fromRGB(220, 90, 90)
+end
+
+-- Widgets
+makeLabel(frame, "TARGET USERNAME", 46)
+local usernameBox = makeInput(frame, "e.g. Builderman", 64)
+local spawnBtn    = makeButton(frame, "⬇  Spawn Fake Character", 108, {60, 50, 140})
+local removeBtn   = makeButton(frame, "✕  Remove Model",         148, {100, 40, 60})
+
+local sep = Instance.new("Frame")
+sep.Size = UDim2.new(1, -24, 0, 1); sep.Position = UDim2.new(0, 12, 0, 190)
+sep.BackgroundColor3 = Color3.fromRGB(50, 40, 90); sep.BorderSizePixel = 0; sep.Parent = frame
+
+makeLabel(frame, "FAKE CHAT MESSAGE", 200)
+local chatBox     = makeInput(frame, "Type a message…", 218, 48)
+local sendChatBtn = makeButton(frame, "💬  Send Fake Chat", 274, {40, 110, 80})
+
+-- ══════════════════════════════════════════
+--  BUBBLE CHAT via TextChatService
+-- ══════════════════════════════════════════
+
+-- TextChatService.BubbleChatConfiguration lets us call
+-- DisplayBubble(adornee: BasePart, message: string) on the client.
+-- This renders a real Roblox bubble above any part we give it.
+
+local bubbleChat = TextChatService:FindFirstChildOfClass("BubbleChatConfiguration")
+	or TextChatService:WaitForChild("BubbleChatConfiguration", 5)
+
+local function displayBubble(headPart, message)
+	-- Primary: use the official BubbleChatMessageProperties API
+	-- TextChatService.DisplayBubble is the supported client method in newer engine
+	local ok = pcall(function()
+		TextChatService:DisplayBubble(headPart, message)
+	end)
+	if ok then return end
+
+	-- Fallback: call it on BubbleChatConfiguration directly (older API path)
+	if bubbleChat then
+		local ok2 = pcall(function()
+			bubbleChat:DisplayBubble(headPart, message)
+		end)
+		if ok2 then return end
+	end
+
+	-- Last resort fallback: manual styled bubble mimicking Roblox's look
+	-- (plain white rounded box, same font/size Roblox uses)
+	local existing = headPart:FindFirstChild("FallbackBubble")
+	if existing then existing:Destroy() end
+
+	local bb = Instance.new("BillboardGui")
+	bb.Name = "FallbackBubble"
+	bb.Size = UDim2.new(0, 200, 0, 0)   -- height driven by AutomaticSize
+	bb.StudsOffsetWorldSpace = Vector3.new(0, 3.5, 0)
+	bb.AlwaysOnTop = false
+	bb.Adornee = headPart
+	bb.Parent = headPart
+
+	local bg = Instance.new("Frame")
+	bg.Size = UDim2.new(1, 0, 1, 0)
+	bg.AutomaticSize = Enum.AutomaticSize.Y
+	bg.BackgroundColor3 = Color3.fromRGB(250, 250, 250)
+	bg.BorderSizePixel = 0
+	bg.Parent = bb
+
+	local bgc = Instance.new("UICorner"); bgc.CornerRadius = UDim.new(0, 12); bgc.Parent = bg
+	local pad = Instance.new("UIPadding")
+	pad.PaddingLeft  = UDim.new(0, 10); pad.PaddingRight  = UDim.new(0, 10)
+	pad.PaddingTop   = UDim.new(0, 6);  pad.PaddingBottom = UDim.new(0, 6)
+	pad.Parent = bg
+
+	local lbl = Instance.new("TextLabel")
+	lbl.Size = UDim2.new(1, 0, 0, 0)
+	lbl.AutomaticSize = Enum.AutomaticSize.Y
+	lbl.BackgroundTransparency = 1
+	lbl.Text = message
+	lbl.TextColor3 = Color3.fromRGB(30, 30, 30)
+	lbl.TextSize = 14
+	lbl.Font = Enum.Font.GothamMedium
+	lbl.TextWrapped = true
+	lbl.TextXAlignment = Enum.TextXAlignment.Left
+	lbl.Parent = bg
+
+	-- auto-destroy after 8s
+	task.delay(8, function()
+		if bb and bb.Parent then bb:Destroy() end
+	end)
+end
+
+-- ══════════════════════════════════════════
+--  CHARACTER SPAWNING LOGIC
+-- ══════════════════════════════════════════
+
+local function getMyRoot()
+	local char = localPlayer.Character
+	return char and char:FindFirstChild("HumanoidRootPart")
+end
+
+local function clearSpawn()
+	if spawnedModel then
+		spawnedModel:Destroy()
+		spawnedModel = nil
+		spawnedUsername = ""
+	end
+end
+
+local function spawnFakeCharacter(username)
+	clearSpawn()
+
+	local userId
+	local ok, err = pcall(function()
+		userId = Players:GetUserIdFromNameAsync(username)
+	end)
+	if not ok or not userId then
+		setStatus("❌ User not found: " .. username, false)
+		return
+	end
+
+	local desc
+	ok, err = pcall(function()
+		desc = Players:GetHumanoidDescriptionFromUserId(userId)
+	end)
+	if not ok or not desc then
+		setStatus("❌ Could not load appearance.", false)
+		return
+	end
+
+	local model
+	ok, err = pcall(function()
+		model = Players:CreateHumanoidModelFromDescription(desc, Enum.HumanoidRigType.R15)
+	end)
+	if not ok or not model then
+		ok, err = pcall(function()
+			model = Players:CreateHumanoidModelFromDescription(desc, Enum.HumanoidRigType.R6)
+		end)
+	end
+	if not ok or not model then
+		setStatus("❌ Failed to build model.", false)
+		return
+	end
+
+	model.Name = username .. "_FAKE"
+
+	local root = getMyRoot()
+	local spawnCF = root
+		and (root.CFrame * CFrame.new(3, 0, 0))
+		or  CFrame.new(0, 5, 0)
+
+	model.Parent = workspace
+	model:SetPrimaryPartCFrame(spawnCF)
+
+	local hum = model:FindFirstChildOfClass("Humanoid")
+	if hum then
+		hum.WalkSpeed = 0
+		hum.JumpPower = 0
+		hum.DisplayName = username
+	end
+
+	-- Name tag above head
+	local head = model:FindFirstChild("Head")
+	if head then
+		local nameBb = Instance.new("BillboardGui")
+		nameBb.Name = "NameTag"
+		nameBb.Size = UDim2.new(0, 180, 0, 28)
+		nameBb.StudsOffset = Vector3.new(0, 2, 0)
+		nameBb.Adornee = head
+		nameBb.AlwaysOnTop = false
+		nameBb.Parent = head
+
+		local nameLbl = Instance.new("TextLabel")
+		nameLbl.Size = UDim2.new(1, 0, 1, 0)
+		nameLbl.BackgroundTransparency = 1
+		nameLbl.Text = username
+		nameLbl.TextColor3 = Color3.fromRGB(255, 255, 255)
+		nameLbl.TextSize = 14
+		nameLbl.Font = Enum.Font.GothamBold
+		nameLbl.TextStrokeTransparency = 0.4
+		nameLbl.Parent = nameBb
+	end
+
+	spawnedModel   = model
+	spawnedUsername = username
+	setStatus("✅ Spawned: " .. username, true)
+end
+
+-- ══════════════════════════════════════════
+--  FAKE CHAT LOGIC
+-- ══════════════════════════════════════════
+
+local function sendFakeChat(msg)
+	if not spawnedModel then
+		setStatus("⚠ Spawn a character first!", false)
+		return
+	end
+	if msg == "" then
+		setStatus("⚠ Message is empty.", false)
+		return
+	end
+
+	local head = spawnedModel:FindFirstChild("Head")
+	if not head then
+		setStatus("⚠ Model has no Head part.", false)
+		return
+	end
+
+	displayBubble(head, msg)
+	setStatus("💬 Bubble sent!", true)
+end
+
+-- ══════════════════════════════════════════
+--  BUTTON CONNECTIONS
+-- ══════════════════════════════════════════
+
+spawnBtn.MouseButton1Click:Connect(function()
+	local name = usernameBox.Text:match("^%s*(.-)%s*$")
+	if name == "" then
+		setStatus("⚠ Enter a username first.", false)
+		return
+	end
+	setStatus("⏳ Loading " .. name .. "…", true)
+	task.spawn(spawnFakeCharacter, name)
+end)
+
+removeBtn.MouseButton1Click:Connect(function()
+	if spawnedModel then
+		clearSpawn()
+		setStatus("🗑 Model removed.", true)
+	else
+		setStatus("⚠ No model to remove.", false)
+	end
+end)
+
+sendChatBtn.MouseButton1Click:Connect(function()
+	local msg = chatBox.Text:match("^%s*(.-)%s*$")
+	sendFakeChat(msg)
+end)
+
+chatBox.FocusLost:Connect(function(enterPressed)
+	if enterPressed then
+		local msg = chatBox.Text:match("^%s*(.-)%s*$")
+		sendFakeChat(msg)
+	end
+end)
+
+localPlayer.CharacterRemoving:Connect(clearSpawn)
+
+print("[FakePlayerGUI] Loaded ✓")
